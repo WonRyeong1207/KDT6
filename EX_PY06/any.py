@@ -64,6 +64,7 @@ for i in range(row):
     matrix.append(list(input("field state : ")))
     
 print(matrix)
+print()
 
 num = 0
 fild_field = []
@@ -74,26 +75,39 @@ for i in range(row):
         if (matrix[i][j] == '*'):
             current_field.append('*')
         if (matrix[i][j] == '.'):
-            if (((i-1) >= 0) and ((j-1) >= 0) and (matrix[i][j] == '*')):
+            if (((i-1) >= 0) and ((j-1) >= 0) and (matrix[i-1][j-1] == '*')):
                 num = num + 1
-            current_field.append(num)
-            if (((i-1) >= 0) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((i-1) >= 0) and (matrix[i-1][j] == '*')):
                 num = num + 1
-            if (((i-1) >= 0) and ((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((i-1) >= 0) and ((j+1) < col) and (matrix[i-1][j+1] == '*')):
                 num = num + 1
-            if (((j-1) >= 0) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((j-1) >= 0) and (matrix[i][j-1] == '*')):
                 num = num + 1
-            if (((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((j+1) < col) and (matrix[i][j+1] == '*')):
                 num = num + 1
-            if (((i+1) <= (row-1)) and ((j-i) >= 0) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((i+1) < row) and ((j-1) >= 0) and (matrix[i+1][j-1] == '*')):
                 num = num+ 1
-            if (((i+1) <= (row-1)) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((i+1) < row) and (matrix[i+1][j] == '*')):
                 num = num + 1
-            if (((i+1) <= (row-1)) and ((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                current_field.append(num)
+            if (((i+1) < row) and ((j+1) < col) and (matrix[i+1][j+1] == '*')):
                 num = num + 1
+                current_field.append(num)
+    
+        
+        
+        current_field = ''.join(current_field)
+        print(current_field)
         fild_field.append(current_field)
+    # fild_field.append(current_field)
+        
    
-'''      
-for i in range(row):
-    print(''.join(fild_field[i]))
-'''
+     
+# for i in range(row):
+#    print(fild_field[i])
