@@ -57,7 +57,7 @@ t.mainloop()
 '''
 
 # 지뢰찾기
-
+'''
 row, col = map(int, input("matrix size : ").split())
 matrix = []
 for i in range(row):
@@ -65,49 +65,48 @@ for i in range(row):
     
 print(matrix)
 print()
-
-num = 0
-fild_field = []
-current_field = []
+'''
+row, col = 3, 3
+matrix = [['.', '*', '*'], ['*', '.', '.'], ['.', '*', '.']]
 
 for i in range(row):
+    current_field = []
+    fild_field = []
+    num = 0
     for j in range(col):
         if (matrix[i][j] == '*'):
             current_field.append('*')
         if (matrix[i][j] == '.'):
-            if (((i-1) >= 0) and ((j-1) >= 0) and (matrix[i-1][j-1] == '*')):
+            # 내주변 위아래좌우, 대각선도 봐야하네...
+            num = 0 # 중복해서 더해지는 것을 방지하기 위해서
+            
+            # i-1
+            if (((i-1) >= 0) and((j-1) >= 0) and (matrix[i-1][j-1] == '*')):
                 num = num + 1
-                current_field.append(num)
             if (((i-1) >= 0) and (matrix[i-1][j] == '*')):
                 num = num + 1
-                current_field.append(num)
-            if (((i-1) >= 0) and ((j+1) < col) and (matrix[i-1][j+1] == '*')):
+            if(((i-1) >= 0) and ((j+1) < col) and (matrix[i-1][j+1] == '*')):
                 num = num + 1
-                current_field.append(num)
+            
+            # i
             if (((j-1) >= 0) and (matrix[i][j-1] == '*')):
                 num = num + 1
-                current_field.append(num)
             if (((j+1) < col) and (matrix[i][j+1] == '*')):
                 num = num + 1
-                current_field.append(num)
-            if (((i+1) < row) and ((j-1) >= 0) and (matrix[i+1][j-1] == '*')):
-                num = num+ 1
-                current_field.append(num)
+            
+            # i +1
+            if (((i+1) < row) and ((j-1) >= 0) and (matrix[i+1][j-1]) == 0):
+                num = num + 1
             if (((i+1) < row) and (matrix[i+1][j] == '*')):
                 num = num + 1
-                current_field.append(num)
-            if (((i+1) < row) and ((j+1) < col) and (matrix[i+1][j+1] == '*')):
+            if (((i+1) < row) and ((j+1) < col) and (matrix[i+1][j+1])):
                 num = num + 1
-                current_field.append(num)
-    
-        
-        
-        current_field = ''.join(current_field)
-        print(current_field)
-        fild_field.append(current_field)
+                
+            current_field.append(num)
+
+        # current_field = ''.join(current_field)
+    print(current_field)
     # fild_field.append(current_field)
-        
-   
-     
+    
 # for i in range(row):
 #    print(fild_field[i])
