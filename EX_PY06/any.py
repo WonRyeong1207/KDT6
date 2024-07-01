@@ -56,3 +56,44 @@ for i in range(n):
 t.mainloop()
 '''
 
+# 지뢰찾기
+
+row, col = map(int, input("matrix size : ").split())
+matrix = []
+for i in range(row):
+    matrix.append(list(input("field state : ")))
+    
+print(matrix)
+
+num = 0
+fild_field = []
+current_field = []
+
+for i in range(row):
+    for j in range(col):
+        if (matrix[i][j] == '*'):
+            current_field.append('*')
+        if (matrix[i][j] == '.'):
+            if (((i-1) >= 0) and ((j-1) >= 0) and (matrix[i][j] == '*')):
+                num = num + 1
+            current_field.append(num)
+            if (((i-1) >= 0) and (matrix[i][j] == '*')):
+                num = num + 1
+            if (((i-1) >= 0) and ((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                num = num + 1
+            if (((j-1) >= 0) and (matrix[i][j] == '*')):
+                num = num + 1
+            if (((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                num = num + 1
+            if (((i+1) <= (row-1)) and ((j-i) >= 0) and (matrix[i][j] == '*')):
+                num = num+ 1
+            if (((i+1) <= (row-1)) and (matrix[i][j] == '*')):
+                num = num + 1
+            if (((i+1) <= (row-1)) and ((j+1) <= (col-1)) and (matrix[i][j] == '*')):
+                num = num + 1
+        fild_field.append(current_field)
+   
+'''      
+for i in range(row):
+    print(''.join(fild_field[i]))
+'''
