@@ -127,6 +127,7 @@ else: print('잘못된 점수')
     
 '''
 
+'''
 data1 = "the grown-ups' response, this time, was to advise me to lay aside mt drawings of boa constrictors, whether from the inside or outside, and devote myself instead to geography, history, arithmetic, and grammar."
 data2 = "That is why, at the, age of six, I gave up what might have been a magnificent career as a painter."
 data3 = "I had been disheartened by the failure of my Drawing Number One and my Drawing Number Two."
@@ -137,9 +138,25 @@ data = data1 + data2 + data3 + data4
 print(data)
 print(f"Find 'the' conunt : {data.count('the')}")
 
-other = ['them', 'there', 'their', 'themslves']
+other = ['them', 'there', 'their']
 
 con_num = data.count('the')
-if (data.find(other)):
-    con_num = con_num - 1
+for i in range(len(other)):
+    current = str(other[i])
+    if (data.count(current)):
+        con_num = con_num - 1
 print(con_num)
+'''
+
+price_input = '51900;83000;158000;367500;250000;59200;128500;1304000'
+price_list = list(price_input.split(';'))
+print(price_list)
+
+current_list = []
+for i in range(len(price_list)):
+    current = str(price_list[i])
+    current_list.append('{0:>9}'.format(current))
+price_list = current_list
+price_list = sorted(price_list, reverse=True)
+for i in range(len(price_list)):
+    print(''.join(price_list[i]))
