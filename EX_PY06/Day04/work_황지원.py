@@ -20,7 +20,7 @@ print('\n')
 
 # p.150 심사문제
 key_list = list(input().split())
-value_list = list(map(int,input().split()))
+value_list = list(map(float,input().split()))
 # key_list = ['health', 'health_regen', 'mana', 'mana_regen']
 # value_list = [575.6, 1.7, 338.8, 1.63]
 
