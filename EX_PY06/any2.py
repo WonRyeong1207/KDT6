@@ -38,3 +38,6 @@ n2, n3, n4, n5, n6, n7, n8, n9 = enumerate(dan)
 print(n2)
 '''
 
+a = {i for i in range(1, 11) if ((10%i) == 0)}
+b = {i for i in range(1, 21) if ((20%i) == 0)}
+print(a)
