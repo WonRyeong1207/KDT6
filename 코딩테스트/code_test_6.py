@@ -17,3 +17,11 @@ print("{0:-^30}".format(f" {num}단 "))
 for i in range(1, 10, 3):
     print("{0:^30}".format(f"{num} * {i} = {num*i}  {num} * {i+1} = {num*(i+1)}  {num} * {i+2} = {num*(i+2)}"))
     # print("{0:^30}.format(f"{num} * {i} = {num_list[i]}  [num] * {i+1} = {num_list[i+1]}  {num} * {i+2} = {num_list[i+2]}")
+
+'''
+이렇게 하면 자리를 맞춰서 표현할 수 있음.
+for i in range(1, 10, 3):
+    print("{0: >10}".format(f"{n} * {i} = {n*i}"), end='    ')
+    print("{0: >10}".format(f"{n} * {i+1} = {n*(i+1)}"), end='    ')
+    print("{0: >10}".format(f"{n} * {i+2} = {n*(i+2)}"))
+'''
