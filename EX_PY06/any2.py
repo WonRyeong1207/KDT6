@@ -9,25 +9,6 @@ print(x)
 
 
 # 중첩 for문을 하나로
-'''
-for dan in range(1, 101):
-    if (dan%10 == 2):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 3):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 4):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 5):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 6):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 7):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 8):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-    if (dan%10 == 9):
-        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}")
-'''
 
 '''
 dan = [[x * i for x in range(1,10)] for i in range(2, 10)]
@@ -38,6 +19,55 @@ n2, n3, n4, n5, n6, n7, n8, n9 = enumerate(dan)
 print(n2)
 '''
 
-a = {i for i in range(1, 11) if ((10%i) == 0)}
-b = {i for i in range(1, 21) if ((20%i) == 0)}
-print(a)
+for dan in range(1, 101):
+    
+    if (dan//10 == 2):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 3):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 4):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 5):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 6):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 7):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 8):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+    if (dan//10 == 9):
+        if not (dan%10 == 0):
+            print(f"{dan//10} * {dan%10} = {(dan%10)*(dan//10)}")
+
+
+print('\n\n\n')
+
+
+for dan in range(1, 101):
+    
+    if (dan%10 == 2):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 3):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 4):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 5):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 6):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 7):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 8):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    elif (dan%10 == 9):
+        print(f"{dan%10} * {dan//10} = {(dan%10)*(dan//10)}", end='    ')
+    else:
+        print()
+        
