@@ -31,7 +31,7 @@ with open('EX_PY06/words.txt', 'r') as word_file:
         if ('c' in d):
             print(d)
 '''
-
+'''
 with open('EX_PY06/words.txt', 'r') as words_file:
     word = words_file.readlines()
     
@@ -41,4 +41,39 @@ with open('EX_PY06/words.txt', 'r') as words_file:
     for i in word:
         if (i == i[::-1]):
             print(i)
+'''
+'''
+k, e, m ,s = 76, 82, 89, 84
+def get_average(korean=0, english=0, mathematics=0, science=0):
+    cnt = 0
+    if korean:
+        cnt += 1
+    if english:
+        cnt += 1
+    if mathematics:
+        cnt += 1
+    if science:
+        cnt += 1
+    return (korean + english + mathematics + science)/cnt
+average = get_average(korean=k, english=e, mathematics=m, science=s)
+print(average)
+average = get_average(english=e, science=s)
+print(average)
+'''
 
+def fib(num):
+    if (num == 0):
+        return 0
+    elif (num == 1):
+        return 1
+    else:
+        return fib(num-2) + fib(num-1)
+    
+n = fib(10)
+print(n)
+
+num = 10
+total = [0, 1]
+for i in range(2, num+1):
+    total.append(total[i-2] + total[i-1])
+print(total[-1])
