@@ -71,6 +71,15 @@ for i in range(n):
     print()
 print()
 
+# 이게 원하던 코딩
+for i in range(n):
+    for j in range(n):
+        if (i < j):
+            print(' ', end='')      
+    print("*" * (1 + (i*2)), end='')
+    print()
+print()
+
 # p.225 연습문제
 for i in range(1, 101):
     if (((i%2) == 0) and ((i%11) == 0)):
