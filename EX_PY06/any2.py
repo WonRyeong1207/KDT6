@@ -78,7 +78,7 @@ for i in range(2, num+1):
     total.append(total[i-2] + total[i-1])
 print(total[-1])
 '''
-
+'''
 n = 5
 for i in range(n):
     for j in range(n):
@@ -87,3 +87,24 @@ for i in range(n):
     print("*" * (1 + (i*2)), end='')
     print()
 print()
+'''
+
+files = ['97.xlsx', '98.docx', '99.docx', '100.docx', '101.docx', '102.docx', '1.jpg', '10.png', '11.png', '2.jpg', '3.png']
+k = list(map(lambda x: x.zfill((3-x.find('.')+len(x))), files))
+print(k)
+print()
+
+def counntdown(n):
+    i = n + 1
+    def count():
+        nonlocal i
+        i -= 1
+        return i
+    return count
+
+n = 20
+c = counntdown(n)
+for i in range(n):
+    print(c(), end=' ')
+print()
+
