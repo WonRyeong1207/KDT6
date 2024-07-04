@@ -60,7 +60,7 @@ print(average)
 average = get_average(english=e, science=s)
 print(average)
 '''
-
+'''
 def fib(num):
     if (num == 0):
         return 0
@@ -77,3 +77,13 @@ total = [0, 1]
 for i in range(2, num+1):
     total.append(total[i-2] + total[i-1])
 print(total[-1])
+'''
+
+n = 5
+for i in range(n):
+    for j in range(n):
+        if (i < j):
+            print(' ', end='')      
+    print("*" * (1 + (i*2)), end='')
+    print()
+print()
