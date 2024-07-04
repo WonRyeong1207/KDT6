@@ -53,7 +53,7 @@ def print_arithmetic_operation(n1, n2):
 
 # Q.220
 def print_max(n1, n2, n3):
-    c = o
+    c = 0
     if (c < n1):
         c = n1
     if (c < n2):
