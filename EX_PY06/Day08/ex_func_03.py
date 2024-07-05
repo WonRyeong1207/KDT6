@@ -26,8 +26,8 @@ def find_extan(data):
     for i in data:
         idx = i.rfind('.')
         carry.append(i[idx:])
-    print(' '.join(carry))
+    return carry
     
 files = list(map(str, input("파일명을 입력 (예 xxx.jpg xxxx.hwp) : ").split()))
-find_extan(files)
+print(find_extan(files))
 print()
