@@ -88,7 +88,7 @@ for i in range(n):
     print()
 print()
 '''
-
+'''
 files = ['97.xlsx', '98.docx', '99.docx', '100.docx', '101.docx', '102.docx', '1.jpg', '10.png', '11.png', '2.jpg', '3.png']
 k = list(map(lambda x: x.zfill((3-x.find('.')+len(x))), files))
 print(k)
@@ -107,4 +107,19 @@ c = counntdown(n)
 for i in range(n):
     print(c(), end=' ')
 print()
+'''
 
+class Annie:
+    def __init__(self, health, mana, ability_power):
+        self.health = health
+        self.mana = mana
+        self.ap = ability_power
+    
+    def tibbers(self):
+        damage = ap * 0.65 + 400
+        print(f"티버: 피해량 {damage}")
+
+health, mana, ap = 1803.68, 1184.0, 645
+
+x = Annie(health=health, mana=mana, ability_power=ap)
+x.tibbers()
