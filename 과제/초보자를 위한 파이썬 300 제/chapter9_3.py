@@ -39,12 +39,11 @@ def print_5xn(data):
     cnt = 0
     carry = ''
     for i in range(len(data)):
-        if cnt == 5:
-            carry = carry + '\n' + data[i]
-            cnt = cnt + 1
-        else:
-            carry = carry + data[i]
-            cnt = cnt + 1
+        if (cnt%5) == 0:
+            carry = carry + '\n'
+        
+        carry = carry + data[i]
+        cnt = cnt + 1
     print(carry)
     
 print_5xn("아이엠어보이유알어걸")
@@ -55,14 +54,36 @@ def print_mxn(data, num):
     cnt = 0
     carry = ''
     for i in range(len(data)):
-        if cnt == num:
-            carry = carry + '\n' + data[i]
-            cnt += 1
-        else:
-            carry += data[i]
-            cnt += 1
+        if (cnt%num) == 0:
+            carry = carry + '\n'
+            
+        carry += data[i]
+        cnt += 1
     print(carry)
     
 print_mxn("아이엠어보이유알어걸", 3)
+print()
+
+# Q.228
+def calc_monthly_salary(annual_salary):
+    monthly_salary = annual_salary / 12
+    print("%.f" % monthly_salary)
+
+
+calc_monthly_salary(12000000)
+print()
+
+# Q.229
+def my_print(a, b):
+    print("왼쪽:", a)
+    print("오른쪽:", b)
+
+my_print(a=100, b=200)
+# 왼쪽:100\n오른쪽:200
+print()
+
+# Q.230
+my_print(b=200, a=100)
+# 왼쪽:100\n오른쪽:100
 print()
 
