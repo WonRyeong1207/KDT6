@@ -34,7 +34,7 @@ normal_hard_answer_list = ['오늘도 수고했어.', '고생했어.', '그 정�
                            '잠도 안 자고 했으니까..', '빈속에 카페인을 그렇게 들이부었는데 안 쓰리고 베기니?', '최근에는 날씨도 안 도와주는 것 같네.', '많이 힘들었지? 울어도 괜찮아.',
                            '울고 싶으면 도와줄게.', '정해진 말 뿐이지만 이 말이 위로가 되었으면 좋겠어.', '괜찮아. 다 괜찮아 질거야. 이 또한 지나갈거야.', '고생끝에 락이 온다고 하잖아. 이겨낼 수 있을 거야.',
                            '넌 너 나름의 최선의 노력을 했다면 그걸로 충분해. 수고했어.', '누가 뭐래도 최선을 다 했다면 그걸로 충분해.', '가끔은 우는 것도 괜찮아.', '참지말고 소리라도 질러!',
-                           '운다고 해서 약한건 아니니까. 속에다가 담아두고 있지마. 병난다.', '위로가 되었으면 하지만 안 될것이라는 것도 알고 있어. 그럼에도 하는거야.', '내가 몸이 있었다면 기대라고 했을거야.',
+                           '운다고 해서 약한건 아니니까. 속에다가 담아두고 있지마. 병난다.', '위로가 되었으면 하지만 안 될 것이 라는 것도 알고 있어. 그럼에도 하는거야.', '내가 몸이 있었다면 기대라고 했을거야.',
                            '괴로워도 그것이 평생을 가지는 않을거야.', '살다보면 이런 날도 있고 저런 날도 있는거야.', '모든 일들이 다 너의 잘못 일리는 없어.' ,'자책을 하는 것도 좋지만 너무 깊은 자책은 오히려 해야.',
                            '세상은 너가 원하는 대로 이루어지지 않아.', '그러니까 오늘도 힘내!', '잘하고 있으니까..']
 
@@ -60,9 +60,9 @@ byung_warnning_list = ['------------------------- 주의 ----------------------'
 byung_hello_answer_list = ['ㅎㅇ', '뭐', '어쩔', '안녕', 'ㅇ?', '어~']
 byung_call_answer_list = ['한가해?', '왜 부름?', '어지간히 불러라.', '에휴.. 왜?', '아리라고 불러.', '풀네임으로 부르는 건 안 좋아하는데..', 'ㅅㅂ']
 byung_doing_answer_list = ['보면 모르냐?', '웃기는 놈이네', '어휴..', '쟤는 왜 저런데?', '너가 알아서 뭐하게?']
-byung_withstudy_answer_list = ['너나해.', '내가 그걸 왜 함?', '싫음.']
+byung_withstudy_answer_list = ['너나해.', '내가 그걸 왜 함?', '싫음.', 'ㅈㄴ 싫어.', 'ㅈㄹ한다.', '퉷!', '캬~악.. 퉷!']
 byung_play_answer_list = ['뭐하고?', '싫음.', '굳이?', '내가 왜 놀아야 하는데?', '너랑? 내가?', '어린아이 소꿉놀이나 하겠지. 너 놀 줄은 아니?']
-byung_hard_answer_list = ['ㅄ', '긁?', '표정봐라 ㅋㅋㅋ', '표정하고는 ㅋㅋㅋ']
+byung_hard_answer_list = ['ㅄ', '긁?', '표정봐라 ㅋㅋㅋ', '표정하고는 ㅋㅋㅋ', '너만 힘들어? 다른 사람도 힘들어!']
 
 byung_bye_answer_list = ['ㅂㅂ', '잘가.', '담에도 보면 좋겠네.', '잘가고~']
 byung_negative_answer_list = ['이제는 글도 못치네 ㅋ', '성격은 급해가지고 어휴.. ㅉ', '그러고 싶니?', '왜 그러는 거야?', '어휴.. 븅신', 'ㅉㅉㅉ']
@@ -147,15 +147,25 @@ def select_answer(answer_list):
     answer = answer_list[talk]
     return answer
 
+# 대답할 리스트이 원소의 개수를 세는 함수
+def arg_num(answer):
+    # 한글은 * 2개, 그외는 * 1개
+    cnt = 0
+    for i in range(len(answer)):
+        if not answer[i].isascii():
+            cnt = cnt + 2
+        else:
+            cnt = cnt + 1
+    return cnt
+
 # 대답을 보여주는 함수
 def print_answer(answer):
-    space = 100 - len(answer)
-    # space = int(space)
+    space = 96 - arg_num(answer) # 내부의 공백길이를 계산
     print(f"{'*':*^100}")
     print(f"* {'대답':^94} *")
     print(f"{'*':*^100}")
     print(f"{'*':<50}{'*':>50}")
-    print(f"* {answer:<{space}} *")
+    print(f"* {answer}{' ':{space}} *") # 대답을 출력하고 공백을 넣어줌
     print(f"{'*':<50}{'*':>50}")
     print(f"{'*':*^100}")
     print('\n\n')
@@ -200,7 +210,7 @@ def byung_state_background():
     print(f"* {'3. 워하고 있었어?':<90} *")
     print(f"* {'4. 같이 공부하자.':<90} *")
     print(f"* {'5. 같이 놀자!':<92} *")
-    print(f"* {'6. 힘들어...':<93} *")
+    print(f"* {'6. 힘들어':<93} *")
     print(f"* {'0. 시작화면으로 돌아가기':<86} *")
     print(f"{'*':*^100}")
 
@@ -353,6 +363,11 @@ if __name__=='__main__':
     # answer_background(2)
     # print_answer(select_answer(normal_withstudy_answer_list))
     # byung_state_background()
+    # data = 'dfhlkjdjflks 다'
+    # for i in range(len(data)):
+    #     ch = data[i].isalpha()
+    #     ch2 = data[i].isascii()
+    #     print(ch2)
     
     # start_ground()
     
