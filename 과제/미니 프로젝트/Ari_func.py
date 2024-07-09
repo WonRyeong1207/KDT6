@@ -59,7 +59,7 @@ byung_play_answer_list = ['뭐하고?', '싫음.', '굳이?']
 byung_hard_answer_list = ['ㅄ', '긁?', '표정봐라 ㅋㅋㅋ', '표정하고는 ㅋㅋㅋ']
 
 byung_bye_answer_list = ['ㅂㅂ']
-byung_negative_answer_list = ['이제는 글도 못치네 ㅋ']
+byung_negative_answer_list = ['이제는 글도 못치네 ㅋ', '성격은 급해가지고 어휴.. ㅉ']
 
 # 입력 데이터 유효성 체크
 def input_check(key):
@@ -151,7 +151,7 @@ def print_answer(answer):
     print(f"{'*':*^100}")
     print('\n\n')
     # 잠시 멈추게 하는 반복문
-    for _  in range(10000000):
+    for _  in range(50000000):
                     pass
 
 # 초기 화면 함수
