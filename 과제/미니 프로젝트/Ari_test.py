@@ -66,7 +66,7 @@ while True:
         for i in range(len(answer_list)):
             print(answer_list[i])
         print('\n')
-        for _ in range(100000000):
+        for _ in range(100000000): # 경고문은 길어야 하니까. 사람들 급하게 타이핑하다가 긁힘 ㅋ
             pass
         
         while True:
