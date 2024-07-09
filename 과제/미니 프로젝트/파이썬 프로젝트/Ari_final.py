@@ -223,6 +223,7 @@ def ari_chat():
         answer_background(0)
         answer_key = input_key()
         
+        # 노말 상태
         if answer_key == 1: # 대화시작
             answer_list = select_list(0, 1)
             talk = select_answer(answer_list)
@@ -276,7 +277,8 @@ def ari_chat():
                     talk = select_answer(answer_list)
                     print_answer(talk)
         
-        elif (answer_key in byung_list):
+        # 븅아리 시점 - 이스터에그
+        elif (answer_key in byung_list): # 븅아리를 부를 수 있는 '정'이 어떤 입력이라도 이루어지도록
             answer_list = select_list(0, 'byung')
             print('\n')
             for i in range(len(answer_list)):
@@ -295,8 +297,6 @@ def ari_chat():
                     print_answer(talk)
                     break
                 
-                # 대답을 보고 넘어 갈 수 있도록 기다리는 키를 주고 싶음.
-                # for문 반복으로 잠시 멈출수 있도록함.
                 elif answer_key == 1: # 안녕
                     answer_list = select_list(1, 1)
                     talk = select_answer(answer_list)
