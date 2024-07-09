@@ -41,6 +41,8 @@ normal_negative_answer_list = ['저기 잘보고 입력한거지?', '나랑 대�
                                '저런 얼마나 피곤하면 저래...', '아냐.. 그냥 뭔가 섭섭하네.', '천천히 입력해도 괜찮아.', '얼마나 급했던거야..']
 
 # 븅아리 리스트
+# 븅아리 호출 리스트
+byung_list = ['jung', 'Jung', 'JUng', 'JUNg', 'JUNG', 'jeong', 'Jeong', 'JEong', 'JEOng', 'JEONg', 'JEONG', 'wjd', '정']
 # 븅아리 호출시
 byung_warnning_list = ['------------------------- 주의 ----------------------',
                        '븅아리는 제작자가 넣은 이스터에그 입니다.',
@@ -48,18 +50,19 @@ byung_warnning_list = ['------------------------- 주의 ----------------------'
                        '븅아리와 대화하다가 화가 나셔도 제작자와는 무관합니다.',
                        '욕설과 혐오발언이 있을 수 있습니다.',
                        '븅아리는 어느 특정 인물이 모티브가 아닙니다.',
-                       '븅아리는 어리기 때문에 선이 없습니다.']
+                       '븅아리는 어리기 때문에 선이 없습니다.',
+                       '상처를 받으셔도 제작자의 책임은 없습니다.']
 
 # 븅아리 대답 리스트
-byung_hello_answer_list = ['ㅎㅇ', '뭐', '어쩔']
-byung_call_answer_list = ['한가해?', '왜 부름?']
+byung_hello_answer_list = ['ㅎㅇ', '뭐', '어쩔', '안녕', 'ㅇ?']
+byung_call_answer_list = ['한가해?', '왜 부름?', '어지간히 불러라.', '에휴.. 왜?', '아리라고 불러.', '풀네임으로 부르는 건 안 좋아하는데..']
 byung_doing_answer_list = ['보면 모르냐?', '웃기는 놈이네', '어휴..']
 byung_withstudy_answer_list = ['너나해.', '내가 그걸 왜 함?', '싫음.']
 byung_play_answer_list = ['뭐하고?', '싫음.', '굳이?']
 byung_hard_answer_list = ['ㅄ', '긁?', '표정봐라 ㅋㅋㅋ', '표정하고는 ㅋㅋㅋ']
 
-byung_bye_answer_list = ['ㅂㅂ']
-byung_negative_answer_list = ['이제는 글도 못치네 ㅋ', '성격은 급해가지고 어휴.. ㅉ']
+byung_bye_answer_list = ['ㅂㅂ', '잘가.', '담에도 보면 좋겠네.', '잘가고~']
+byung_negative_answer_list = ['이제는 글도 못치네 ㅋ', '성격은 급해가지고 어휴.. ㅉ', '그러고 싶니?', '왜 그러는 거야?']
 
 # 입력 데이터 유효성 체크
 def input_check(key):
@@ -78,7 +81,7 @@ def input_key():
         key = int(key)
         print('\n\n')
         return key
-    elif (key=='henog' or key=='wjd' or key=='정' or key=='jung'):
+    elif (key in byung_list):
         return key
     else:
         print('\n\n')
@@ -86,6 +89,7 @@ def input_key():
 
 # 대답할 리스트를 선정하는 함수, 리스트의 이름이 길어서 보기 싫어서
 def select_list(state_num, answer_key=None): # else 고려
+    # 초기 화면에서
     if state_num == 0:
         if answer_key == 1:
             return strat_positive_answer_list
@@ -96,6 +100,7 @@ def select_list(state_num, answer_key=None): # else 고려
         else:
             return strat_negative_answer_list
         
+    # 븅아리에서
     elif state_num == 1:
         if answer_key == 0:
             return byung_bye_answer_list
@@ -114,6 +119,7 @@ def select_list(state_num, answer_key=None): # else 고려
         else:
             return byung_negative_answer_list
     
+    # (정)병아리에서
     elif state_num == 2:
         if answer_key == 0:
             return normal_bye_answer_list
@@ -156,6 +162,10 @@ def print_answer(answer):
 
 # 초기 화면 함수
 def start_ground():
+    print(f"{'*':*^100}")
+    print(f"{'*':<50}{'*':>50}")
+    print(f"* {'병아리와 대화하고 놀아요!':^85} *")
+    print(f"{'*':<50}{'*':>50}")
     print(f"{'*':*^100}")
     print(f"* {'선택창':^93} *")
     print(f"{'*':*^100}")
@@ -213,5 +223,6 @@ if __name__=='__main__':
     
     # answer_background(2)
     # print_answer(select_answer(normal_withstudy_answer_list))
+    # byung_state_background()
     
-    byung_state_background()
+    start_ground()

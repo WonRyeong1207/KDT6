@@ -60,7 +60,7 @@ while True:
                 talk = Ari.select_answer(answer_list)
                 Ari.print_answer(talk)
     
-    elif (answer_key=='jeong' or answer_key=='wjd' or answer_key=='정' or answer_key=='jung'):
+    elif (answer_key in Ari.byung_list):
         answer_list = Ari.select_list(0, 'byung')
         print('\n')
         for i in range(len(answer_list)):
