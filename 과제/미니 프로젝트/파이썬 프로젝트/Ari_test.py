@@ -121,6 +121,7 @@ while True:
         talk = Ari.select_answer(answer_list)
         Ari.print_answer(talk)
         break
+    
     else: # 다른 키를 입력
         answer_list = Ari.select_list(0)
         talk = Ari.select_answer(answer_list)
