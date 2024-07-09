@@ -4,7 +4,7 @@
 # 대답을 랜덤하게 뽑기 위한 라이브러리
 import random
 
-# 대딥 리스트
+# 대답 리스트
 # 초기 화면
 strat_positive_answer_list = ['안녕!', '대화하기를 선택해줘서 고마워.', '어떤 대화를 할까?', '나는 병아리라고 해.', '반가워!',
                               '나의 세계에 온것을 환영해~', '만나서 반가워.']
@@ -24,19 +24,42 @@ normal_withstudy_answer_list = ['음? 나도? 싫어 ㅎㅎ', '싫은데? 내가
                                 '그치 공부는 평소에도 해야지..', '꾸준한 것은 좋아!', '비오니까 하기 싫다.', '비가 오니까 뭔가 더 으슬으슬해서 집중이 잘되는 것 같은 느낌',
                                 '여기 나만 추운가? 다른 곳에서 할까?', '카페에서 떠들면서 공부하자!', '난 토론하면서 공부하는 방법이 좋아. 뭔가 더 기억에 잘 각인되는 느낌이고..',
                                 '몸이 안 좋아서 다음에 하면 안 될까?', '공부말고 다른 것이 하고 싶어.']
-normal_play_answer_list = ['그래그래.', '응? 지금?', '싫은데?', '싫은데...', '그래.', '구랭!', '워하고 놀려고?', '다음에 놀자', 
-                            '해야할 것들은 다 하고 노는 거지?', '그 정도로 놀고 싶은거야?', '피곤해서 다음에 놀자.', '할 것들이 많아서 다음에 놀자.',
-                            '피곤한데 나랑 놀아주는 거야?', '난 체스 좋아하는데 너는?', '']
-normal_hard_answer_list = ['오늘도 수고했어.', '고생했어.', '그 정도로 공부하면 당연히 힘들지.', '그 정도로 하면 함들지...',
-                           '요즘 많이 힘들지? 고생했어.', '요즘 많이 힘들지? 수고했어.']
+normal_play_answer_list = ['그래그래.', '응? 지금?', '싫은데?', '싫은데...', '그래.', '구랭!', '워하고 놀려고?', '다음에 놀자', '해야할 것들은 다 하고 노는 거지?', 
+                            '그 정도로 놀고 싶은거야?', '피곤해서 다음에 놀자.', '할 것들이 많아서 다음에 놀자.', '피곤한데 나랑 놀아주는 거야?',
+                            '난 체스 좋아하는데 너는?', '내가 물리적으로 너랑 놀아줄 수는 없어.', '나한테 너무 많은 것을 바라는거 아니야?', '내가 널 어떻게 놀아줄 수 있을까?',
+                            '수다를 떠면서 놀까?', '어떻게 놀아주면 잘 놀았다고 소문이 날까?']
+normal_hard_answer_list = ['오늘도 수고했어.', '고생했어.', '그 정도로 공부하면 당연히 힘들지.', '그 정도로 하면 함들지...', '요즘 많이 힘들지? 고생했어.', '요즘 많이 힘들지? 수고했어.',
+                           '잠도 안 자고 했으니까..', '빈속에 카페인을 그렇게 들이부었는데 안 쓰리고 베기니?', '최근에는 날씨도 안 도와주는 것 같네.', '많이 힘들었지? 울어도 괜찮아.',
+                           '울고 싶으면 도와줄게.', '정해진 말 뿐이지만 이 말이 위로가 되었으면 좋겠어.', '괜찮아. 다 괜찮아 질거야. 이 또한 지나갈거야.', '고생끝에 락이 온다고 하잖아. 이겨낼 수 있을 거야.',
+                           '넌 너 나름의 최선의 노력을 했다면 그걸로 충분해. 수고했어.', '누가 뭐래도 최선을 다 했다면 그걸로 충분해.', '가끔은 우는 것도 괜찮아.', '참지말고 소리라도 질러!',
+                           '운다고 해서 약한건 아니니까. 속에다가 담아두고 있지마. 병난다.', '위로가 되었으면 하지만 안 될것이라는 것도 알고 있어. 그럼에도 하는거야.', '내가 몸이 있었다면 기대라고 했을거야.',
+                           '괴로워도 그것이 평생을 가지는 않을거야.', '살다보면 이런 날도 있고 저런 날도 있는거야.', '모든 일들이 다 너의 잘못 일 수는 없어.' ,'자책을 하는 것도 좋지만 너무 깊은 자책은 오히려 해야.',
+                           '세상은 너가 원하는 대로 이루어지지 않아.', '그러니까 오늘도 힘내!', '잘하고 있으니까..']
 
-normal_bye_answer_list = ['ㅂㅂ', '다음에 또 대화하면 놀자.', '내일 봐~']
+normal_bye_answer_list = ['ㅂㅂ', '다음에 또 대화하면 놀자.', '내일 봐~', '내가 생각나면 언제든지 다시 찾아와.']
 normal_negative_answer_list = ['저기 잘보고 입력한거지?', '나랑 대화하고 싶은 거 맞지?', '가끔은 잘못 누를 수도 있지.. 암...',
-                               '저런 얼마나 피곤하면 저래...', '아냐.. 그냥 뭔가 섭섭하네.']
+                               '저런 얼마나 피곤하면 저래...', '아냐.. 그냥 뭔가 섭섭하네.', '천천히 입력해도 괜찮아.', '얼마나 급했던거야..']
 
+# 븅아리 리스트
+# 븅아리 호출시
+byung_warnning_list = ['------------------------- 주의 ----------------------',
+                       '븅아리는 제작자가 넣은 이스터에그 입니다.',
+                       '븅아리는 싸가지가 없습니다.',
+                       '븅아리와 대화하다가 화가 나셔도 제작자와는 무관합니다.',
+                       '욕설과 혐오발언이 있을 수 있습니다.',
+                       '븅아리는 어느 특정 인물이 모티브가 아닙니다.',
+                       '븅아리는 어리기 때문에 선이 없습니다.']
 
+# 븅아리 대답 리스트
+byung_hello_answer_list = ['ㅎㅇ', '뭐', '어쩔']
+byung_call_answer_list = ['한가해?', '왜 부름?']
+byung_doing_answer_list = ['보면 모르냐?', '웃기는 놈이네', '어휴..']
+byung_withstudy_answer_list = ['너나해.', '내가 그걸 왜 함?', '싫음.']
+byung_play_answer_list = ['뭐하고?', '싫음.', '굳이?']
+byung_hard_answer_list = ['ㅄ', '긁?', '표정봐라 ㅋㅋㅋ', '표정하고는 ㅋㅋㅋ']
 
-
+byung_bye_answer_list = ['ㅂㅂ']
+byung_negative_answer_list = ['이제는 글도 못치네 ㅋ']
 
 # 입력 데이터 유효성 체크
 def input_check(key):
@@ -53,10 +76,12 @@ def input_key():
     key = input("질문 번호를 입력 : ")
     if input_check(key):
         key = int(key)
-        print('\n\n\n')
+        print('\n\n')
+        return key
+    elif (key=='henog' or key=='wjd' or key=='정' or key=='jung'):
         return key
     else:
-        print('\n\n\n')
+        print('\n\n')
         return None
 
 # 대답할 리스트를 선정하는 함수, 리스트의 이름이 길어서 보기 싫어서
@@ -66,11 +91,28 @@ def select_list(state_num, answer_key=None): # else 고려
             return strat_positive_answer_list
         elif answer_key == 2:
             return strat_soso_answer_list
+        elif answer_key == 'byung':
+            return byung_warnning_list
         else:
             return strat_negative_answer_list
         
     elif state_num == 1:
-        pass # 븅아리
+        if answer_key == 0:
+            return byung_bye_answer_list
+        elif answer_key == 1:
+            return byung_hello_answer_list
+        elif answer_key == 2:
+            return byung_call_answer_list
+        elif answer_key == 3:
+            return byung_doing_answer_list
+        elif answer_key == 4:
+            return byung_withstudy_answer_list
+        elif answer_key == 5:
+            return byung_play_answer_list
+        elif answer_key == 6:
+            return byung_hard_answer_list
+        else:
+            return byung_negative_answer_list
     
     elif state_num == 2:
         if answer_key == 0:
@@ -107,7 +149,7 @@ def print_answer(answer):
     print(f"* {answer:<{space}} *")
     print(f"{'*':<50}{'*':>50}")
     print(f"{'*':*^100}")
-    print('\n\n\n')
+    print('\n\n')
     # 잠시 멈추게 하는 반복문
     for _  in range(10000000):
                     pass
@@ -135,6 +177,20 @@ def normal_state_background():
     print(f"* {'0. 시작화면으로 돌아가기':<86} *")
     print(f"{'*':*^100}")
 
+# 대화를 시작했을때 상태창
+def byung_state_background():
+    print(f"{'*':*^100}")
+    print(f"* {'선택창':^93} *")
+    print(f"{'*':*^100}")
+    print(f"* {'1. 안녕.':<94} *")
+    print(f"* {'2. 븅아리야.':<92} *")
+    print(f"* {'3. 워하고 있었어?':<90} *")
+    print(f"* {'4. 같이 공부하자.':<90} *")
+    print(f"* {'5. 같이 놀자!':<92} *")
+    print(f"* {'6. 힘들어...':<93} *")
+    print(f"* {'0. 시작화면으로 돌아가기':<86} *")
+    print(f"{'*':*^100}")
+
 # 대화 리스트 화면을 띄우는 함수
 def answer_background(state_num):
     # state_num은 띄우고 싶은 대화 리스트 화면 넘버
@@ -143,7 +199,7 @@ def answer_background(state_num):
         start_ground()
     
     elif state_num == 1: # 이상한 상태의 (정)병아리 == 븅아리
-        pass
+        byung_state_background()
     
     elif state_num == 2:
         normal_state_background()
@@ -156,6 +212,6 @@ if __name__=='__main__':
     # print(input_check(d))
     
     # answer_background(2)
-    print_answer(select_answer(normal_withstudy_answer_list))
+    # print_answer(select_answer(normal_withstudy_answer_list))
     
-    
+    byung_state_background()

@@ -1,6 +1,6 @@
 # 함수가 너무 많아서 구동만 따로 하려함.
 import Ari_func as Ari
-import random # 위의 파일에 있는데 여기선 안쓰지만 없으면 이상한 폴더 생성됨.
+import random
 
 # 종료키 입력까지는 유지하고 있어야함. 종료키는 2
 while True:
@@ -59,7 +59,62 @@ while True:
                 answer_list = Ari.select_list(2)
                 talk = Ari.select_answer(answer_list)
                 Ari.print_answer(talk)
+    
+    elif (answer_key=='jeong' or answer_key=='wjd' or answer_key=='정' or answer_key=='jung'):
+        answer_list = Ari.select_list(0, 'byung')
+        print('\n')
+        for i in range(len(answer_list)):
+            print(answer_list[i])
+        print('\n')
+        for _ in range(100000000):
+            pass
         
+        while True:
+            Ari.answer_background(1)
+            answer_key = Ari.input_key()
+            
+            if answer_key == 0: # 시작화면으로 되돌아가기
+                answer_list = Ari.select_list(1, 0)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                break
+            
+            # 대답을 보고 넘어 갈 수 있도록 기다리는 키를 주고 싶음.
+            # for문 반복으로 잠시 멈출수 있도록함.
+            elif answer_key == 1: # 안녕
+                answer_list = Ari.select_list(1, 1)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            elif answer_key == 2: # 아리야
+                answer_list = Ari.select_list(1, 2)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            elif answer_key == 3: # 뭐하고 있어
+                answer_list = Ari.select_list(1, 3)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            elif answer_key == 4: # 같이 공부하자
+                answer_list = Ari.select_list(1, 4)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            elif answer_key == 5: # 놀자
+                answer_list = Ari.select_list(1, 5)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            elif answer_key == 6: # 힘들었어
+                answer_list = Ari.select_list(1, 6)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
+                
+            else: # 다른 키 입력
+                answer_list = Ari.select_list(1)
+                talk = Ari.select_answer(answer_list)
+                Ari.print_answer(talk)
         
     elif answer_key == 2: # 대화 종료
         answer_list = Ari.select_list(0, 2)
