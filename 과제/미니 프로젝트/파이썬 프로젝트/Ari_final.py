@@ -75,7 +75,7 @@ def input_check(key):
         else:
             return False
     else:
-        False
+        return False
 
 # 입력을 받는 함수
 def input_key():
