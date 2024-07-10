@@ -356,19 +356,4 @@ def ari_chat():
 # test
 if __name__=='__main__':
     
-    # test
-    # d = input("d : ")
-    # print(input_check(d))
-    
-    # answer_background(2)
-    # print_answer(select_answer(normal_withstudy_answer_list))
-    # byung_state_background()
-    # data = 'dfhlkjdjflks 다'
-    # for i in range(len(data)):
-    #     ch = data[i].isalpha()
-    #     ch2 = data[i].isascii()
-    #     print(ch2)
-    
-    # start_ground()
-    
     ari_chat()
