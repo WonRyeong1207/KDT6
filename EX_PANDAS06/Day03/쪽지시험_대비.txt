@@ -1,0 +1,37 @@
+파이썬 ==> 일반프밍
+        |
+        |
+판다스 => 데이터 분석 프로그래밍
+        자료형 => Seies, DataFrame
+        int64, float64, object <-- str, int
+        datatime 등등
+        그외 다양한 파일들 존재
+        read_파일종류 : read_csv/read_excel/read_json etc
+
+Seies/DataFrame ==> 구성 : index+values / index+columns+values
+
+[행/열 인덱스 변경 방법] ----------------
+(1) 메서드 사용
+    rename() : 일부변경
+(2) 속성사용
+    index/columns
+
+
+[행/열 삭제 메서드]
+drop
+*행삭제 -> axis=0, 삭제하고 싶은 인덱스 지정
+        -> index = 삭제하고 싶은 인덱스
+*열삭제 -> axis = 1 또는 columns 지정
+
+*inplace = Fales 기본값, 복사본이 아닌 원본을 변경 할 것이라면 True
+
+
+[행/열 추가 메서드]
+*행 추가 ==> loc[새로운 행] = 새로운 값 (1개 또는 열의 수만큼)
+*열 추가 ==> [새로운 열] = 새로운 값 (1개 또는 행의 수만큼)
+
+
+[원소 선택/추가 메서드]
+*열 선택 ==> 변수명[열인덱스]
+*행 선택 ==> 변수명.loc[행인덱스] / 변수명.iloc[정수행인덱스]
+*원소 선택 ==> 변수명.(i)loc[행인덱스, 열인덱스]
