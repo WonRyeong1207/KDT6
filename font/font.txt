@@ -1,0 +1,18 @@
+여기에다가 폰트파일 넣어두고 사용하면 좋을 것 같아서 만든 폴더
+
+# 한글폰트 설정 => 폰트 메니저 모듈 사용
+from matplotlib import font_manager as fm
+from matplotlib import rc
+
+# 사용할 폰트 파일
+font_path = r'C:\Users\PC\AppData\Local\Microsoft\Windows\Fonts\NanumMyeongjo.ttf'
+font_path = r'C:\Users\PC\Desktop\AI_빅데이터 전문가 양성과정 6기\KDT6\font\NanumMyeongjo.ttf'
+font_path = '../font/NanumMyeongjo.ttf'
+
+# 폰트 패밀리 이름 가져오기
+font_name = fm.FontProperties(fname=font_path).get_name()
+
+# 새로운 폰트 패밀리 이름 지정
+rc('font',family=font_name)
+
+
