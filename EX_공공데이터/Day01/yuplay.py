@@ -79,6 +79,7 @@ while True:
             break
         
     if player_1_total >= 20:
+        print('-'*50)
         print(f"{player_1_name} 승리 => {player_1_name} : {player_1_total}, {player_2_name} : {player_2_total}")
         break
     
@@ -88,5 +89,6 @@ while True:
         if (score ==1 ) or (score == 2) or (score == 3):
             break
     if player_2_total >= 20:
+        print('-'*50)
         print(f"{player_2_name} 승리 => {player_1_name} : {player_1_total}, {player_2_name} : {player_2_total}")
         break
