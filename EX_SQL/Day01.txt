@@ -1,0 +1,113 @@
+# 다른 database 사용
+use sqlclass_db;
+
+# person 테이블이 있으면 삭제
+drop table if exists person;
+
+# 테이블 생성
+create table person
+	(person_id smallint unsigned,
+	 fname varchar(20),
+	 lname varchar(20),
+	 eye_color enum('BR', 'BL', 'GR'),
+	 birth_date date,
+	 street varchar(30),
+	 city varchar(20),
+	 state varchar(20),
+	 country varchar(20),
+	 postal_code varchar(20),
+	 # constraint pk_person : 생략 가능, 제약조건을 주는 명령어
+	 constraint pk_person primary key (person_id)
+	 );
+	 
+# 테이블 확인
+desc person;
+
+# favorite_food 있으면 삭제
+drop table if exists favorite_food;
+
+# 테이블 생성
+create table favorite_food
+	(person_id smallint unsigned,
+	 food varchar(20),
+	 # constraint pk_favorite_food
+	 constraint pk_favorite_food primary key (person_id, food),
+	 # constraint fk_fav_food_person_id
+	 constraint fk_fav_food_person_id foreign key (person_id) references person(person_id)
+	);
+	
+desc favorite_food;
+
+# 테이블 수정
+# foreifgn 되어있는 경우에는 제약조건을 비활성화 한후 다시 재 활성화
+set foreign_key_checks = 0;
+alter table person modify person_id smallint unsigned auto_increment;
+set foreign_key_checks = 1;
+
+# 데이터 추가(insert)
+insert into person
+	(person_id, fname, lname, eye_color, birth_date)
+	values (null, 'william', 'Turner', 'BR', '1972-05-27');
+
+# 데이터 확인(select)
+select * from person;	# * 은 모든 데이터 들고오기
+
+# 특정한 열의 데이터 값만 확인
+select person_id, fname, lname, birth_date from person;
+select person_id, fname, lname, birth_date from person where lname = 'Turner';
+
+# 데이터 추가 (favorite_food)
+insert into favorite_food (person_id, food)
+values (1, 'pizza');
+insert into favorite_food (person_id, food)
+values (1, 'cookies');
+insert into favorite_food (person_id, food)
+values (1, 'nachos')
+
+select * from favorite_food;
+
+# 다른 방법
+delete from favorite_food where person_id = 1;
+
+insert into favorite_food (person_id, food)
+values (1, 'pizza'), (1, 'cookies'), (1, 'nachos');
+
+# 특정한 칼럼을 알파벳 순서대로 정렬
+# 오름차순
+select food from favorite_food
+where person_id = 1 order by food;
+
+# 내림차순
+select food from favorite_food
+where person_id=1 order by food desc;
+
+# person에 다른 데이터 추가
+insert into person
+(person_id, fname, lname, eye_color, birth_date,
+ street, city, state, country, postal_code)
+ values (null, 'Susan', 'Smith', 'BL', '1975-11-02',
+ '23 Maple St', 'Arlington', 'VA', 'USA', '20220');
+ 
+# 데이터 확인
+select person_id, fname, lname, birth_date from person;
+# 2을 지우고 새로 추가하면 인덱스를 2번이 아닌 3으로 나타냄.
+
+# 데이터 수정(update)
+update person
+set street = '1225 Tremon St',
+	city = 'Boston',
+	state = 'MA',
+	country = 'USA',
+	postal_code = '02138'
+where person_id = 1;
+
+select * from person;
+
+# 데이터 삭제
+delete from person where person_id = 2;
+
+select * from person;
+
+# 오류구문
+# favorite_food에 3번을 추가하려면 person에 3번이 있어야 가능!
+# 제약조건이 있기 때문에
