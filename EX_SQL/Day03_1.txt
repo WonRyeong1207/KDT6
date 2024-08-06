@@ -1,0 +1,110 @@
+# 6장 집합연산자
+
+# union 합집합의 기본 사용 방법
+select 1 as num, 'abc' as str
+union
+select 9 as num, 'xvz' as str;
+# select '9' as num, 1+1 as str 로 일단은 자료형이 달라도 됨. (버전 차이인듯)
+
+# 사용할 데이터베이스
+use sakila;
+
+# union
+desc customer;
+desc actor;
+
+select 'CUST' as type1, c.first_name, c.last_name from customer as c
+union all
+select 'ACTR' as type2, a.first_name, a.last_name from actor as a;
+# 여기는 799개 행이 존재
+select count('first_name') from customer;		# 599
+select count('frist_name') from actor;		# 200
+
+# union 중복 포함
+select 'ACTR1' as type, a.first_name, a.last_name from actor as a
+union all
+select 'ACTR2' as type, a.first_name, a.last_name from actor as a;
+# 400개의 행 존재
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'J%' and c.last_name like 'D%'
+union all
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'J%' and a.last_name like 'D%';
+# 위에는 5명 아래는 4명. 아래는 중복을 제거
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'J%' and c.last_name like 'D%'
+union
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'J%' and a.last_name like 'D%';
+
+# intersect 연산(교집합)
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'D%' and c.last_name like 'T%';
+# 3명
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'D%' and a.last_name like 'T%';
+# 2명
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'D%' and c.last_name like 'T%'
+intersect
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'D%' and a.last_name like 'T%';
+# 0명
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'J%' and c.last_name like 'D%'
+intersect
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'J%' and a.last_name like 'D%';
+# 1명 나옴 JENNIFFER DAVIS
+
+# inner join과 같은 결과가 나옴
+select c.first_name, c.last_name from customer as c
+inner join actor as a
+on (c.first_name = a.first_name) and (c.last_name = a.last_name);
+# 교집합보다 더 많은 경우의 수를 볼 수 있음.
+select c.first_name, c.last_name from customer as c
+inner join actor as a
+on (c.first_name = a.first_name) and (c.last_name = a.last_name)
+where a.first_name like 'J%' and a.last_name like 'D%';
+
+# EXCEPT 연산(차집합) - 'actor - customer'
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'J%' and a.last_name like 'D%'
+except
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'J%' and c.last_name like 'D%';
+
+# order by는 젤 마지막에
+# 단, 이름은 복합 쿼리의 첫번째 쿼리에 있는 열 이름을 사용해야함!!!!
+# 복합 쿼리에서 연산 순서는 위에서 부터 적용 but 교집합은 젤 먼저 적용됨!!
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'J%' and a.last_name like 'D%'
+union all
+select a.first_name, a.last_name from actor as a
+where a.first_name like 'M%' and a.last_name like 'T%'
+union # 중복 제거되서 안나와
+select c.first_name, c.last_name from customer as c
+where c.first_name like 'J%' and c.last_name like 'D%'
+# 정렬을 넣으면
+order by first_name, last_name;
+
+
+# actor와 customer 테이블에서 성이 L로 시작하는 사람의 이름과 성을 찾는 복합쿼리 작성
+select first_name, last_name from actor
+where last_name like 'L%'
+union
+select first_name, last_name from customer
+where last_name like 'L%';
+
+# last_name 열을 기준은로 오름차수 정렬
+select first_name, last_name from actor
+where last_name like 'L%'
+union
+select first_name, last_name from customer
+where last_name like 'L%'
+order by last_name;
+
+
+
+
+

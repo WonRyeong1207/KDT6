@@ -1,0 +1,112 @@
+use sakila;	# 이거 사용 안하네
+
+# 7장 문자열
+# 어느 언어든 가장 중요한 파트!!
+
+use sqlclass_db;
+
+drop table if exists string_tbl;
+create table string_tbl
+	(char_fld char(30),
+	 vchar_fld varchar(30),
+	 text_fld text
+	);
+insert into string_tbl(char_fld, vchar_fld, text_fld)
+values ('This is char data',
+		 'This is varchar data',
+		 'This is text data');
+select * from string_tbl;
+
+# update 값이 over 되는 경우
+update string_tbl
+# set vchar_fld = 'This is piece of extremely long vachar data';
+set text_fld = 'This is piece of extremely long text data';
+
+# ANSI 모드 : 길이만큼 자르고 경고만 생성
+select @@session.sql_mode;
+
+# ANSI 모드 선택
+set sql_mode = 'ansi';
+select  @@session.sql_mode;
+
+# 아까 그거 다시
+update string_tbl
+set vchar_fld = 'This is piece of extremely long vachar data';
+select vchar_fld from string_tbl;
+
+# 문자열에 작은 따옴표 추가 방법
+# - 작은 따옴표 하나 더 추가
+# - \문자 추가
+# - quote() 내장함수 사용 : 전체 작은 따옴표
+
+# 문자열 조작: length() == python len()
+delete from string_tbl;
+
+insert into string_tbl(char_fld, vchar_fld, text_fld)
+values ('This string is 28 characters',
+		 'This string is 28 characters',
+		 'This string is 28 characters');
+
+select length (char_fld) as char_length,
+length (vchar_fld) as vchar_length, length (text_fld) as text_length
+from string_tbl;
+
+# position() : 부분 문자열 위치를 변환
+select position('characters' in vchar_fld) from string_tbl;
+
+# locate(문자열, 열이름 시작위치):문자열 시작 인덱스를 반환, 중복은 안나와. 그래서 시작 위치를 줘.
+select locate('is', vchar_fld, 5) from string_tbl;	# 13
+select locate('is', vchar_fld, 1) from string_tbl;	# 3
+
+# strcmp(문자열1, 문자열2) : 문자열 비교
+delete from string_tbl;
+insert into string_tbl(vchar_fld)
+values ('abcd'), ('xyz'), ('QRSTUV'), ('qrstuv'), ('12345');
+
+# 오름차순 정렬
+select vchar_fld from string_tbl order by vchar_fld;
+
+select strcmp('12345', '12345') as 12345_12345,
+		strcmp('abcd', 'xyz') as abcd_xyz,
+		strcmp('abcd', 'QRSTUV') as abcd_QRSTUV,
+		strcmp('qrstuv', 'QRSTUV') as qrstuv_QRSTUV,
+		strcmp('12345', 'xyz') as 12345_xyz,
+		strcmp('xyz', 'qrstuv') as xyz_qrstuv;
+# 문자열을 비교할 때, 대소문자를 구별하지 않는다
+
+# like 또는 regexp 연산자 : 문자열 찾을때
+use sakila;
+
+select name, name like '%y' as ends_in_y from category;
+select name, name regexp '%y' as ends_in_y from category;
+# 2개다 결과는 같음
+
+# concat() : 문자열 추가 함수
+use sqlclass_db;
+delete from string_tbl;
+
+insert into string_tbl (text_fld)
+values ('This string was 29 characters');
+
+# concat()
+update string_tbl
+set text_fld = concat(text_fld, ',but now is longer');
+select text_fld from string_tbl;
+
+# concat 함수를 활용
+use sakila;
+select concat(first_name, ' ', last_name, ' has been a customer since ', date(create_date)) as cust_narrative from customer;
+
+use sqlclass_db;
+
+# insert() : table에 값을 추가
+# 문자열, 시작위치, 길이, 새로운 문자열 의 4가지 파라미터를 가짐
+# 세 번째 인수값 == 0 : 추가(삽입), != : 대치(교체)
+select insert ('goodbye world', 9, 0, 'cruel ') as string;
+select insert ('goodbye world', 1, 7, 'hello') as string;
+
+# replace(문자열, 기존문자열, 새로운문자열) : 기존 문자열을 찾아서 새로운 문자열로 교체
+select replace ('goodbye world', 'goodbye', 'hello') as replce_str;
+
+# substr() 또는 substring() : 문자열에서 시작위치에서 개수만큼 출력
+select substr('goodbye cruel world', 9, 5);

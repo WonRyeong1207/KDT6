@@ -1,0 +1,51 @@
+# 7장 : 숫자 데이터 처리
+use sqlclass_db;
+
+# round와 truncate: 반올림과 버림
+select round(72.0909, 1), round(72.0909, 2), round(72.0909, 3);
+select truncate(72.0909, 1), truncate(72.0909, 2), truncate(72.0909,3);
+
+# sign(): 음이면 -1, 양이면 1, 0은 0을 반환
+drop table if exists account;
+create table account
+(account_id int, acct_type varchar (20), balance float);
+
+insert into account (account_id, acct_type, balance)
+values (123, 'MONEY MARKET', 785), (456, 'SAVINGS', 0.00), (789, 'CHECKING', -324);
+select  * from account;
+select account_id, sign(balance), abs(balance) from account;
+
+# 시간데이터 처리
+# cast() : 지정한 값을 다른 데이터 타입으로 변환
+# 시간을 표기하는 4가지 방법
+# = '2001-01-01 00:00:00'
+# = '2001/01/01 00:00:00'
+# = '2001,01,01 00:00:00'
+# = '20010101000000'
+select cast('2019-09-17 15:30:00' as datetime);
+select cast('20240806134300' as datetime);
+
+# 날짜 생성 함수 : str_to_date(str, format)
+select str_to_date('September 17, 2019', '%M %d, %Y') as return_date;
+# 문장열 형식에 맞춰서 사용
+
+select str_to_date('04/30/2024', '%m/%d/%Y') as date1;	# 없는 날짜는 안나옴;;
+select str_to_date('01,5,2024', '%d,%m,%Y') as date2;
+select str_to_date('15:35:00', '%H:%i:%s') as time1;
+
+# 현재를 나타내는 함수
+select current_date(), current_time(), current_timestamp(); 
+select date_add(current_date(), interval 5 day); 
+
+# 날짜를 반환하는 함수
+select last_day('2022-08-01');
+
+# 문자열을 반환하는 시간 함수
+select dayname('2022-08-01'); 
+
+# 문자열을 반환하는 시간 함수
+select extract(year from '2019-08-18 22:19:05');
+
+# 숫자를 반환하는 함수
+select datediff('2019-09-03', '2019-06-21');
+
