@@ -1,0 +1,130 @@
+# 8장: 그룹화와 집계
+
+# group by : 칼럼의 데이터를 그룹화
+use sakila;
+
+select customer_id, count(*) from rental
+group by customer_id;
+
+select customer_id, count(*) from rental
+group by customer_id
+order by 2 desc;	# 칼럼 인덱스
+# 둘다 같은 결과를 보임
+select customer_id, count(*) from rental
+group by customer_id
+order by count(*) desc;
+
+# 그룹연산 필터링
+# group by 연산을 했을때는 having을 사용
+select customer_id, count(*) from rental
+group by customer_id
+having count(*) >= 40;
+
+
+# 집계함수: max(), min(), avg() == mean(), sum(), count()
+desc payment;
+
+select max(amount) as max_amt,
+	min(amount) as min_amt,
+	avg(amount) as avg_amt,
+	sum(amount) as sum_amt,
+	count(*) as num_pymounts from payment;
+
+# 명시적 그룸: 집계함수르르 적용하기 위해 그룹화 할 열 이름 저장
+# 	집계함수는 그룹별로 연산이 가능!
+select customer_id,
+	max(amount) as max_amt,
+	min(amount) as min_amt,
+	avg(amount) as avg_amt,
+	sum(amount) as sum_amt,
+	count(*) as num_payments
+from payment
+group by customer_id;
+
+# 중복제거: distinct
+select count(customer_id) as num_rows,
+	   count(distinct customer_id) as num_customers
+from payment;
+
+# 표현식 사용: 집계 함수 안에 넣어서 사용. for문이 없는 sql에서의 특징?
+select max(datediff(return_date, rental_date)) from rental;
+select avg(datediff(return_date, rental_date)) from rental;
+
+# Null 처리 방법
+
+use sqlclass_db;
+drop table if exists number_tbl;
+create table number_tbl (val smallint);
+desc number_tbl;
+
+insert into number_tbl values(1);
+insert into number_tbl values(3);
+insert into number_tbl values(5);
+
+select count(*) as num_rows,
+		count(val) as num_val,
+		sum(val) as total,
+		max(val) as max_val,
+		avg(val) as avg_val
+from number_tbl;
+
+# Null 입력
+insert into number_tbl values(NULL);
+select * from number_tbl;
+# Null 값은 무시하고 계산을 진행
+select count(*) as num_rows,
+		count(val) as num_val,
+		sum(val) as total,
+		max(val) as max_val,
+		avg(val) as avg_val
+from number_tbl;
+
+# 그룹 생성
+use sakila;
+
+# 단일 그룹화
+# 배우별로 몇번 영화에 출연헀나
+select actor_id, count(*)
+from film_actor
+group by actor_id;
+
+# 다중 그룹화: 하나 이상의 열을 사용
+select fa.actor_id, f.rating, count(*)
+from film_actor as fa
+	inner join film as f
+	on fa.film_id = f.film_id
+group by fa.actor_id, f.rating
+order by 1, 2;	# order by fa.actor_id, f.rating asc;
+
+# 그룹화와 표현식: extract(unit, from date)
+# - 낟짜 데이터를 사용한다면 원하는 연, 월, 일, 시, 분, 초 등을 특정값에서 추출가능
+select extract(year from rental_date) as year, count(*) as how_many from rental
+group by extract(year from rental_date);
+
+
+# with rollup: group by로 출력된 항목들의 랍계를 나타내는 방법
+select fa.actor_id, f.rating, count(*)
+from film_actor as fa
+	inner join film as f
+	on fa.film_id = f.film_id
+group by fa.actor_id, f.rating with rollup
+order by 1, 2;		# order by fa.actor, f.rating asc;
+
+# 두 가지 필터 조건 사용
+select fa.actor_id, f.rating, count(*)
+from film_actor as fa
+	inner join film as f
+	on fa.film_id = f.film_id
+where f.rating in ('G', 'PG')
+group by fa.actor_id, f.rating
+# having count(*) > 9;
+order by fa.actor_id asc;
+
+
+# 각 고객의 지불 횟수와 각 고객이 지불한 총 금액을 계산
+select customer_id, count(*), sum(amount) from payment
+group by customer_id;
+
+
+
+
