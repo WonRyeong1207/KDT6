@@ -53,12 +53,84 @@ class VendingMachine:
         self.input_money = 0
         self.inventory = input_dict
     
+    # 입력 데이터 유효성 체크
+    def money_check(self, money):
+        self.money = money
+        if len(self.money) <= 4:       # 최대 판매할 수 있는 커피 값이 1500원
+            if self.money.isdecimal():
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    # 입력을 받는 함수
+    def input_money_(self):
+        money = input("동전을 투입하세요 : ")
+        if self.money_check(money):
+            money = int(money)
+            return money
+        else:
+            return None
+    
+    # 입력 데이터 유효성 체크
+    def key_check(self, key):
+        self.key = key
+        if len(self.key) == 1:
+            if self.key.isdecimal():
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    # 입력을 받는 함수
+    def input_key(self):
+        key = input("메뉴를 선택하세요 : ")
+        if self.key_check(key):
+            key = int(key)
+            return key
+        else:
+            return None
+    
+    
     def run(self):
         '''
         커피 자판기 동작 및 메뉴 호출 함수
         '''
         # 기능 구현 및 다른 메서드 호출
         
+        
+        while True:
+            # 돈을 입력받음
+            self.input_money = self.input_money_()
+            
+            # None인 경우를 먼저 검증하면 에러 안나려나?
+            if self.input_money == None:
+                print('-'*80)
+                print("커피 자판기 동작을 종료합니다.")
+                print('-'*80)
+                break
+            
+            # 300원 이상인 경우
+            elif self.input_money >= 300:
+                pass
+            
+            # 300원 보다 작을 경우
+            elif self.input_money < 300:
+                print(f"투입된 돈 ({self.input_money}원)이 300원 보다 작습니다.")
+                print('-'*80)
+                print("커피 자판기 동작을 종료합니다.")
+                print('-'*80)
+                break
+            
+            # 만약의 경우..
+            else:
+                print('Error')
+                print('-'*80)
+                print("커피 자판기 동작을 종료합니다.")
+                print('-'*80)
+                break
         
         
 if __name__ == '__main__':
