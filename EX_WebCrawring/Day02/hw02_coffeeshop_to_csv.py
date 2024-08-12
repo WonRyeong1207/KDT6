@@ -45,6 +45,9 @@ for x in num:
     
     hollys_df = pd.concat([hollys_df, sub_hollys_df], ignore_index=True)
 
+for i in range(len(hollys_df.index)):
+    print(f"[{i:3}] 매장이름: {hollys_df.loc[i,'매장이름']}, 지역: {hollys_df.loc[i,'지역']}, 주소: {hollys_df.loc[i, '주소']}, 전화번호: {hollys_df.loc[i, '전화번호']}")
+
 print(hollys_df)
 hollys_df.to_csv('./hollys_branches.csv', encoding='utf-8', index=False)
 print('hollys_branches.csv 파일 저장 완료')
