@@ -186,7 +186,7 @@ class VendingMachine:
         print('-'*80)
         print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
         print('-'*80)
-        self.update(self, coffee, cream, sugar, water, cup, change, money)
+        self.update(coffee, cream, sugar, water, cup, change, money)
         stop = False
         return stop
     
@@ -226,7 +226,7 @@ class VendingMachine:
         print('-'*80)
         print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
         print('-'*80)
-        self.update(self, coffee, cream, sugar, water, cup, change, money)
+        self.update(coffee, cream, sugar, water, cup, change, money)
         stop = False
         return stop
     
@@ -253,21 +253,19 @@ class VendingMachine:
             # 300원 이상인 경우
             elif self.input_money >= 300:
                 # 여기도 종료가 안되면 계속 반복
-                # 이 안에서만 사용할 변수로 이름 변경
-                money = self.input_money
                 
                 while True:
                     print('-'*30)
-                    print(f"  커피 자판기 (잔액:{money}원)")
+                    print(f"  커피 자판기 (잔액:{self.input_money}원)")
                     print('-'*30)
                     
                     self.menu()
                     key = self.input_key()
                     
                     # 또 다른 종료 조건: 돈이 부족
-                    if money < 300:
-                        print(f"잔액이 ({money}원)이 300원보다 작습니다.")
-                        print(f"{money}원이 반환됩니다.")
+                    if self.input_money < 300:
+                        print(f"잔액이 ({self.input_money}원)이 300원보다 작습니다.")
+                        print(f"{self.input_money}원이 반환됩니다.")
                         print('-'*30)
                         print('커피 자판기 동작을 종료합니다.')
                         print('-'*30)
@@ -275,7 +273,7 @@ class VendingMachine:
                     
                     # 종료 조건
                     if (key == 5) or (key == None):
-                        print(f"종료를 선택하셨습니다. {money}원이 반환됩니다.")
+                        print(f"종료를 선택하셨습니다. {self.input_money}원이 반환됩니다.")
                         print('-'*30)
                         print('커피 자판기 동작을 종료합니다.')
                         print('-'*30)
