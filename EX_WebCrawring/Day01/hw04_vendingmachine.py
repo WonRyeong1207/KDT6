@@ -303,14 +303,6 @@ class VendingMachine:
                         print(f"재료 현황: coffee: {self.inventory['coffee']} cream: {self.inventory['cream']} sugar: {self.inventory['water']} cup: {self.inventory['cup']} change: {self.inventory['change']}")
                         print('-'*80)
                     
-                    #  예외 상황: 6, 7, 8, 9, 0이 입력 되었을 때
-                    # else:
-                    #     print(f"종료를 선택하셨습니다. {money}원이 반환됩니다.")
-                    #     print('-'*30)
-                    #     print('커피 자판기 동작을 종료합니다.')
-                    #     print('-'*30)
-                    #     break
-                    
                 # 내부의 while의 반복이 끝났으니 바로 자판기 종료
                 break
                 
