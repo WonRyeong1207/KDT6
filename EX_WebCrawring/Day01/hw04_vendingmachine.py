@@ -100,7 +100,17 @@ class VendingMachine:
         print('3. 설탕 프림 커피')
         print('4. 재료 현황')
         print('5. 종료')
-        
+    
+    # 업데이크 함수
+    def update(self, coffee, cream, sugar, water, cup, change, money):
+        self.inventory['coffee'] = coffee
+        self.inventory['cream'] = cream
+        self.inventory['sugar'] = sugar
+        self.inventory['water'] = water
+        self.inventory['cup'] = cup
+        self.inventory['change'] = change
+        self.input_money = money
+    
     # 블랙 커피
     def black_coffee(self):
         # 변수부터 너무 기니까 정리
@@ -122,7 +132,8 @@ class VendingMachine:
             print('-'*30)
             print("커피 자판기 동작을 종료합니다.")
             print('-'*30)
-            
+            stop = True
+            return stop
         
         # 커피 판매
         money = money - 300
@@ -135,6 +146,11 @@ class VendingMachine:
         print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
         print('-'*80)
         
+        # 커피 업데이트??
+        self.update(coffee, cream, sugar, water, cup, change, money)
+        
+        stop = False
+        return stop
         
     # 프림 커피
     def cream_coffee(self):
@@ -156,6 +172,8 @@ class VendingMachine:
             print('-'*30)
             print("커피 자판기 동작을 종료합니다.")
             print('-'*30)
+            stop = True
+            return stop
         
         # 커피 판매
         money = money - 300
@@ -168,6 +186,9 @@ class VendingMachine:
         print('-'*80)
         print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
         print('-'*80)
+        self.update(self, coffee, cream, sugar, water, cup, change, money)
+        stop = False
+        return stop
     
     
     # 설탕 프림 커피
@@ -190,6 +211,8 @@ class VendingMachine:
             print('-'*30)
             print("커피 자판기 동작을 종료합니다.")
             print('-'*30)
+            stop = True
+            return stop
             
         # 커피 판매
         money = money - 300
@@ -203,7 +226,9 @@ class VendingMachine:
         print('-'*80)
         print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
         print('-'*80)
-    
+        self.update(self, coffee, cream, sugar, water, cup, change, money)
+        stop = False
+        return stop
     
     
     def run(self):
@@ -258,15 +283,21 @@ class VendingMachine:
                     
                     # 블랙 커피를 선택
                     elif key == 1:
-                        self.black_coffee
+                        is_stop = self.black_coffee()
+                        if is_stop == True:
+                            break
                     
                     # 프림 커피를 선택
                     elif key == 2:
-                        self.cream_coffee
+                        is_stop = self.cream_coffee()
+                        if is_stop == True:
+                            break
                     
                     # 설탕 프림 커피를 선택
                     elif key == 3:
-                        self.sugar_cream_coffee
+                        is_stop = self.sugar_cream_coffee()
+                        if is_stop == True:
+                            break
                     
                     # 재료 현황을 선택
                     elif key == 4:
