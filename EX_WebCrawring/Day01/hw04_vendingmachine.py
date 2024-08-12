@@ -56,7 +56,7 @@ class VendingMachine:
     # 입력 데이터 유효성 체크
     def money_check(self, money):
         self.money = money
-        if len(self.money) <= 4:       # 최대 판매할 수 있는 커피 값이 1500원
+        if len(self.money) <= 5:       # 설마 동전을 십만원 단위로 넣지는 않겠지?
             if self.money.isdecimal():
                 return True
             else:
@@ -93,6 +93,118 @@ class VendingMachine:
         else:
             return None
     
+    # 메뉴를 띄우는 함수
+    def menu(self):
+        print('1. 블랙 커피')
+        print('2. 프림 커피')
+        print('3. 설탕 프림 커피')
+        print('4. 재료 현황')
+        print('5. 종료')
+        
+    # 블랙 커피
+    def black_coffee(self):
+        # 변수부터 너무 기니까 정리
+        coffee = self.inventory['coffee']
+        cream = self.inventory['cream']
+        sugar = self.inventory['sugar']
+        water = self.inventory['water']
+        cup = self.inventory['cup']
+        change = self.inventory['change']
+        money = self.input_money
+        
+        # 재료 소진부터 체크
+        if (coffee < 30) or (water < 100) or (cup < 0):
+            print('재료가 부족합니다.')
+            print('-'*80)
+            print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+            print('-'*80)
+            print(f"{money}원을 반환합니다.")
+            print('-'*30)
+            print("커피 자판기 동작을 종료합니다.")
+            print('-'*30)
+            
+        
+        # 커피 판매
+        money = money - 300
+        coffee = coffee - 30
+        water = water - 100
+        cup = cup - 1
+        change = change + 300
+        print(f"블랙 커피를 선택하셨습니다. 잔액: {money}")
+        print('-'*80)
+        print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+        print('-'*80)
+        
+        
+    # 프림 커피
+    def cream_coffee(self):
+        coffee = self.inventory['coffee']
+        cream = self.inventory['cream']
+        sugar = self.inventory['sugar']
+        water = self.inventory['water']
+        cup = self.inventory['cup']
+        change = self.inventory['change']
+        money = self.input_money
+        
+        # 재료 소진부터 체크
+        if (coffee < 15) or (water < 100) or (cup < 0) or (cream < 15):
+            print('재료가 부족합니다.')
+            print('-'*80)
+            print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+            print('-'*80)
+            print(f"{money}원을 반환합니다.")
+            print('-'*30)
+            print("커피 자판기 동작을 종료합니다.")
+            print('-'*30)
+        
+        # 커피 판매
+        money = money - 300
+        coffee = coffee - 15
+        water = water - 100
+        cup = cup - 1
+        change = change + 300
+        cream = cream - 15
+        print(f"프림 커피를 선택하셨습니다. 잔액: {money}")
+        print('-'*80)
+        print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+        print('-'*80)
+    
+    
+    # 설탕 프림 커피
+    def sugar_cream_coffee(self):
+        coffee = self.inventory['coffee']
+        cream = self.inventory['cream']
+        sugar = self.inventory['sugar']
+        water = self.inventory['water']
+        cup = self.inventory['cup']
+        change = self.inventory['change']
+        money = self.input_money
+    
+        # 재료 소진부터 체크
+        if (coffee < 10) or (water < 100) or (cup < 0) or (cream < 10) or (sugar < 10):
+            print('재료가 부족합니다.')
+            print('-'*80)
+            print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+            print('-'*80)
+            print(f"{money}원을 반환합니다.")
+            print('-'*30)
+            print("커피 자판기 동작을 종료합니다.")
+            print('-'*30)
+            
+        # 커피 판매
+        money = money - 300
+        coffee = coffee - 10
+        water = water - 100
+        cup = cup - 1
+        change = change + 300
+        cream = cream - 15
+        sugar = sugar - 10
+        print(f"설탕 프림 커피를 선택하셨습니다. 잔액: {money}")
+        print('-'*80)
+        print(f"재료 현황: coffee: {coffee} cream: {cream} sugar: {sugar} cup: {cup} change: {change}")
+        print('-'*80)
+    
+    
     
     def run(self):
         '''
@@ -107,30 +219,82 @@ class VendingMachine:
             
             # None인 경우를 먼저 검증하면 에러 안나려나?
             if self.input_money == None:
-                print('-'*80)
+                print('error')
+                print('-'*30)
                 print("커피 자판기 동작을 종료합니다.")
-                print('-'*80)
+                print('-'*30)
                 break
             
             # 300원 이상인 경우
             elif self.input_money >= 300:
-                pass
+                # 여기도 종료가 안되면 계속 반복
+                # 이 안에서만 사용할 변수로 이름 변경
+                money = self.input_money
+                
+                while True:
+                    print('-'*30)
+                    print(f"  커피 자판기 (잔액:{money}원)")
+                    print('-'*30)
+                    
+                    self.menu()
+                    key = self.input_key()
+                    
+                    # 또 다른 종료 조건: 돈이 부족
+                    if money < 300:
+                        print(f"잔액이 ({money}원)이 300원보다 작습니다.")
+                        print(f"{money}원이 반환됩니다.")
+                        print('-'*30)
+                        print('커피 자판기 동작을 종료합니다.')
+                        print('-'*30)
+                        break
+                    
+                    # 종료 조건
+                    if (key == 5) or (key == None):
+                        print(f"종료를 선택하셨습니다. {money}원이 반환됩니다.")
+                        print('-'*30)
+                        print('커피 자판기 동작을 종료합니다.')
+                        print('-'*30)
+                        break
+                    
+                    # 블랙 커피를 선택
+                    elif key == 1:
+                        self.black_coffee
+                    
+                    # 프림 커피를 선택
+                    elif key == 2:
+                        self.cream_coffee
+                    
+                    # 설탕 프림 커피를 선택
+                    elif key == 3:
+                        self.sugar_cream_coffee
+                    
+                    # 재료 현황을 선택
+                    elif key == 4:
+                        print('-'*80)
+                        print(f"재료 현황: coffee: {self.inventory['coffee']} cream: {self.inventory['cream']} sugar: {self.inventory['water']} cup: {self.inventory['cup']} change: {self.inventory['change']}")
+                        print('-'*80)
+                    
+                    #  예외 상황: 6, 7, 8, 9, 0이 입력 되었을 때
+                    # else:
+                    #     print(f"종료를 선택하셨습니다. {money}원이 반환됩니다.")
+                    #     print('-'*30)
+                    #     print('커피 자판기 동작을 종료합니다.')
+                    #     print('-'*30)
+                    #     break
+                    
+                # 내부의 while의 반복이 끝났으니 바로 자판기 종료
+                break
+                
             
             # 300원 보다 작을 경우
             elif self.input_money < 300:
                 print(f"투입된 돈 ({self.input_money}원)이 300원 보다 작습니다.")
-                print('-'*80)
+                print('-'*30)
                 print("커피 자판기 동작을 종료합니다.")
-                print('-'*80)
+                print('-'*30)
                 break
             
-            # 만약의 경우..
-            else:
-                print('Error')
-                print('-'*80)
-                print("커피 자판기 동작을 종료합니다.")
-                print('-'*80)
-                break
+            
         
         
 if __name__ == '__main__':
