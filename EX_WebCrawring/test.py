@@ -21,3 +21,8 @@ if not hasattr(collections, 'Callable'):
 # naver openAPI
 # Client ID: y1uqitPVBCd_RQ91I3MJ
 # Client Secret: qLwNQvHK1I
+
+# selenium version
+import selenium
+print(selenium.__version__)
+
