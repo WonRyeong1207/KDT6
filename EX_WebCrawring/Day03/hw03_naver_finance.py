@@ -92,6 +92,7 @@ def print_result(key, company_link, company_df):
     print(company_link[key])
     print(f"종목명: {company_df.loc[key, '종목명']}")
     print(f"종목코드: {company_df.loc[key, '종목코드']}")
+    print(f"현재가: {company_df.loc[key, '현재가']}")
     print(f"전일가: {company_df.loc[key, '전일가']}")
     print(f"시가: {company_df.loc[key, '시가']}")
     print(f"고가: {company_df.loc[key, '고가']}")
