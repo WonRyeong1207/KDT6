@@ -10,3 +10,9 @@ from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 from urllib.error import URLError
 import requests
+
+
+# 그 BeutifulSoup 불러오기 오류나서...
+import collections
+if not hasattr(collections, 'Callable'):
+    collections.Callable = collections.abc.Callable
