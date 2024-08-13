@@ -16,3 +16,8 @@ import requests
 import collections
 if not hasattr(collections, 'Callable'):
     collections.Callable = collections.abc.Callable
+    
+    
+# naver openAPI
+# Client ID: y1uqitPVBCd_RQ91I3MJ
+# Client Secret: qLwNQvHK1I
