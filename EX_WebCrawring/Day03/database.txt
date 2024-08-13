@@ -1,0 +1,19 @@
+# 웹 크롤링으로 들고온 데이터를 데이터 베이스에 저장
+
+create database scraping;
+use scraping;
+
+# pages 테이블이 존재하면 삭제함
+drop table if exists pages;
+
+create table pages
+(
+ id bigint(7) not null auto_increment,
+ title varchar(200),
+ content varchar(10000),
+ created timestamp default current_timestamp,
+ primary key(id)
+);
+
+desc pages;
+select * from pages;
