@@ -131,7 +131,9 @@ def company_bene(link_list):
             for span in span_list:
                 item_list.append(span.text)
             
-            bene_df.loc[n, :] = company, category_list, item_list
+            category = ','.join(category_list)
+            item = ','.join(item_list)
+            bene_df.loc[n, :] = company, category, item
             
             
         else:
