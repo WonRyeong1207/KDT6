@@ -37,38 +37,27 @@ class Player:
         # 순차 탐색해야하는 거였어...
         
         num_list = []
+        sub_list = []
+        # for card in self.holding_card_list:
+        #     num = card.numder
+        #     num_list.append(num)
         for i in range(len(self.holding_card_list)):
             num = str(self.holding_card_list[i])[5]
             num_list.append(num)
+            sub_list.append(num)
         
         # 순차 탐색
         # print(len(self.holding_card_list), len(num_list))
-        count = 0
-        is_dup_none = False # 중복이 없었음을 알려주는 변수
-        while True:
-            # 10장 모두가 중복이 아닐 수 있으니까.
-            # 종료 조건
-            if count > len(num_list):
-                break
+        
+       
+        for n in range(1, len(sub_list)-1):
             
             num_len = len(self.holding_card_list)   # 카드 2장을 빼버리면 수가 줄어드니까.
-            
-            # 중복을 못 찾는 경우가 발생
-            if is_dup_none == True:
-                # 이럼에도 중복이 계속 발생하지 않는다면?
-                # 여기서 잘 카운트 해야 잘 되는데
-                try:
-                    current_num = num_list[0+count]
-                    n = 1 + count
-                except:
-                    count += 1
-                    is_dup_none = False
-                    continue
-                    
-            else:
-                current_num = num_list[0]
-                n = 1
-                
+            try:
+                current_num = num_list[n]
+            except:
+                pass
+                current_num = num_list[-1]
             
             for j in range(n, num_len): # 왜 같지도 않은데 open으로 빼버리는 거야?
                 search_num = num_list[j]
@@ -81,11 +70,7 @@ class Player:
                     del self.holding_card_list[0]
                     del num_list[j]
                     del num_list[0]
-                    # 같으면 찾지도 말라고 사이좋게 제거헸는데
-                    is_dup_none = False
                     break   # 같은 원소 찾았으면 추가하고 삭제한 다음에 나오기
-                else:
-                    is_dup_none = True  # 중복이 없었음을 알려줌
-            count += 1
+               
             
                 

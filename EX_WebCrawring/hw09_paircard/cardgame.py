@@ -91,6 +91,8 @@ def play_game():
         player1.display_two_card_list()
         print('='*80)
         player2.display_two_card_list()
+        
+        
         print('='*80)
         player1.check_one_pair_card()
         print('='*80)

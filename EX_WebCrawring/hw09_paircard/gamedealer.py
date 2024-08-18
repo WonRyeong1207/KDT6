@@ -55,6 +55,11 @@ if __name__ == '__main__':
     
     dealer = GameDealer()
     deck = dealer.make_deck()
-    card = str(deck[4])
-    print(card[5])
-    
+    print('\n\n')
+    i = 0
+    for card in deck:
+        card_num = str(card)[5]
+        print(card_num, end=' ')
+        if i in [x for x in range(12, len(deck), 13)]:
+            print()
+        i += 1
