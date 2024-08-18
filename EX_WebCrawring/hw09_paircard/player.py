@@ -61,7 +61,9 @@ class Player:
                     current_num = num_list[0+count]
                     n = 1 + count
                 except:
-                    pass
+                    count += 1
+                    is_dup_none = False
+                    continue
                     
             else:
                 current_num = num_list[0]
