@@ -20,27 +20,86 @@ class Player:
         print(f'[{self.name}] Open Card list: {len(self.open_card_list)}')
         
         if len(self.open_card_list) > 0:
-            for i in range(2):
+            for i in range(len(self.open_card_list)):
                 print(self.open_card_list[i], end=' ')
-            print()
+            del self.open_card_list[:]
+            print('\n')
         else:
-            print()
+            print('\n')
+            
+        print(f"[{self.name}] Holding card list: {len(self.holding_card_list)}")
+        for i in range(len(self.holding_card_list)):
+            print(self.holding_card_list[i], end=' ')
+        print('\n')
     
     def check_one_pair_card(self):
-        card_num_list = []
+        print(f"[{self.name}: 숫자가 같은 한쌍의 카드 검사]")
         # 문자열로 받는게 나을까? 리스트로 받아서 비교하는 것이 좋을까?
+        # 순차 탐색해야하는 거였어...
+        
+        num_list = []
         for i in range(len(self.holding_card_list)):
-            card = self.holding_card_list[i]
-            if (i == 0) or (i == len(self.holding_card_list)):    
+            num = str(self.holding_card_list[i])[5]
+            num_list.append(num)
+        
+        # 순차 탐색
+        # print(len(self.holding_card_list), len(num_list))
+        count = 0
+        count_non_dup = 0   # 중복이 없었음을 count
+        is_dup_re = False   # 위의 면수를 초기화 시킬지 알려주는 변수
+        is_dup_none = False # 중복이 없었음을 알려주는 변수
+        while True:
+            # 10장 모두가 중복이 아닐 수 있으니까.
+            # 종료 조건
+            if count > len(num_list):
+                break
+            
+            num_len = len(self.holding_card_list)   # 카드 2장을 빼버리면 수가 줄어드니까.
+            
+            # 중복을 세는 변수를 초기화 시키는 분기점?
+            if is_dup_re == True:
+                count_non_dup = 0
+                n = 2
+                i = 0
+                is_dup_re = False
+            else:
                 pass
-            elif (i >= 1) and (i < len(self.holding_card_list)):
-                card_num = str(card)[5]
-                next_num = str(self.holding_card_list[i+1])[5]
-                if card_num == next_num:
-                    self.open_card_list.append(self.holding_card_list[i])
-                    self.open_card_list.append(self.holding_card_list[i+1])
-                    del self.holding_card_list[i+1]
-                    del self.holding_card_list[i]
-                    break
+            
+            # 중복을 못 찾는 경우가 발생
+            if is_dup_none == True:
+                # 이럼에도 중복이 계속 발생하지 않는다면?
+                if count_non_dup > 0:
+                    if count_non_dup == 1:
+                        current_num = num_list[1]
+                        n = 2
+                    elif count_non_dup > 1:
+                        current_num = num_list[1 + i]
+                        n = 2 + i
+                        i += 1
+            else:
+                current_num = num_list[0]
+                n = 1
                 
+            
+            for j in range(n, num_len): # 왜 같지도 않은데 open으로 빼버리는 거야?
+                search_num = num_list[j]
+                if current_num == search_num:   # 원소의 값이 다른데 왜 빼는 거야? 왜? 왜?
+                    # 같은 것은 보여주려고 추가하고
+                    self.open_card_list.append(self.holding_card_list[0])
+                    self.open_card_list.append(self.holding_card_list[j])
+                    # 그래서 같은 것들은 빼버리고
+                    del self.holding_card_list[j]
+                    del self.holding_card_list[0]
+                    del num_list[j]
+                    del num_list[0]
+                    # 같으면 찾지도 말라고 사이좋게 제거헸는데
+                    is_dup_none = False
+                    is_dup_re = True
+                    break   # 같은 원소 찾았으면 추가하고 삭제한 다음에 나오기
+                else:
+                    is_dup_none = True  # 중복이 없었음을 알려줌
+                    count_non_dup += 1
+                    is_dup_re = False
+            count += 1
+            
                 

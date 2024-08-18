@@ -41,8 +41,20 @@ def play_game():
             print()
         print(dealer_deck[i], end=' ')
     print()
+    print('='*80)
+    player1.display_two_card_list()
+    print('='*80)
+    player2.display_two_card_list()
     
-    
+    _ = input("[2]단계: 다음 단계 진행을 위해 Enter 키를 누르세요!")
+    print('='*80)
+    player1.check_one_pair_card()
+    print('='*80)
+    player1.display_two_card_list()
+    print('='*80)
+    player2.check_one_pair_card()
+    print('='*80)
+    player2.display_two_card_list()
     
     
 if __name__ == '__main__':
