@@ -22,7 +22,7 @@ class Player:
         if len(self.open_card_list) > 0:
             for i in range(len(self.open_card_list)):
                 print(self.open_card_list[i], end=' ')
-            del self.open_card_list[:]
+            # del self.open_card_list[:]
             print('\n')
         else:
             print('\n')
@@ -59,23 +59,21 @@ class Player:
             # 중복을 세는 변수를 초기화 시키는 분기점?
             if is_dup_re == True:
                 count_non_dup = 0
-                n = 2
-                i = 0
                 is_dup_re = False
             else:
+                count += 1
                 pass
             
             # 중복을 못 찾는 경우가 발생
             if is_dup_none == True:
                 # 이럼에도 중복이 계속 발생하지 않는다면?
-                if count_non_dup > 0:
-                    if count_non_dup == 1:
-                        current_num = num_list[1]
-                        n = 2
-                    elif count_non_dup > 1:
-                        current_num = num_list[1 + i]
-                        n = 2 + i
-                        i += 1
+                # 여기서 잘 카운트 해야 잘 되는데
+                try:
+                    current_num = num_list[1 + count_non_dup]
+                    n = 2 + count_non_dup
+                except:
+                    # 예외인 경우 다음으로 넘어가기?
+                    continue
             else:
                 current_num = num_list[0]
                 n = 1

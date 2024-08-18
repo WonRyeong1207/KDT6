@@ -56,6 +56,52 @@ def play_game():
     print('='*80)
     player2.display_two_card_list()
     
+    step = 3
+    while True:
+        
+        # 여기에 딜러가 카드를 못 나누도록 해야 할듯 위의 조건을 안 받네
+        if step == 7:   # 6번째에서 딜러의 카드가 나눠주고 나면 0장
+            break
+        elif (len(player1.holding_card_list) == 0) or (len(player2.holding_card_list) == 0):
+            # 또다른 정지 조건
+            break
+        else:
+            _ = input(f"[{step}]단계: 다음 단계 진행을 위해 Enter 키를 누르세요!")
+            print('='*80)
+            print('카드 나누어 주기: 4장')
+            print('-'*80)
+            player1_start_list = []
+            player2_start_list = []
+            for i in range(4):
+                player1_start_list.append(dealer_deck[0])
+                player2_start_list.append(dealer_deck[0+1])
+                del dealer_deck[0]
+                del dealer_deck[0]
+            player1.add_card_list(player1_start_list)
+            player2.add_card_list(player2_start_list)
+                
+            print(f'[GameDealer] 딜러가 가진 카드 수: {len(dealer_deck)}')
+            for i in range(len(dealer_deck)):
+                if i in [x for x in range(13, len(dealer_deck), 13)]:
+                    print()
+                print(dealer_deck[i], end=' ')
+            print()
+            
+        print('='*80)
+        player1.display_two_card_list()
+        print('='*80)
+        player2.display_two_card_list()
+        print('='*80)
+        player1.check_one_pair_card()
+        print('='*80)
+        player1.display_two_card_list()
+        print('='*80)
+        player2.check_one_pair_card()
+        print('='*80)
+        player2.display_two_card_list()
+        
+        step += 1
+        
     
 if __name__ == '__main__':
     play_game()
