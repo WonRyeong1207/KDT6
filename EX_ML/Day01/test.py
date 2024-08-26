@@ -11,6 +11,7 @@ import sklearn
 import statsmodels
 import nltk
 # import mlib # 이거 없고
-import cv2
+# import cv2    # 왜 있는데 없다고 하누
 # import pytorch  # 없누?
 
+print(sklearn.__version__)
