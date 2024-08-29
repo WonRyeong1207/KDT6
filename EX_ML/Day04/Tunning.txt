@@ -1,0 +1,51 @@
+Tunning 모델 수정
+- feature selection
+    -filtering
+        - 상관계수 rank
+        - KNN과 K-mean clustering에서의 k값: 점진적으로 찾아감
+    - Wappter method
+        - forward selection
+        - barckward elimination
+        - stepwise selection
+    - Embedding method
+
+- 모델 성능 높이기
+    - sklearn 에서는 score 메서드 사용
+    - 모델을 평가하는 성능지표는 분류와 회귀에 따라 다름
+
+- 모델 성능에 미치는 변수: Hyperparameter
+    - KNN: k
+    - Liner-Regression: weight, gradient intial value, Regulation
+    - learaning algorithm 마다 Hyperparameter가 다름
+
+- feature 제어
+    - feature 개수를 조절
+    - feature 추출, 압축
+
+Auto ML: 이것들을 도와줌. 유료임.
+
+
+Data Preparation
+- data preparation: data loading, data identification(raal data identification & searching)
+
+- data preprocessing
+    - refinement(missing value, duplecate value, outlier, columnms, eigen value, ...)
+    - feature of procession(encoding, scaling, ...)
+    - feature selection, processing
+    - feature, label
+
+- learaning preparation
+    - datasets(train, test, validation)
+        - in order to train & test datasets split, data lack & generalization
+
+- learaning progression
+    - cross validation use learaning progression: train datasets
+
+- model assessment
+    - Classification
+    - Regression
+
+- Tunning (model's processing improvement)
+    - Hyperparameter control: generating model instance, setting parameter
+    - learaning progressing to new model -> assessment
+
