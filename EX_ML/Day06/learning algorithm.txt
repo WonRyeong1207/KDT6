@@ -57,7 +57,11 @@
         - Linear Regression의 algorithm을 Classification에 적용한 model
         - regression의 linear, polynomial의 결정은 data의 Weight가 linear인지 polynomial인지 따름
         - binary와 multi는 feature의 개수에 따라 달라짐. 3개 이상이면 multi
+        
         - 기본 Regularization: L2 <-- l1, l2, elasticnet, none option
+            - panalty로 Regularization을 설정
+            - C(Cost function: 역수)을 Regularization의 강도를 설정함.
+        
         - regression line의 최적을 찾는 것이 아닌 sigmoid의 optima를 찾고 sigmoid의 return value를 probability로 보고 Classification 진행
 
         - scaling: standrad scaling, log transform
@@ -84,7 +88,26 @@
             - function: 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html'
             - concept(1.1.11): 'https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression'
 
+        * multi-class: ex> A, B, O, AB
+        * multi-label: ex> in image, 'human', 'cat', 'dog' etc
 
-    * multi-class: ex> A, B, O, AB
-    * multi-label: ex> in image, 'human', 'cat', 'dog' etc
-    
+        - multi class
+            - OvR(one-vs-the-rest) / OvA(one-vs-all)
+             : binary classfication로 만들어서 classification을 진행
+              ex> [1, 2, 3, 4]의 feature가 있다면
+                1 & [2, 3, 4], 2 & [1, 3, 4], 3 & [1, 2, 4], 4 & [1, 2, 3]
+
+            - OvO(one-vs-one): n * (n-1) /2 개의 binary classifier
+             : correlation과 유사한 algorithm
+              ex> [1, 2, 3, 4]의 feature가 있다면 4*(4-1)/2 = 6개
+                1 ->          1 vs 2      1 vs 3       1 vs 4
+                2 ->                      2 vs 3       2 vs 4
+                3 ->                                   3 vs 4
+
+            - error correcting output codes
+
+            * y = weight[0]*X[0] + weight[1]*x[1] + weight[2]*x[2] + weight[3]*x[3] + weight[4]*x[4] + ... + bais
+                - transform to probability
+                    * sklearn => model.predict_proba(y) <--- binary에서는 positive value 기준으로 probability 계산
+                    * numpy => 1/(1+exp(-y))
+                    * scipy => scipy.special.expit(y)
