@@ -1,0 +1,90 @@
+### Data Exploratory Analysis
+- OverFtitting은 개발자가 반드시 없애야하는 항목
+
+- 좋은 Model
+    - 일반화가 잘 된 model
+    - model compelexity -> feature의 수가 간소화된 model
+
+
+
+- Supervised Learning
+    - Linear Model
+        - feature와 target의 관계가 선형관계 일때
+        - 정규분포 기반
+        - 선형식:  y = ax + b ==> wx + b ==> w_0 + w_1x
+                   y = w_0 + w_1x + w_2x + ... + w_nx
+        - Cofficent 또는 Weight
+         : 학습을 통해서 다양한 feature들의 영향정도를 정확하게 반영하기 위해서 사용됨.
+        
+        - 학습을 시키다보니 over-fitting
+            ==> 이를 방지하기 위해서 나온 mothod/algorithm이 Regularization: Ridge, Lasso, Elastic Net
+
+        - Regularization
+            - Ridge: feature의 제곱을 이용, alpha 값을 조절해 0과 가깝게 만들어서 over-fitting을 방지함.
+            - Lasso: feature의 절댓값을 이용, 계수를 0으로 만들어 over-fitting을 방지함.
+            - Elastick Net: Ridge와 Lasso를 혼합하여 사용하는 방식.
+            - 모든 algorithm은 data마다 다 해봐야 함.
+
+        - train에서 원하는 결과물을 얻은 다음에 test로 시도를 해봐야함.
+        - 정확하게 내용을 보려면 통계의 선형분석?을 봐야함.
+
+        - Preprocessing
+            - categorical data --> encoding [경우에 따라서는 소분류를 대분류화 하고 진행 ex> anminal specise]
+            - all data to numerical
+
+        - Parameter
+            - model papameter
+                - model 학습후 생성되는 papameter
+                - 직접 조절을 할 수 없음.
+            - Hyperparameter
+                - model intance 생성시 설정하는 papameter    
+                - model 성능에 영향을 주는 papameter
+                    - k, alpha, C(Regularization의 규제 강도, alpha의 역수), Learning Rate, batch size, ... etc
+            - Tuning
+                - model의 hyperparameter 값을 조절해서 model의 성능을 높이는 방법
+
+
+    - KNN: K-Nearest Neighbors Classification/Regression
+        - 느린 학습, 늦은 학습
+        - 공식없음, 노드간의 거리를 측정
+            - 거리 측정 방식: 유클리드 거리
+        - hyperparameter: k
+        - train datasets의 범위를 벗어나는 new data들에 대해서는 score가 낮음
+
+    
+    - Logistic Regression --> DL처럼 표기한다면.. optimizer='sigmoid', loss='l2'
+
+        - Linear Regression의 algorithm을 Classification에 적용한 model
+        - regression의 linear, polynomial의 결정은 data의 Weight가 linear인지 polynomial인지 따름
+        - binary와 multi는 feature의 개수에 따라 달라짐. 3개 이상이면 multi
+        - 기본 Regularization: L2 <-- l1, l2, elasticnet, none option
+        - regression line의 최적을 찾는 것이 아닌 sigmoid의 optima를 찾고 sigmoid의 return value를 probability로 보고 Classification 진행
+
+        - scaling: standrad scaling, log transform
+            - data의 정규 분포도에 따라 예측이 영향을 받을 수 있음.
+            - data의 형태에 따라 log를 취해야 할 수 있음
+
+        - gradient와 erorr의 관계
+            - Odds
+                : binary classification 기준
+                -> Odds(A) = P(A) / P(B) = p/(1-p)
+                : probability와 Odds의 관계
+                -> p = Odds/(1-Odds) = 1 / (1+e**-(β_0 + β_1*x_1 + β_2*x_2+ ...))
+                : logit = log(Odds) <-- 이것때문에 Logistic Regression이라고 부름 또는 MaxEnt
+                -> log(Odds) = β_0 + β_1*x_1 + β_2*x_2 + ...
+            
+            * probability에서 'a^'은 'predict a value'
+            * vactor에서 (||a||_2)**2는 유클리드 거리, ||a||_1은 멘해튼 거리
+        
+        - Weight와 bais를 찾기 위한 method: Gradient Descent <-- optimizer algorithm
+
+        - Regularization: penalty와 C로 optimizer함. (skleran에서 제공하는 hyperparameter)
+            - multi class에 따라서 다르게 적용됨
+        - 생각보다 많은 hyperparameter들이 있음. 자세한 내용은 아래의 document를 참고
+            - function: 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html'
+            - concept(1.1.11): 'https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression'
+
+
+    * multi-class: ex> A, B, O, AB
+    * multi-label: ex> in image, 'human', 'cat', 'dog' etc
+    
