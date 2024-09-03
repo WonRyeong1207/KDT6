@@ -56,3 +56,20 @@ Supervised Learning
             - n_outputs_
             - tree_
 
+    - Ensemble
+        - Voting classifier
+            - hyperparameter
+                - estimatorslist: [str, estimator tuples]
+                - voting: [hard, soft] default = hard
+                - weight: [sarray-like of shape (n_classifiers,)] default None
+                - n_jobs: [int] default None
+                - flatten_transform: [bool] default True
+                - verbose: [bool] default False
+                
+            - parameter
+                - classes_
+                - estimators_
+                - named_estimators_
+                - feature_names_in
+                - n_features_in_
+
