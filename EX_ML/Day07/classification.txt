@@ -1,0 +1,58 @@
+###
+우리가 모델을 만들고 tuning을 하는 이유는 일반화가 잘된 성능 좋은 모델을 만들고 서비스하기 위해서
+    당연히 model complexity는 낮은 모델을 사용
+###
+
+
+Supervised Learning
+- Classification
+    - Decision Tree
+        - binary tree 기반. yes/no로 나눔.
+         쉽게 사용할 수 있음. 데이터의 영향을 안 받음. scaling의 영향이 적음.
+         over-fitting이 쉽게 발생함. 일부러 over-fiting을 일으키는 경우에 사용될 때가 있음
+        - 균일도(nuiformity): 데이터가 순수한 정도, 낮을수록 섞인 상태
+        - 불순도(impurity): 데이터가 섞인 정도, 높을수록 섞인 상태
+        
+        - 성능이 좋은 모델은 아님. Ensemble 하면 좋아짐.
+
+        - Decision Node의 속성에 따라 분류
+         splitting attribute에 따라 tree의 형태가 결정됨. tree complexity가 달라짐.
+         entorpy를 이용한 Information Gain과 Gini's Coefficent에 의해 결정.
+         Gain값은 (1-entorpy(probability)) 값으로 높은 순으로 선택, Gini는 낮은 순으로 선택함.
+        - 관련 algorithm
+         ID3, C3.5, C4, C4.5(?), Cart(?)
+
+        - Over-Fitting을 막기 위한 algorithm
+            - Pruning (가지치기): minimum sample 수를 만족하지 않으면 split 못함
+            - Stop Rule
+
+        - hyperparameter
+            - max_depth: maximum depth, [int, None] defalut = None
+            - min_samples_split: in order to split, minimum sample, [int] defalut = 2
+            - min_sample_leaf: need breanch, minimum sample, [int, float] defalut = 1
+            - max_feature: in order to optimizer split, consider maximum feature, [float, sqrt, auto, log, None] defalut None
+            - max_leaf_modes: leaf node maximum sample count, [int, None] defalut = None
+
+            - criterion: [gini, entorpy, log_loss] defalut = gini
+            - spliter: [best, random] defalut = best
+            - random_state: [int, None] defalut = None
+            
+            - min_weight_fraction_leaf: [float] defalut = 0.0
+            - min_impurity_decrease: [float] defalut = 0.0
+            - class_weight: [dict, list, balanced, None] defalut = None
+            - ccp_alapha: [non-negative float] defalut = 0.0
+            - monotonic_cst: [1, 0, -1] defalut  None
+                * 1: increase
+                * 0: None
+                * -1: decrease
+        
+        - parameter (attribute)
+            - classes_
+            - max_features_
+            - feature_importances_
+            - n_classes_
+            - n_features_in_
+            - feature_names_in_
+            - n_outputs_
+            - tree_
+
