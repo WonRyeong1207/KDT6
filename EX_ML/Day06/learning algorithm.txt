@@ -100,7 +100,7 @@
             - OvO(one-vs-one): n * (n-1) /2 개의 binary classifier
              : correlation과 유사한 algorithm
               ex> [1, 2, 3, 4]의 feature가 있다면 4*(4-1)/2 = 6개
-                1 ->          1 vs 2      1 vs 3       1 vs 4
+                1 ->          1 vs 2      1 vs 3       1 vs 4   => positive value 추출 decision_function으로 구할 수 있음. probability를 취해야 함. 
                 2 ->                      2 vs 3       2 vs 4
                 3 ->                                   3 vs 4
 
