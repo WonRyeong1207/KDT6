@@ -34,7 +34,7 @@ Supervised Learning
             - max_leaf_modes: leaf node maximum sample count, [int, None] defalut = None
 
             - criterion: [gini, entorpy, log_loss] defalut = gini
-            - spliter: [best, random] defalut = best
+            - splitter: [best, random] defalut = best
             - random_state: [int, None] defalut = None
             
             - min_weight_fraction_leaf: [float] defalut = 0.0
