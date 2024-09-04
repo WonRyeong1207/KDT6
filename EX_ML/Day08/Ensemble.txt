@@ -1,0 +1,111 @@
+Scaling: 내가 아는 것과 docu의 설명이나 model의 적용되는 것은 다를 수 있음.
+ -> sklearn: MinMax
+Decision Tree
+ -> CART: categorical, numerical 모두 처리 regression / classification
+    -> sklearn에서는 categorical은 지원하지 않음. Encoding 해야함
+    * Label Encoder: 0, 1, ...          1D: y, target, Label
+    * Ordinal Encoder: 0, 1, ...        2D: feature를 꼭 One-Hot-Encoding을 해야할까? 에서 출발한 Idea
+        - hyperparameter 종류가 다양하니 docu를 참고하길
+    * One Hot Encoder: 1이 하나인 패턴   2D: 순서가 중요하지 않은 feature 
+        - get_feature_names_out: feature name을 가져옴. ndarray에서 이름이 없어지는 문제를 해결할 수 있음.
+
+
+### Ensemble
+- Voting
+    - 어제 했음. 어제 필기 참고
+
+- Bagging (Bootstrap Aggregation)
+    : allow repetition, Random Sampling, same model used
+    - Random Forest
+        - 최종 class 결정: soft-voting
+        - 비교적 빠른 성능
+        - classification, regression 둘다 사용 가능
+        - datasets이 겹치는 경우도 있음. subsets을 사용함.
+
+        - Random-Forest-Classifier
+            - hyperparameter
+                - n_estimators: [int] default : 100
+                - criterion: [gini, entropy, log_loss] default : 'gini'
+
+                - max_depth: [int] default : None
+                - min_samples_split: [int] default : 2
+                - min_samples_leaf: [int, float] default : 1
+                - min_weight_fraction_leaf: [float] default : 0.0
+                - max_features: [sqrt, log2, None, int, float] default :'sqrt'
+                - max_leaf_nodes: [int] default : None
+                - min_impurity_decrease: [float] default : 0.0
+                - max_samples: [int, float] defalut : None
+                - random_state: [int, None] default : None
+                
+                - bootstrap: [bool] defalut : True
+                - oob_score: [bool, callable] defalut : False
+                
+                - n_jobs: [int] defalut : None
+                - verbose: [int] defalut : 0
+                - warm_start: [bool] defalut : False
+                - class_weight: [balanced, balanced_subsample, dict, list of dict] defalut : None
+                - ccp_alpha: [non_negative_float] defalut : 0.0
+                - monotonic_cst: [array-like of int of shape (n_features)] defalut : None
+                    * 1: monotonic increase
+                    * 0: no constraint
+                    * -1: monotonic decrease
+            
+            -parameter
+                - estimator_
+                - estimators_
+                - classes_
+                - n_classes_
+                - n_features_in_
+                - feature_names_in_
+                - n_outputs_
+                - feature_importances_
+                - oob_score_
+                - oob_decision_function_
+                - estimators_samples_
+
+- Pasting
+    : reject repetition, Random Sampling, same model used
+    - Extra-Tree
+        - Random-Forest 보다 속도 빠름.
+        - 무작위 datasets 분할 -> 그중에 좋은 것을 선택
+        - Random-Forest 보다 Tree 수를 늘려야 함
+
+        - hyperparameter
+            - n_estimators: [int] default : 100
+            - criterion: [gini, entropy, log_loss] default : gini
+            - random_state: [int, RandomState instance, None] default : None
+            - verbose: [int] default : 0
+
+            - max_depth : [int] default : None
+            - min_samples_split : [int, float] default : 2
+            - min_samples_leaf : [int, float] default : 1
+            - min_weight_fraction_leaf: [float] default : 0.0
+            - max_features: [sqrt, log2, None, int, float] default : sqrt
+            - max_leaf_nodes : [int] default : None
+            - min_impurity_decrease : [float] default : 0.0
+            - max_sample: [int, float] default : None
+
+            - bootstrap: [bool] default : False
+            - oob_score: [bool, callable] default : False
+            - n_jobs: [int] default : None
+            - warm_start: [bool] default : False
+            - class_weight: [balanced, balanced_subsample, dict, list of dicts] default : None
+            - ccp_alpha: [non_negative_float] default : 0.0
+            - monotonic_cst: [array-like of int of shape (n_features)] default : None
+
+        - parameter
+            - estimator_
+            - estimators_
+            
+            - classes_
+            - n_classes_
+            - feature_importances_
+
+            - n_features_in_
+            - feature_names_in_
+            
+            - n_outputs_
+            - oob_score_
+            - oob_decision_function_
+
+- Boost
