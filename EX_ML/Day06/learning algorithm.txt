@@ -91,7 +91,7 @@
         * multi-class: ex> A, B, O, AB
         * multi-label: ex> in image, 'human', 'cat', 'dog' etc
 
-        - multi class
+        - multi class: decision_function -> 각각의 값을 도출 ---> 이후 probability value transform
             - OvR(one-vs-the-rest) / OvA(one-vs-all): n 개의 binary Classifier
              : binary classfication로 만들어서 classification을 진행
               ex> [1, 2, 3, 4]의 feature가 있다면
