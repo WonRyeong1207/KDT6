@@ -7,8 +7,8 @@ import urllib.request
 import pandas as pd
 
 def get_requst_url(url):
-    client_id = "y1uqitPVBCd_RQ91I3MJ"
-    client_secret = "qLwNQvHK1I"
+    client_id = "J"
+    client_secret = "I"
     
     req = urllib.request.Request(url)
     req.add_header("X-Naver-Client-Id",client_id)
