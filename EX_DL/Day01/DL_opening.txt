@@ -1,0 +1,73 @@
+### Tensorflow, Keras, Pytorch
+    - 현재는 Keras가 Tensorflow 안으로 들어간 상태.
+
+    - GPU 사용여부를 확인을 해봤는데.. 내꺼는 못 사용하는듯... 하ㅏㅏㅏㅏㅏ 나도 GPU 쓰고 싶은데.. 왜 지원을 안해주는 거야? 흙흙 모래모래 자갈자갛
+
+
+- Deep Learning의 기반은 graph를 따라감. node와 edge
+    - Tensorflow도 graph를 따라감. 그래서 만들면 자동으로 graph로 그려줌.
+    - 단점이 있다면 오류 발생시 뭐가 오류를 일으켰었는지 알 수 없음.
+
+- Pytorch는 전부 버전을 맞춰야함. Python까지... 전부 따로 설치해서 버전을 맞춰줘야함. 복잡복잡
+    - PytorchText는 올해 4월이 마지막 update... 현업에서 사용한다면 일단은 알아야하지 않을까?
+    - 메모리 사용성이 좋음. 그때그때 사용하는 data만 사용하니까.
+    - 단점이 datasets이 적음. 어이없음.
+    - 시중의 있는 PytorchText는 버전이 맞지 않으면 작동이 되지 않음. 맞는 버전 찾는다고 애먹음.
+        - 맞는 책이 없음. 개발을 멈췄는데 책이 나올리가 있나....
+    - Lua language로 만들어졌었지만 python으로 변경됨.
+    - 동적계산(Define by Run)을 지원함. <-- Tensorflow는 지원을 하지 않음?(몰?루)
+    - file을 읽을때 type을 지정하지 않으면 자동으로 최대 공간의 memory를 먹음. memory 귀신 
+
+    - 패키지와 모듈의 종류가 다양함.
+        - 보고 메모하려니까... 진짜 보기 어려운 document...
+        - torch
+        - torch.autograd
+        - torch.nn
+        - torch.multiprocessing
+        - torch.utils
+        - torch.legacy
+        - torch.onnx
+
+
+- Tensorflow
+    - 여기도 다양한 패키지와 모듈이 있음.
+        - document 보고 몇개는 메모해두면 도움이 될 것 같음.
+    - [[[[0],],],] : 오른쪽에서부터 읽음. columns, row, depth(면, 차원), etc
+        - axis는 축! 순서는 왼쪽부터!! []의 개수가 depth
+
+
+
+
+- data type을 정리하기 위해서
+    (ex) int age = 10; (C)
+- 기본 data type: 숫자, 글자
+                (ex) int, float, char, bool
+    - C/C++/C#/Java: steck
+    - python: hip? heap? (class 기반 객체)
+- 확장 data type: 여러개의 기본 data type 모여서 하나의 data 표현
+                (ex) string
+- C: 구조체(struct)
+- Java외 OOP: 구조체 + 함수 ==> class
+    - C/C++/C#/Java/python: hip? heap? (class 기반 객체)
+
+- integer int -> kind of size(?)
+* byte: 8 bit -> 256가지의 정보 ==> int8 / uint8
+    - signed: -128 ~ 0 ~ 127
+    - unsigned: 0 ~ 255  => image pixel value
+* short: 16 bit -> -215 ~ 214 ==> int16/uint16
+* int: 32 bit ==> int32/uint32
+* long int: 64 bit ==> int64/uint64
+
+- real number float: 소수점 이하 6자리 / double: 소수점 이하 15자리 / long double: 소수점 이하 15자리
+    (ex) 3.14 -> 정수부: 3, 실수부: 14 형태로 저장
+* float: 4 byte == int32
+* double: float 소수점 2배 8 byte == int64
+
+- 논리형까지 초 3개의 data type을 가짐
+
+
+
+### why we check funtion document
+    - data share but shape change -> view method, memory save
+    - create new data, don't change origin data -> copy method, different memory
+
