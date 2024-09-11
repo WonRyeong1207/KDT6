@@ -1,0 +1,22 @@
+# Frame work: 개발에 필요한 모든 것을 포함하고 연결하고 있는 집합체
+(ex) ML Algorithm Package, Performance Package, Preprocessing Package, Datasets Package, ...
+
+
+# Interface: 서로 다른 요소 / 장치 / 사람 연결 시켜주는 것
+(ex) UI(User Interface) : 사람(사용자)와 컴퓨터 / 핸드폰 / SW / HW 연결 ==> butten, 글자 입력란, 그림
+(ex) OOP concept : 서로 다른 객체들이 동일한 기능을 사용할 수 있도록 해주는 기능
+
+
+# Module: 같은 목적의 parameter, function, class를 포함한 1개의 파일(py)
+(ex) : 웹에서 요청 목적의 parameter, function, class
+(ex) : 웹에서 받은 응답을 처리하는 목적의 parameter, function, class
+(ex) : 웹 주소 분석 목적의 parameter, function, class
+
+
+# Package: 같은 분야나 유사한 Module을 모아서 하나로 만든 것
+(ex) Web Package : 요청 처리 Module, 응답 처리 Module, 주소 분석 Module, 데이터 파일 분석
+
+
+# IDE(Integrated Development Environment) : 개발의 편의성을 위한 것
+(ex) Visual Studio Code, Visual Studio Community, IntelliJ etc
+
