@@ -1,0 +1,148 @@
+Optique quantique
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Page d’aide sur l’homonymie	
+Pour les articles homonymes, voir Optique (homonymie) et Quantique.
+
+Optique quantique
+
+Exemples de valeurs numériques illustrant la dépendance de l'effet photoélectrique sur l'énergie du photon entrant. Le photon de gauche sur l’image, à 1,77 électron-volt, n’a pas assez d’énergie pour libérer un électron du métal.
+Pratiqué par	
+Opticien quantique (d)
+modifier - modifier le code - modifier WikidataDocumentation du modèle
+
+L’optique quantique désigne l'ensemble des expériences dans lesquelles la lumière ou bien l'interaction entre lumière et matière doivent être quantifiées. C'est un domaine de recherche en plein essor, à la frontière entre la mécanique quantique et l'optique.
+
+Dans le cadre de l’optique quantique, la lumière est considérée comme constituée de photons, objets quantiques qui se comportent :
+
+comme des corpuscules dans leurs interactions avec la matière,
+et comme des ondes pour leur propagation.
+La description de la dynamique des photons relève de la mécanique quantique : leur mouvement est donc « décrit » à l'aide de probabilités de présence en un point donné.
+
+Histoire
+La nature même de la lumière a été longtemps source de débats au sein de la communauté scientifique. Ainsi, Newton considérait la lumière comme un flux de particules, tandis que Fresnel privilégiait une approche ondulatoire. Il faut attendre l'avènement de la physique quantique, au début du XXe siècle, pour répondre à ce problème conceptuel.
+
+Le premier à faire appel à la notion de photon fut Einstein pour expliquer les caractéristiques de l'effet photoélectrique 1, ce qui lui vaudra le prix Nobel de physique en 1921.
+
+Ce fut encore Einstein qui introduisit un troisième mécanisme d'interaction élémentaire des photons avec la matière, à côté de l’absorption et de l’émission spontanée : l’émission stimulée, qui est à la base de l'effet laser. Les lasers ont ouvert la voie à l'holographie, autre application de l'optique quantique.
+
+Louis de Broglie a prédit ensuite dans sa mécanique ondulatoire, que, puisque la lumière se comportait comme une particule dans ses rapports avec la matière, inversement, les particules matérielles devaient se comporter comme des ondes (les ondes de matière) dans leur propagation 2. Cela a été prouvé par Davisson et Germer en 1927 dans leur expérience de diffraction des électrons. Les électrons, comme les photons, relèvent donc des lois de l'optique quantique. La microscopie électronique en est ainsi une application.
+
+La première observation d'un comportement quantique a été faite par H.Jeff Kimble en 1976 sur du dégroupement de photons (photon antibunching).
+
+De nos jours, l'optique quantique est un domaine de recherche très porteur : de nombreux Prix Nobel de physique ont récompensé des travaux dans cette discipline ces dernières années. On trouve ainsi parmi les lauréats récents Serge Haroche, David Wineland, Roy J. Glauber, Claude Cohen-Tannoudji ou encore Alain Aspect.
+
+Hypothèses
+L'hypothèse fondamentale de l'optique quantique est que toute particule (photon, électron...) présente une dualité onde-corpuscule. Celle-ci peut être mise en évidence en réalisant par exemple l'expérience des fentes de Young photon par photon.
+
+On rappelle que longueur d'onde 
+λ{\displaystyle \lambda } et fréquence 
+ν{\displaystyle \nu } sont reliées par 
+λ
+=
+c
+ν{\displaystyle \lambda ={\frac {c}{\nu }}} pour une onde se propageant à la vitesse 
+c
+{\displaystyle c}.
+
+Les photons ont une masse nulle : on ne peut donc pas définir leur quantité de mouvement de manière classique par la formule 
+p
+→
+=
+m
+v
+→{\displaystyle {\vec {p}}=m{\vec {v}}}. Louis de Broglie trouve la solution à ce problème dans sa thèse : la quantité de mouvement d'un photon est en réalité donnée par 
+p
+→
+=
+h
+λ
+u
+→
+=
+ℏ
+k
+→{\displaystyle {\vec {p}}={\frac {h}{\lambda }}{\vec {u}}=\hbar {\vec {k}}} où h est la constante de Planck, 
+λ{\displaystyle \lambda } la longueur d'onde associée au photon, 
+u
+→{\displaystyle {\vec {u}}} le vecteur unitaire dirigé dans le sens de propagation du rayonnement, 
+ℏ{\displaystyle \hbar } la constante de Planck réduite et 
+k
+→{\displaystyle {\vec {k}}} le vecteur d'onde du photon. Inversement, on peut associer une longueur d'onde dite "de de Broglie" à une particule ayant une masse par la formule 
+λ
+D
+B
+=
+h
+p
+{\displaystyle \lambda _{DB}={\frac {h}{p}}}.
+
+Un problème analogue se pose pour l'énergie cinétique d'un photon : on ne peut pas utiliser la définition classique 
+E
+c
+=
+1
+2
+m
+v
+2
+{\displaystyle E_{c}={\frac {1}{2}}mv^{2}}. En optique quantique, l'énergie véhiculée par un photon est donnée par 
+E
+=
+h
+ν
+=
+ℏ
+ω{\displaystyle E=h\nu =\hbar \omega } où 
+ν{\displaystyle \nu } est la fréquence de l'onde lumineuse et 
+ω{\displaystyle \omega } sa pulsation. Cette énergie correspond à la transition entre deux niveaux discrets d'énergie d'un système (e.g. un atome) émettant un photon.
+
+Phénomènes expliqués par l'optique quantique
+La mécanique quantique et plus particulièrement l'optique quantique permettent d'expliquer l'origine de beaucoup de phénomènes :
+
+La pression de radiation provient du fait que les photons ont bien une quantité de mouvement malgré leur masse nulle.
+L'effet photoélectrique s'explique par le fait que les niveaux d'énergie des électrons dans un atome sont discrets : énergie et longueur d'onde d'un photon étant proportionnelles, seules certaines radiations de longueur d'onde bien précise peuvent engendrer un effet photoélectrique. Ce dernier trouve une application directe dans les panneaux solaires.
+Principales expériences
+Les fentes de Young sont une expérience d'optique quantique extrêmement simple. Elles mettent en évidence le comportement ondulatoire des particules ou plus récemment des molécules via les figures d'interférence obtenues.
+Les interféromètres tels que celui de Michelson ou de Mach-Zender mettent aussi en évidence les propriétés ondulatoires de la lumière.
+L'expérience d'Alain Aspect, réalisée au début des années 1980, aboutit à une violation des inégalités de Bell. Elle apporte une preuve expérimentale de l'absence de variables cachées en physique quantique. Ces dernières avaient suscité un vif débat entre Einstein et Bohr au début du XXe siècle : le premier était partisan de leur existence afin d'expliquer le paradoxe EPR - établi entre autres par lui-même -, alors que le second ne les considéraient pas nécessaires pour expliquer la physique quantique.
+La réalisation du premier condensat de Bose-Einstein gazeux en 1995 par Eric Cornell et Carl Wieman, qui leur rapporte le Prix Nobel de physique en 2001, est un autre grand succès de l'optique quantique. Cette dernière a en effet permis de comprendre comment interagissent atomes et photons et donc comment il est possible de refroidir un gaz avec de la lumière par effet Doppler-Fizeau.
+Bibliographie
+Romain Maciejko, Introduction à l'optique quantique, Presses inter Polytechnique, 2008, 334 p.
+Le site web [archive] du groupe d'Optique Quantique du Laboratoire Kastler Brossel de l'ENS/UPMC.
+Richard Feynman, Les Cours de Physique, volume Physique quantique.
+Notes et références
+Quantum Optics sur Google Livres
+Introductory Quantum Optics sur Google Livres
+icône décorative Portail de l’optique icône décorative Portail des sciences quantiques
+Catégorie : Optique quantique[+]
+La dernière modification de cette page a été faite le 15 octobre 2023 à 19:16.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

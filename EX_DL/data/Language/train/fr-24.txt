@@ -1,0 +1,1068 @@
+Énergie cinétique
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Si ce bandeau n'est plus pertinent, retirez-le. Cliquez ici pour en savoir plus.	
+Cet article ne cite pas suffisamment ses sources (décembre 2017).
+
+Si vous disposez d'ouvrages ou d'articles de référence ou si vous connaissez des sites web de qualité traitant du thème abordé ici, merci de compléter l'article en donnant les références utiles à sa vérifiabilité et en les liant à la section « Notes et références ».
+
+En pratique : Quelles sources sont attendues ? Comment ajouter mes sources ?
+
+Énergie cinétique
+Description de cette image, également commentée ci-après
+L'énergie cinétique du boulet est utilisée pour détruire un édifice.
+Données clés
+Unités SI	joule (J)
+Dimension	M·L 2·T −2
+Nature	Grandeur scalaire extensive
+Symbole usuel	
+E
+c
+{\displaystyle \mathrm {E} _{c}} , 
+E
+k
+{\displaystyle \mathrm {E} _{k}} ou 
+T
+{\displaystyle T}
+Lien à d'autres grandeurs	
+E
+c
+≈
+1
+2
+m
+v
+2
+{\displaystyle \mathrm {E} _{c}\approx {\frac {1}{2}}mv^{2}}
+E
+r
+≡{\displaystyle \mathrm {E} _{r}\equiv }
+1
+2
+L
+G
+→{\displaystyle {\frac {1}{2}}{\vec {L_{G}}}}
+⋅
+ω
+→{\displaystyle \cdot {\vec {\omega }}}
+modifier
+
+En physique, l'énergie cinétique est l’énergie que possède un corps du fait de son mouvement dans un référentiel donné. Dans le Système international, son unité de mesure est le joule (J).
+
+L'énergie cinétique d'un point matériel dans un référentiel galiléen est égale à la somme des travaux des forces appliquées pour faire passer le point du repos à un mouvement. Ce n'est pas un invariant galiléen, sa valeur dépend du référentiel choisi.
+
+
+Les wagons des montagnes russes possèdent une énergie cinétique maximale en bas de leur parcours. Lorsqu'ils commencent à monter, l'énergie cinétique est convertie en énergie potentielle.
+Histoire
+Article détaillé : Force vive (physique).
+L'expression énergie cinétique provient du grec ἐνέργεια / enérgeia, « force en action » et κίνησις / kínêsis, « mouvement ».
+
+Gottfried Leibniz, s'opposant ainsi à Descartes qui estimait que la quantité de mouvement se conservait toujours, développa l'idée de la « force vive » (vis viva), à laquelle il attribuait la valeur 
+m
+v
+2
+{\displaystyle mv^{2}}. La force vive est donc le double de l'énergie cinétique.
+
+« Il y a longtemps déjà que j’ai corrigé la doctrine de la conservation de la quantité de mouvement, et que j’ai posé à sa place quelque chose d’absolu, justement la chose qu’il faut, la force (vive) absolue… On peut prouver, par raison et par expérience, que c’est la force vive qui se conserve1… »
+
+Définition
+Pour un point
+Dans la théorie de la relativité, l'énergie cinétique 
+E
+c
+{\displaystyle \mathrm {E} _{c}} d'un point matériel de masse inerte 
+m
+{\displaystyle m}N 1 se déplaçant à une vitesse 
+v
+{\displaystyle v} dans un référentiel donné vaut :
+
+E
+c
+=
+γ
+2
+γ
++
+1
+m
+v
+2
+ 
+ 
+{\displaystyle \mathrm {E} _{c}={\frac {\gamma ^{2}}{\gamma +1}}mv^{2}\ \ } avec 
+ 
+ 
+γ
+=
+1
+1
+−
+v
+2
+c
+2
+{\displaystyle \ \ \gamma ={\frac {1}{\sqrt {1-{\frac {v^{2}}{c^{2}}}}}}}
+Le coefficient 
+γ{\displaystyle \gamma } (« gamma ») est le facteur de Lorentz, 
+c
+{\displaystyle c} est la vitesse de la lumière.
+
+Dans les cas non relativistes, c'est-à-dire lorsque la vitesse du point est négligeable devant la vitesse de la lumière, le développement limité de l'énergie cinétique 
+E
+c
+{\displaystyle \mathrm {E} _{c}} est :
+
+E
+c
+≈
+1
+2
+m
+v
+2
++
+3
+8
+m
+v
+4
+c
+2
++
+5
+16
+m
+v
+6
+c
+4
++
+⋯
+≈
+1
+2
+m
+v
+2
+{\displaystyle \mathrm {E} _{c}\approx {\frac {1}{2}}mv^{2}+{\frac {3}{8}}{\frac {mv^{4}}{c^{2}}}+{\frac {5}{16}}{\frac {mv^{6}}{c^{4}}}+\dots \approx {\frac {1}{2}}mv^{2}}
+Le terme du premier ordre est l'énergie cinétique classique. Pour un objet de 1 kg allant à la vitesse de 10 km/s, la différence entre énergie cinétique relativiste et classique est d'environ 0,04 J pour une énergie cinétique classique de 50 MJ, soit un écart relatif d'environ 
+10
+−
+9
+{\displaystyle 10^{-9}}, ce qui en fait une très bonne approximation.
+
+Pour un solide
+On peut assimiler un corps à un système de points matériels 
+M
+i
+{\displaystyle M_{i}} de masses 
+m
+i
+{\displaystyle m_{i}} et de vitesses 
+v
+i
+{\displaystyle v_{i}}. En notant 
+M
+{\displaystyle M} la masse totale du corps, on a 
+M
+=
+∑
+i
+m
+i
+{\displaystyle M=\sum _{i}m_{i}}.
+
+Conformément à l'extensivité de l'énergie cinétique, l'énergie cinétique 
+E
+c
+{\displaystyle \mathrm {E} _{c}} du système de points peut être définie comme la somme des énergies cinétiques des points matériels constituant le système :
+
+E
+c
+=
+∑
+i
+E
+c
+,
+i
+=
+∑
+i
+γ
+i
+2
+γ
+i
++
+1
+m
+i
+v
+i
+2
+≈
+1
+2
+∑
+i
+m
+i
+v
+i
+2
+{\displaystyle \mathrm {E} _{c}=\sum _{i}\mathrm {E} _{{c},i}=\sum _{i}{\frac {\gamma _{i}^{2}}{\gamma _{i}+1}}m_{i}v_{i}^{2}\approx {\frac {1}{2}}\sum _{i}m_{i}v_{i}^{2}}
+Cette expression est générale et ne préjuge pas de la nature du système, déformable ou pas. En passant à la limite des milieux continus et en intégrant sur le volume, on obtient :
+
+E
+c
+=
+1
+2
+∭
+ρ
+v
+2
+d
+τ{\displaystyle \mathrm {E} _{c}={\frac {1}{2}}\iiint \rho v^{2}\mathrm {d} \tau }
+En notant :
+
+ρ{\displaystyle \rho } la masse volumique locale ;
+v
+{\displaystyle v} la vitesse locale ;
+d
+{\displaystyle \mathrm {d} }
+τ{\displaystyle \tau } le volume élémentaire.
+Mise en évidence
+Dans le domaine de validité de la mécanique newtonienne, la notion d'énergie cinétique peut être mise en évidence pour un point matériel de masse 
+m
+{\displaystyle m} constante.
+
+La relation fondamentale de la dynamique s'écrit :
+
+m
+d
+v
+→
+d
+t
+=
+∑
+F
+→{\displaystyle m{\frac {\mathrm {d} {\vec {v}}}{\mathrm {d} t}}=\sum {\vec {F}}}
+avec 
+∑
+F
+→{\displaystyle \sum {\vec {F}}} la résultante des forces appliquées au point matériel. Elle comprend les forces d'inertie dans le cas d'un référentiel non galiléen.
+
+En effectuant le produit scalaire par la vitesse 
+v
+→{\displaystyle {\vec {v}}} du point, il vient :
+
+m
+(
+d
+v
+→
+d
+t
+)
+⋅
+v
+→
+=
+(
+∑
+F
+→
+)
+⋅
+v
+→{\displaystyle m\left({\frac {\mathrm {d} {\vec {v}}}{\mathrm {d} t}}\right)\cdot {\vec {v}}=\left(\sum {\vec {F}}\right)\cdot {\vec {v}}}
+comme 
+(
+d
+v
+→
+d
+t
+)
+⋅
+v
+→
+=
+d
+d
+t
+(
+1
+2
+v
+2
+)
+{\displaystyle \left({\frac {\mathrm {d} {\vec {v}}}{\mathrm {d} t}}\right)\cdot {\vec {v}}={\frac {\mathrm {d} }{\mathrm {d} t}}\left({\frac {1}{2}}v^{2}\right)}, alors 
+d
+d
+t
+(
+1
+2
+m
+v
+2
+)
+=
+∑
+(
+F
+→
+⋅
+v
+→
+)
+{\displaystyle {\frac {\mathrm {d} }{\mathrm {d} t}}\left({\frac {1}{2}}mv^{2}\right)=\sum \left({\vec {F}}\cdot {\vec {v}}\right)}
+On reconnait dans le membre de gauche la quantité 
+E
+c
+≡
+1
+2
+m
+v
+2
+{\displaystyle \mathrm {E} _{c}\equiv {\frac {1}{2}}mv^{2}} qu'on nomme énergie cinétique du point matériel, et dont la dérivée par rapport au temps est égale à la somme des puissances 
+F
+→
+⋅
+v
+→{\displaystyle {\vec {F}}\cdot {\vec {v}}} des forces appliquées au point.
+
+On peut obtenir une expression plus générale en remarquant que 
+∫
+d
+(
+1
+2
+m
+v
+2
+)
+=
+∫
+m
+v
+→
+⋅
+d
+v
+→{\displaystyle \int \mathrm {d} \left({\frac {1}{2}}mv^{2}\right)=\int m{\vec {v}}\cdot \mathrm {d} {\vec {v}}}, puisque 
+d
+(
+v
+2
+)
+=
+2
+v
+→
+⋅
+d
+v
+→{\displaystyle \mathrm {d} (v^{2})=2{\vec {v}}\cdot \mathrm {d} {\vec {v}}}. En introduisant la variation infinitésimale de la quantité de mouvement du corps 
+d
+p
+→
+≡
+m
+d
+v
+→{\displaystyle \mathrm {d} {\vec {p}}\equiv m\mathrm {d} {\vec {v}}}, on obtient :
+
+Δ
+E
+c
+=
+∫
+v
+→
+⋅
+d
+p
+→{\displaystyle \Delta \mathrm {E} _{c}=\int {\vec {v}}\cdot \mathrm {d} {\vec {p}}}
+où 
+Δ
+E
+c
+{\displaystyle \Delta \mathrm {E} _{c}} désigne la variation d'énergie cinétique.
+
+Dans le domaine de validité de la mécanique relativiste, la masse d'un objet n'est pas invariant de sa vitesse, et en intégrant on obtient finalement :
+
+Δ
+E
+c
+=
+∫
+v
+→
+⋅
+d
+(
+m
+γ
+v
+→
+)
+=
+γ
+2
+γ
++
+1
+m
+v
+2
+{\displaystyle \Delta \mathrm {E} _{c}=\int {\vec {v}}\cdot \mathrm {d} (m_{\gamma }{\vec {v}})={\frac {\gamma ^{2}}{\gamma +1}}mv^{2}}
+Théorèmes de l’énergie cinétique
+Ces théorèmes, valables uniquement dans le cadre de la mécanique classique, permettent de relier l’énergie cinétique d’un système aux travaux des forces auxquelles celui-ci a été soumis.
+
+Pour un point
+Dans un référentiel galiléen, pour un point matériel de masse constante parcourant un chemin 
+Γ{\displaystyle \Gamma } entre une position 
+A
+{\displaystyle A} et une position 
+B
+{\displaystyle B} :
+
+La variation d’énergie cinétique du point entre 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B} est égale à la somme des travaux 
+W
+Γ{\displaystyle W_{\Gamma }} des forces qui s'exercent sur le point le long du chemin 
+Γ{\displaystyle \Gamma } :
+
+Δ
+A
+→
+B
+ 
+E
+c
+=
+E
+c
+B
+−
+E
+c
+A
+=
+∑
+W
+Γ{\displaystyle {\underset {A\rightarrow B}{\Delta }}\ \mathrm {E} _{c}=\mathrm {E} _{c}^{B}-\mathrm {E} _{c}^{A}=\sum {W_{\Gamma }}}
+avec 
+E
+c
+A
+{\displaystyle \mathrm {E} _{c}^{A}} et 
+E
+c
+B
+{\displaystyle \mathrm {E} _{c}^{B}} les énergies cinétiques du point respectivement aux positions 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B}. Le résultat ne dépend pas du chemin 
+Γ{\displaystyle \Gamma } suivi entre 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B}, ce qui découle du caractère exact de la différentielle de l'énergie cinétique. Le terme des travaux prend en compte à la fois les forces conservatives et les forces non conservatives. Pour un point matériel, toutes les forces sont extérieures.
+
+On est déduit le théorème de la puissance cinétique :
+
+P
+=
+d
+E
+c
+d
+t
+{\displaystyle P={\frac {\mathrm {dE} _{c}}{\mathrm {d} t}}}
+Pour un solide
+Dans un référentiel galiléen, pour un solide déformableN 2 de masse constante parcourant un chemin 
+Γ{\displaystyle \Gamma } reliant un point 
+A
+{\displaystyle A} à un point 
+B
+{\displaystyle B} :
+
+La variation d’énergie cinétique du solide est égale à la somme des travaux des forces intérieures 
+W
+Γ
+i
+n
+t
+{\displaystyle W_{\Gamma }^{int}} et extérieures 
+W
+Γ
+e
+x
+t
+{\displaystyle W_{\Gamma }^{ext}} qui s'exercent sur et dans le solide le long de 
+Γ{\displaystyle \Gamma } :
+
+Δ
+A
+→
+B
+ 
+E
+c
+=
+E
+c
+B
+−
+E
+c
+A
+=
+∑
+W
+Γ
+e
+x
+t
++
+W
+Γ
+i
+n
+t
+{\displaystyle {\underset {A\rightarrow B}{\Delta }}\ \mathrm {E} _{c}=\mathrm {E} _{c}^{B}-\mathrm {E} _{c}^{A}=\sum {W_{\Gamma }^{ext}+W_{\Gamma }^{int}}}
+avec 
+E
+c
+A
+{\displaystyle \mathrm {E} _{c}^{A}} et 
+E
+c
+B
+{\displaystyle \mathrm {E} _{c}^{B}} les énergies cinétiques du solide respectivement aux positions 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B}. Le résultat ne dépend pas du chemin 
+Γ{\displaystyle \Gamma } suivi entre 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B}. Les termes des travaux prennent en compte à la fois les forces conservatives et non conservatives.
+
+On est déduit le théorème de la puissance cinétique pour un solide déformable :
+
+P
+e
+x
+t
++
+P
+i
+n
+t
+=
+d
+E
+c
+d
+t
+{\displaystyle P_{ext}+P_{int}={\frac {\mathrm {dE} _{c}}{\mathrm {d} t}}}
+Démonstration pour un point
+D’après la deuxième loi de Newton, l’accélération du centre de gravité est liée aux forces qui s’exercent sur le point par la relation :
+
+m
+a
+→
+=
+F
+→{\displaystyle m\,{\vec {a}}={\vec {F}}}
+Pendant une durée 
+d
+t
+{\displaystyle \mathrm {d} t}, le point se déplace de 
+d
+ℓ
+→
+=
+v
+→
+d
+t
+{\displaystyle \mathrm {d} {\vec {\ell }}={\vec {v}}\,\mathrm {d} t} où 
+v
+→{\displaystyle {\vec {v}}} est la vitesse du solide. On en déduit le travail élémentaire des forces :
+
+δ
+W
+=
+F
+→
+⋅
+d
+ℓ
+→
+=
+m
+a
+→
+⋅
+d
+ℓ
+→
+=
+m
+d
+v
+→
+d
+t
+⋅
+v
+→
+d
+t
+=
+m
+v
+→
+⋅
+d
+v
+→{\displaystyle \delta W={\vec {F}}\cdot \mathrm {d} {\vec {\ell }}=m\,{\vec {a}}\cdot \mathrm {d} {\vec {\ell }}=m\,{\frac {\mathrm {d} {\vec {v}}}{\mathrm {d} t}}\cdot {\vec {v}}\,\mathrm {d} t=m\,{\vec {v}}\cdot \mathrm {d} {\vec {v}}}
+Si le point parcourt un chemin 
+Γ{\displaystyle \Gamma } d’un point 
+A
+{\displaystyle A} à un point 
+B
+{\displaystyle B}, alors le travail total s’obtient en intégrant le long du chemin :
+
+W
+=
+∫
+Γ
+F
+→
+⋅
+d
+ℓ
+→
+=
+∫
+Γ
+m
+v
+→
+⋅
+d
+v
+→{\displaystyle W=\int _{\Gamma }{\vec {F}}\cdot \mathrm {d} {\vec {\ell }}=\int _{\Gamma }m{\vec {v}}\cdot \mathrm {d} {\vec {v}}}
+La quantité 
+v
+→
+⋅
+d
+v
+→{\displaystyle {\vec {v}}\cdot \mathrm {d} {\vec {v}}} étant une différentielle exacte, l’intégrale ne dépend pas du chemin 
+Γ{\displaystyle \Gamma } suivi entre 
+A
+{\displaystyle A} et 
+B
+{\displaystyle B} et peut donc être obtenue explicitement :
+
+W
+=
+m
+∫
+v
+A
+v
+B
+v
+→
+⋅
+d
+v
+→
+=
+m
+(
+∫
+v
+x
+A
+v
+x
+B
+v
+x
+d
+v
+x
++
+∫
+v
+y
+A
+v
+y
+B
+v
+y
+d
+v
+y
++
+∫
+v
+z
+A
+v
+z
+B
+v
+z
+d
+v
+z
+)
+=
+m
+(
+[
+v
+x
+2
+2
+]
+v
+x
+A
+v
+x
+B
++
+[
+v
+y
+2
+2
+]
+v
+y
+A
+v
+y
+B
++
+[
+v
+z
+2
+2
+]
+v
+z
+A
+v
+z
+B
+)
+{\displaystyle W=m\,\int _{v_{A}}^{v_{B}}{\vec {v}}\cdot \mathrm {d} {\vec {v}}=m\,\left(\int _{v_{xA}}^{v_{xB}}v_{x}\,\mathrm {d} v_{x}+\int _{v_{yA}}^{v_{yB}}v_{y}\,\mathrm {d} v_{y}+\int _{v_{zA}}^{v_{zB}}v_{z}\,\mathrm {d} v_{z}\right)=m\,\left(\left[{\frac {v_{x}^{2}}{2}}\right]_{v_{xA}}^{v_{xB}}+\left[{\frac {v_{y}^{2}}{2}}\right]_{v_{yA}}^{v_{yB}}+\left[{\frac {v_{z}^{2}}{2}}\right]_{v_{zA}}^{v_{zB}}\right)}
+W
+=
+1
+2
+m
+[
+(
+v
+x
+B
+2
++
+v
+y
+B
+2
++
+v
+z
+B
+2
+)
+−
+(
+v
+x
+A
+2
++
+v
+y
+A
+2
++
+v
+z
+A
+2
+)
+]
+{\displaystyle W={\frac {1}{2}}m\,\left[\left(v_{xB}^{2}+v_{yB}^{2}+v_{zB}^{2}\right)-\left(v_{xA}^{2}+v_{yA}^{2}+v_{zA}^{2}\right)\right]}
+W
+=
+1
+2
+m
+(
+‖
+v
+B
+→
+‖
+2
+−
+‖
+v
+A
+→
+‖
+2
+)
+=
+1
+2
+m
+(
+v
+B
+2
+−
+v
+A
+2
+)
+=
+E
+c
+B
+−
+E
+c
+A
+{\displaystyle W={\frac {1}{2}}m\,\left(\left\|{\vec {v_{B}}}\right\|^{2}-\left\|{\vec {v_{A}}}\right\|^{2}\right)={\frac {1}{2}}m\,\left(v_{B}^{2}-v_{A}^{2}\right)=\mathrm {E} _{c_{B}}-\mathrm {E} _{c_{A}}}
+Théorème énergétique de König
+Article détaillé : théorèmes de König (mécanique).
+Il est possible de réécrire l'énergie cinétique d'un solide sous la somme de deux termes possédant chacun une interprétation physique.
+
+Énoncé
+Pour un solide de masse totale 
+m
+{\displaystyle m}, considéré comme un ensemble de points matériels :
+
+L'énergie cinétique d'un ensemble de points matériels s'écrit comme la somme de deux termes :
+
+E
+c
+=
+1
+2
+m
+v
+2
++
+E
+c
+∗
+ 
+ 
+{\displaystyle E_{\mathrm {c} }={\frac {1}{2}}mv^{2}+E_{\mathrm {c} }^{*}\ \ } avec 
+ 
+ 
+E
+c
+∗
+=
+1
+2
+∑
+i
+m
+i
+v
+i
+2
+{\displaystyle \ \ E_{\mathrm {c} }^{*}={\frac {1}{2}}\sum _{i}m_{i}v_{i}^{2}}
+où :
+
+v
+{\displaystyle v} désigne la vitesse du barycentre du solide dans le référentiel d'étude 
+R
+{\displaystyle R} ;
+v
+i
+{\displaystyle v_{i}} désigne la vitesse de chaque point matériel dans le référentiel barycentrique 
+R
+∗{\displaystyle R^{*}}, et 
+m
+i
+{\displaystyle m_{i}} sa masse.
+L'énergie 
+E
+c
+∗{\displaystyle E_{\mathrm {c} }^{*}} est appelée énergie cinétique propre du solide, associée aux déplacements propres au solide comme les rotations et les dilatations. Le premier terme correspond à une énergie cinétique de translation qui ne prendrait pas en compte les mouvements propres du solide.
+
+Pour un solide indéformable
+Pour un solide indéformable, la distance entre chaque point matériel qui le constitue est constante. En d'autres termes, le solide ne se dilate et ne se comprime pas, et ne possède pas de mouvement de torsion. Il peut cependant effectuer une rotation dans le référentiel envisagé.
+
+Dans ce cas, le mouvement du solide peut être décomposé en un mouvement de son centre de masse dans 
+R
+{\displaystyle R} et un mouvement de rotation autour d'un axe instantané 
+Δ{\displaystyle \Delta } dans le référentiel barycentrique 
+R
+∗{\displaystyle R^{*}}.
+
+L'énergie cinétique d'un ensemble de points matériels s'écrit sous la somme de deux termes :
+
+E
+c
+=
+1
+2
+m
+v
+2
++
+1
+2
+L
+→
+⋅
+ω
+→{\displaystyle \mathrm {E} _{c}={\frac {1}{2}}mv^{2}+{\frac {1}{2}}{\vec {L}}\cdot {\vec {\omega }}}
+En notant :
+
+v
+{\displaystyle v} la vitesse du centre de masse du solide dans le référentiel d'étude 
+R
+{\displaystyle R} ;
+L
+→{\displaystyle {\vec {L}}} le vecteur moment cinétique du solide par rapport à son centre de masse ;
+ω
+→{\displaystyle {\vec {\omega }}} le vecteur vitesse angulaire instantané du solide. Il ne dépend pas du référentiel.
+L'énergie cinétique propre du solide devient alors une énergie cinétique de rotation ou encore une énergie cinétique angulaire.
+
+Si de surcroît, l'axe de rotation 
+Δ{\displaystyle \Delta } est fixe dans le référentiel barycentrique 
+R
+∗{\displaystyle R^{*}} bien choisi, le moment cinétique du solide vérifie 
+L
+→
+=
+I
+Δ
+ω
+→{\displaystyle {\vec {L}}=I_{\Delta }{\vec {\omega }}}, où 
+I
+Δ{\displaystyle I_{\Delta }} est le moment d'inertie du solide par rapport à l'axe 
+Δ{\displaystyle \Delta }. Son énergie cinétique de rotation se met alors sous la forme 
+E
+r
+=
+1
+2
+I
+Δ
+ω
+2
+{\displaystyle E_{r}={\begin{matrix}{\frac {1}{2}}\end{matrix}}I_{\Delta }\omega ^{2}}.
+
+Lien avec l'énergie thermique
+Article détaillé : Énergie thermique.
+L’énergie thermique est l’énergie associée à l'agitation des molécules et des atomes qui forment la matière. Pour un gaz parfait, l'expression de l'énergie thermique prend une forme analogue à l'énergie cinétique :
+
+E
+t
+h
+=
+1
+2
+m
+u
+2
+=
+3
+2
+k
+B
+T
+{\displaystyle E_{th}={\frac {1}{2}}mu^{2}={\frac {3}{2}}k_{B}T}
+En notant :
+
+u
+{\displaystyle u} la vitesse quadratique moyenne ;
+T
+{\displaystyle T} la température ;
+k
+B
+{\displaystyle k_{B}} la constante de Boltzmann.
+De nature quantique, l’énergie thermique se transforme en énergie électromagnétique par rayonnement. Ce rayonnement thermique peut être approché sous certaines conditions par le modèle du rayonnement du corps noir. La relation entre la chaleur, la température et l’énergie cinétique des atomes et des molécules est l’objet de la mécanique statistique et de la thermodynamique.
+
+Notes et références
+Notes
+Il s'agit de la masse du point au repos, dans son référentiel.
+Dans le cas d'un solide indéformable, les puissances et travaux intérieurs sont nuls, et on est ramené au cas du point matériel.
+Références
+(en) G. W. Leibniz von Freiherr, « Specimen dynamicum », dans Philip P. Wiener, Leibniz Selections [« Sélections de Leibniz »], New York, Charles Scribner's Sons, 1979 (1re éd. 1951), 606 p., 21 cm (ISBN 9780684175959, OCLC 12309633), Part 2: First Principles: Foundations of the Sciences, Chapter 5.
+Voir aussi
+Articles connexes
+Théorie cinétique des gaz
+Énergie potentielle
+Énergie mécanique
+Liens externes
+Notices d'autorité : GND
+Notices dans des dictionnaires ou encyclopédies généralistes : Britannica [archive]Den Store Danske Encyklopædi [archive]Larousse [archive]Nationalencyklopedin [archive]Store norske leksikon [archive]
+icône décorative Portail de la physique icône décorative Portail du génie mécanique icône décorative Portail de l’énergie
+Catégories : Grandeur physique extensiveMécanique classiqueÉnergie (physique)[+]
+La dernière modification de cette page a été faite le 11 juillet 2024 à 14:45.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

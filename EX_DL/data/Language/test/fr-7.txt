@@ -1,0 +1,263 @@
+Coefficient de Gini
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Page d’aide sur l’homonymie	
+Pour les articles homonymes, voir Gini.
+
+Page d’aide sur l’homonymie	
+Ne doit pas être confondu avec Moyenne de Gini.
+
+Coefficient de Gini
+
+Type	
+Indice (d), nombre caractéristique (en)
+Nommé en référence à	
+Corrado Gini
+Formule	
+G
+=
+|
+1
+−
+∑
+k
+=
+1
+n
+(
+X
+k
+−
+X
+k
+−
+1
+)
+(
+Y
+k
++
+Y
+k
+−
+1
+)
+|
+{\displaystyle G=\left\vert 1-\sum _{k=1}^{n}(X_{k}-X_{k-1})(Y_{k}+Y_{k-1})\right\vert }
+modifier - modifier le code - modifier WikidataDocumentation du modèle
+
+Le coefficient de Gini, ou indice de Gini, est une mesure statistique permettant de rendre compte de la répartition d'une variable (revenus, richesse, etc.) au sein d'une population. Principalement il mesure le degré d'inégalité des revenus d'un pays1.
+
+Il a été développé par le statisticien italien Corrado Gini. Il est défini par un nombre variant de 0 à 1a. Pour une période et un pays donnés, le « 0 » signifie l'égalité parfaite (tous les revenus de toutes les personnes sont égaux) et le « 1 », qui ne peut pas être atteint, est la valeur qu’approchent des situations fortement inégalitaires (une seule personne dispose de tout le revenu national et donc toutes les autres n'ont rien ; 1 est la limite lorsque la taille de la population augmente).
+
+Définitions
+
+Courbe de Lorenz (en gras) comparée à la courbe théorique pour une situation égalitaire (en pointillés). Le coefficient de Gini vaut alors G = 2A = 1-2B.
+Une première approche consiste à définir le coefficient de Gini comme le double de l’aire comprise entre la courbe de Lorenz de la distribution des revenus et celle associée à une situation théorique totalement égalitaire (dans laquelle tous les individus ont des revenus égaux). Cette aire est notée A sur la figure ci-contre, la courbe de Lorenz observée figurant en gras. L’aire notée B est celle comprise entre la courbe de Lorenz observée et celle associée à une situation totalement inégalitaire (dans laquelle un individu de la population détient la totalité des revenus).
+
+La courbe de Lorenz utilisée à cette fin est la courbe représentative de la fonction L, définie sur l’intervalle [0,1] et prenant ses valeurs dans l’intervalle [0,1], telle que L(q) représente la part du revenu total détenue par les individus représentant la proportion q des plus pauvres.
+
+Alternativement2, l’indice de Gini peut être défini comme la moitié de la différence moyenne relative de Gini de la série des revenus, c’est-à-dire comme la valeur :
+
+G
+=
+E
+2
+M
+{\displaystyle G={\frac {E}{2M}}}
+où M la moyenne des revenus et E représente la différence moyenne de Gini des revenus, c'est-à-dire la moyenne de tous les écarts en valeur absolue pour tous les couples de la variable statistique étudiée (cette différence moyenne mesure l'écart espéré entre les revenus de deux individus pris au hasard avec remise dans la population étudiée). Cela donne, si les (xi)1 ⩽ i ⩽ n sont les revenus des n individus3 :
+
+E
+=
+1
+n
+2
+∑
+i
+=
+1
+n
+∑
+j
+=
+1
+n
+|
+x
+i
+−
+x
+j
+|
+{\displaystyle E={\frac {1}{n^{2}}}\sum _{i=1}^{n}\sum _{j=1}^{n}|x_{i}-x_{j}|}
+M
+=
+1
+n
+∑
+k
+=
+1
+n
+x
+k
+{\displaystyle M={\frac {1}{n}}\sum _{k=1}^{n}x_{k}}
+Calcul pratique
+En pratique, on ne dispose pas de cette fonction, mais du revenu par « tranches » de la population. Pour n tranches, le coefficient s'obtient par la formule de Brown :
+
+G
+=
+1
+−
+∑
+k
+=
+0
+n
+−
+1
+(
+X
+k
++
+1
+−
+X
+k
+)
+(
+Y
+k
++
+1
++
+Y
+k
+)
+{\displaystyle G=1-\sum _{k=0}^{n-1}(X_{k+1}-X_{k})(Y_{k+1}+Y_{k})}
+où X est la part cumulée de la population, et Y la part cumulée du revenu.
+
+Pour n personnes ayant des revenus yi, pour i allant de 1 à n, indicés par ordre croissant ( yi ≤ yi+1):
+
+G
+=
+2
+∑
+i
+=
+1
+n
+i
+y
+i
+n
+∑
+i
+=
+1
+n
+y
+i
+−
+n
++
+1
+n
+{\displaystyle G={\frac {2\sum _{i=1}^{n}\;iy_{i}}{n\sum _{i=1}^{n}y_{i}}}-{\frac {n+1}{n}}}
+L'indice de Gini ne permet pas de tenir compte de la répartition des revenus. Des courbes de Lorenz différentes peuvent correspondre à un même indice de Gini. Si 50 % de la population n’a pas de revenu et l’autre moitié a les mêmes revenus, l’indice de Gini sera de 0,5. On trouvera le même résultat de 0,5 avec la répartition suivante, pourtant moins inégalitaire : 75 % de la population se partage de manière identique 25 % du revenu global d'une part, et d'autre part le 25 % restant se partage de manière identique le 75 % restant du revenu global. En effet, dans ce dernier cas, 25 % de la population gagne en moyenne 9 fois ce que gagnent en moyenne les trois autres quarts tandis que dans le premier cas, 50 % de la population gagne infiniment plus que l'autre moitié.
+
+L'indice de Gini ne fait pas de différence entre une inégalité dans les bas revenus et une inégalité dans les hauts revenus. L'indice d'Atkinson permet de tenir compte de ces différences et de considérer l’importance que la société attribue à l’inégalité des revenus.
+
+Exemples
+
+Inégalité des revenus (2013) au sein des pays, mesurée par le coefficient de Gini : 0 correspond à une égalité parfaite (toutes les personnes ont les mêmes richesses), et 100 à une inégalité totale (où une personne posséderait tout). Les pays en rouge sont plus inégalitaires que les pays en vert.
+Article détaillé : Liste des pays par égalité de revenus.
+À partir des données du World Factbook de la CIA, qui sont établies pour des années de référence diverses selon les pays, on obtient les cartes ci-après4.
+
+Les pays les plus égalitaires ont un coefficient de l'ordre de 0,2 (Danemark, Suède, Islande, République tchèque, etc.). Les pays les plus inégalitaires au monde ont un coefficient de 0,6 (Brésil, Guatemala, Honduras, etc.). En France, le coefficient de Gini est de 0,292 en 20155. La Chine, malgré sa croissance, demeure un pays inégalitaire avec un indice s'élevant à 0,47 en 2010 selon le Centre d'enquête et de recherche sur les revenus des ménages (institut dépendant de la banque centrale chinoise).
+
+
+Carte de l'indice de Gini dans le monde (année de référence variable) : 0 est en vert (égalitaire), 100 en rouge (inégalitaire) et les valeurs intermédiaires sont en jaune. Les valeurs vont de 0,3 (Jersey) à 63,2 (Lesotho).
+Le coefficient de Gini montre qu’en moyenne 10 % de la population détient 90 % des richesses ou gagne 90 % de ses revenus ; à titre de précision, 0,5 % de la population mondiale détient actuellement 35 % du patrimoine et environ 8 % en détient 80 %6. En bref, les inégalités de revenu et de répartition de la richesse sont proches de la règle du 1-9-90.
+
+Appliqué aux communautés d'échanges en ligne, le coefficient se révèle plus élevé pour les communautés professionnelles fermées en business to business (0,71) que pour les communautés business to consumer (0,67)7.
+
+Applications
+Le coefficient de Gini est principalement utilisé pour mesurer les inégalités de revenu, mais peut aussi servir à mesurer les inégalités de richesse ou de patrimoine8.
+
+Le coefficient de Gini en économie est souvent combiné avec d'autres données. Se situant dans le cadre de l'étude des inégalités, il va de pair avec la politique. Un degré de corrélation existe donc avec l'indice de démocratie.
+
+Il est aussi utilisé par le logisticien en entrepôts pour étudier l'implantation des références en fonction des statistiques de sorties des articles. En informatique, le coefficient de Gini est employé dans le cadre de certaines méthodes d'apprentissage supervisé, comme les arbres de décision9.
+
+Amartya Sen a proposé une « fonction du bien-être » : PIB (1 - coefficient de Gini) comme alternative à la médiane2.
+
+Selon Jean-François Jaudon, la résilience bioéconomique est d'autant plus importante que le coefficient de Gini est faible, c'est-à-dire que les écarts de revenus sont bas10. En effet, à la suite d'une crise sociale impliquant un fort chômage, dans une société où les écarts de revenus sont faibles, la consommation de la population est plus forte que dans une société où les écarts sont forts, et donc où l'épargne est plus importante. Quand la consommation est plus forte, la production reprend et donc le chômage baisse.
+
+Notes et références
+Notes
+On exprime parfois le coefficient de Gini en pourcents : il varie alors de 1 à 100.
+Références
+« Indice de Gini / Coefficient de Gini [archive] », sur Institut national de la statistique et des études économiques (consulté le 16 janvier 2020).
+(en) James E. Foster et Amartya Sen, On Economic Inequality, expanded edition with annexe, 1996. (ISBN 0-19-828193-5)
+(en) Christian Damgaard, « Gini Coefficient [archive] », sur MathWorld
+(en) « Field Listing: Distribution of family income - Gini index [archive] », sur Central Intelligence Agency (consulté le 28 octobre 2019).
+« Les niveaux de vie en 2015 », Insee Première, INSEE,‎ 12 septembre 2017 (lire en ligne [archive]).
+Blog de Andrée OGER [archive]
+(en) T he Economics of 90-9-1: The Gini Coefficient (with Cross Sectional Analyses) » [archive], sur khoros.com, 29 mars 2010 (consulté le 16 janvier 2020).
+Bruce M. Boghosian, « Aux sources mathématiques des inégalités de richesse », Pour la science, no 507,‎ janvier 2020, p. 60-67.
+(en) Leo Breiman, Friedman, J. H., Olshen, R. A., & Stone, C. J., Classification and regression trees, 1984. (ISBN 978-0-412-04841-8)
+« Jean-François Jaudon [archive] » Accès libre (consulté le 20 mai 2024)
+Voir aussi
+Bibliographie
+Yoram Amiel et Frank A Cowell, Thinking about inequality, Cambridge, 1999.
+C. Gini, Measurement of inequality of income, in: Economic Journal 31 (1921), 22-43.
+Amartya Sen, On Economic Inequality (Enlarged Edition with a substantial annexe “On Economic Inequality” after a Quarter Century with James Foster), Oxford, 1997 (ISBN 0-19-828193-5)
+Articles connexes
+Coefficient de variation
+Indicateur de pauvreté
+Indice de Theil
+Indice de Hoover
+Indice de développement humain (IDH)
+Produit intérieur brut | Produit national brut | Revenu national brut
+Déflateur du PIB
+Loi d'Okun
+Liens externes
+(en) World Bank explanatory note [archive]
+(en) Classement des pays [archive]
+La répartition du revenu disponible [archive] (Répartition par tranche de revenu des ménages, Source : Insee. Année des données : 2004, enquête revenus fiscaux) et (en) les mesures d'inégalité [archive]
+(en) Application of the Gini coefficient to measure the level of inequality of the contributions to Wikipedia [archive]
+(en) De la feuille de calcul au tableur
+Coefficient de Gini des entreprises [archive], mode de calcul
+(en) Une fiche technique [archive] sur la courbe de Lorenz comprenant divers champs d'application, incluant un fichier Excel [archive] traçant la courbe de Lorenz et calculant coefficients de Gini et de variation.
+icône décorative Portail de l’économie icône décorative Portail des mathématiques
+Catégories : Indicateur économiqueInégalités de revenuSocioéconomieStatistiquesTechnique géographique[+]
+La dernière modification de cette page a été faite le 2 août 2024 à 04:35.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

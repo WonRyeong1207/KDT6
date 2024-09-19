@@ -1,0 +1,179 @@
+Nappe phréatique
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Page d’aide sur l’homonymie	
+Pour les articles homonymes, voir Phréatique.
+
+Page d’aide sur l’homonymie	
+Ne doit pas être confondu avec Aquifère, Nappe d'eau souterraine, Nappe libre ou Nappe alluviale.
+
+
+Nappe phréatique.
+La nappe phréatique est une nappe d'eau que l'on rencontre à faible profondeur. Elle alimente traditionnellement les puits et les sources en eau potable. C'est la nappe la plus exposée à la pollution en provenance de la surface.
+
+Par « nappe », on entend la partie du sol saturée en eau, c'est-à-dire celle où les interstices entre les grains solides sont entièrement remplis d'eau, ce qui permet à celle-ci de s'écouler. Au-dessus, on peut trouver des terrains non saturés, dans lesquels les interstices contiennent aussi de l'air. Cette couche est appelée la « zone non saturée », ou encore « zone vadose ». Il peut suffire d'un petit apport supplémentaire d'eau en provenance de la surface pour faire basculer la couche non saturée à l'état saturé. Si l'épaisseur de cette tranche de terrain est importante, et si la topographie s'y prête, ce mécanisme peut déclencher une inondation par remontée de la nappe phréatique. C'est ce phénomène qui a, par exemple, a aggravé les crues de la Somme en 2001 où les inondations ont couvert plus de 6 000 hectares.
+
+Types de nappes
+
+Nappe libre et nappe captive contenues dans un aquifère, situé sous le niveau piézométrique.
+
+Nappe perchée dont l'eau ressort dans la vallée d'une rivière au niveau d'une résurgence.
+La nappe est dite « libre » lorsque son niveau peut varier sans être bloqué par une couche imperméable. Si on crée un puits dans une telle nappe, le niveau de l'eau reste inchangé. Une nappe perchée est une nappe libre, permanente ou temporaire, formée dans une zone non saturée, et qui surmonte une nappe libre de plus grande extension.
+Dans le cas contraire, on parle de nappe « captive ». Elle est « sous pression », et, lorsque l'on y ouvre un puits, l'eau s'élève jusqu'à un niveau d'équilibre supérieur. Il arrive même que la nappe jaillisse du sol ; c'est le phénomène d'artésianisme.
+Il existe également des nappes semi-captives ou à drainance. Le toit ou le substratum de l'aquifère (parfois les deux) sont fréquemment constitués par des formations semi-perméables. Lorsque les conditions hydrodynamiques sont favorables, il peut y avoir échange d'eau avec l'aquifère superposé ou sous-jacent ; c'est le phénomène de drainage [archive].
+
+Selon leur comportement (lié à la porosité et à la perméabilité des roches qui les composent), on distingue les nappes « réactives » des nappes « inertielles »1. Les premières « réagissent » rapidement aux épisodes météorologiques : elles se rechargent lors de fortes pluies et se vident lors des épisodes de sécheresse, ce qui leur donne en général une cyclicité annuelle. Les secondes présentent au contraire une forme « d'inertie » sur plusieurs années : elles se rechargent ou se vident sur une longue période à travers plusieurs saisons.
+Les aquifères des nappes réactives sont généralement constitués de sables, graviers, calcaires karstiques ou granites altérés tandis que ceux des nappes inertielles sont constitués de craie, de calcaire non karstique ou de grès.
+
+Dans certains contextes hydrogéologiques, des nappes communiquent directement avec les cours d'eau dans un système de relations parfois complexes : renfort des cours d'eau en période de sécheresse, accompagnement des phénomènes de crues ou échanges et dissémination des polluants issus des activités humaines2.
+
+Rabattement de nappe
+Article détaillé : Rabattement de nappe.
+Un forage permet de repérer le niveau supérieur de la nappe : c'est le niveau piézométrique, niveau au-dessus duquel les interstices de la roche ne sont pas saturés en eau. Les variations de ce niveau renseignent sur le degré de remplissage de la roche-réservoir.
+
+Le pompage d'eau dans une nappe à une vitesse qui dépasse la vitesse de recharge de la nappe entraîne la baisse du niveau de nappe phréatique, appelée rabattement de nappe.
+
+Remontées de nappe
+Un phénomène courant et source d'importants désordres sous les grandes villes et dans les régions industrielles (Bassin minier du nord de la France par exemple) est que des nappes pompées durant plusieurs décennies ou siècles par l'industrie ou pour des besoins en eau potable, ont cessé de l'être, en raison du recul des besoins industriels ou de la pollution de l'eau, n'autorisant plus son usage en eau potable. Il s'ensuit une remontée de nappe, source d'inondation et de désordres dans les sous-sols construits à l'époque où le plafond de la nappe avait été artificiellement rabattu3.
+
+Relation solide/eau dans les milieux poreux
+Zone saturée
+
+Organisation spatiale d'un système karstique : zone vadose (non saturée) et zone saturée, avec la frange capillaire et la nappe phréatique.
+La zone saturée des nappes distingue deux types d'eau :
+
+l’eau liée, liée au solide par des forces électrostatiques et moléculaires, les deux processus étant limités dans l'espace ;
+l’eau libre, susceptible de se déplacer sous l'effet de la gravité et des gradients de pression.
+L'eau liée correspond à :
+
+la couche la plus proche des grains, dont l'épaisseur est de l'ordre de quelques dizaines de molécules (0,1 micromètre) correspond à une orientation des molécules d'eau à structure dipolaire H-OH, perpendiculairement à la surface des grains. Dans cette zone, la viscosité de l'eau peut être doublée ou triplée, sa densité est de l'ordre de 1,5 et sa force par unité de surface est de l'ordre de 10 000 bars.
+la zone de transition entre 0,1 et 0,5 micromètre contient des molécules d'eau qui supportent une attraction non négligeable et sont immobiles.
+Au-delà, les forces d'attraction sont encore plus modestes, et on parle d'eau libre.
+
+Zone non saturée
+Contrairement à la zone saturée qui contient deux phases (liquide pour l'eau, solide pour les grains), il y a ici existence d'une troisième phase : l'air. La saturation est alors la part des pores occupée par un type de fluide
+
+La zone non saturée distingue quatre états en fonction de la saturation du sol en eau :
+
+l’eau funiculaire ou gravifique : dans un sol presque saturé en eau, avec quelques bulles d'air, l'eau peut s'écouler sous l'influence de la gravité.
+sol à saturation d'équilibre autrement appelé sol à capacité de rétention capillaire : la phase d'eau est encore continue, mais ne circule pas sous la seule influence de la gravité. Cela correspond à l'eau liée et à l'eau retenue par capillarité.
+l’eau pendulaire : dans un sol faiblement saturé en eau, l'eau entoure les grains et occupe des anneaux discontinus aux points de contact de ceux-ci. La phase d'eau est toujours continue, les pressions se transmettent, mais les mouvements de l'eau sont très lents du fait de la minceur de la pellicule mouillée.
+saturation irréductible : si on prélève encore de l'eau (évapotranspiration), on n'obtient plus que l'eau liée.
+Suivi des nappes
+Il est effectué via des modélisations et des réseaux de mesures automatiques (piézomètres).
+
+En France, en 2017, le BRGM publie 11 fois par an des bulletins de situation hydrologique des nappes à partir de 1 700 points suivis en France depuis au moins 40 ans dans la plupart des cas, et il prépare (avec Météo France) un outil « MétéEAU des nappes » de prévision et modélisation des niveaux de nappes souterraines. Ceci nécessite un dispositif de télétransmission rapide de l'information et de validation rapide de la donnée. En mars 2017, 300 points de surveillance sont déjà disponibles à une fréquence journalière et à la fin de 2018 tout le réseau devrait être équipé pour la télétransmission4.
+
+Menaces, qualité et niveau de nappes en large baisse dans le monde
+La biophysicogéochimie des nappes réagit aux modifications de leur environnement5, et aux modifications climatiques et anthropiques notamment, avec trois principales menaces pour les nappes actuelles :
+
+la pollution de l'eau (qui peut en partie provenir de la pollution des sols et/ou de l'air) ; elle est fréquente sous les zones urbaines et industrielles, et sous les zones d'agriculture intensive pour les nitrates (qui peuvent aussi provenir d'eaux usées, dans les pays où les stations d'épuration ne les traitent pas, avec alors parfois aussi un risque de maladies infectieuses et parasitoses associé6,7,8) et pesticides. Forêts naturelles et prairies permanentes ont un effet protecteur sur les nappes sous-jacentes alors que le labour, l'urbanisation et l'industrialisation nuisent à la qualité et parfois à la recharge des nappes.
+la salinisation, dans certains contextes littoraux ou de proximité avec sous-sol salins9.
+l’évaporation (dans le cas des nappes superficielles en zone aride, avec souvent un risque accru de salinisation10).
+la surexploitation : Dès 2001, l'expert américain Lester R. Brown alertait que le niveau des nappes phréatiques chutait sur tous les continents, du fait que nous disposons de puissantes pompes diesel ou électriques qui permettent de puiser l'eau des aquifères plus rapidement qu'elle n'est remplacée par les précipitations. Il citait trois régions : la plaine de Chine du Nord, le Pendjab en Inde / Pakistan, et le sud des grandes plaines des États-Unis. Ces trois régions sont des zones d'agriculture irriguée11.
+En 2002, la NASA et le centre aérospatial allemand ont lancé la mission GRACE (Gravity Recovery and Climate Experiment) afin notamment de pouvoir évaluer le niveau des nappes phréatiques de la planète grâce à des observations par satellite. Il était auparavant impossible de faire des estimations sur l'état des eaux souterraines, en raison des difficultés d'accès. La mission a constaté une forte baisse des nappes phréatiques, non seulement en Chine, en Inde, aux États-Unis, mais aussi dans d'autres régions telles que l'Argentine, la Californie, le Proche-Orient, et l'Australie12. Or, il se trouve que la Chine, les États-Unis et l'Inde sont les trois plus grandes régions productrices de céréales dans le monde, alors que les eaux souterraines représentent la plus grande partie des ressources en eau douce disponibles de la planète.
+Sandra Postel estime le surpompage annuel des aquifères à 160 milliards de mètres cubes d'eau à l'échelle de la planète. Avec une équivalence approximative « mille tonnes d'eau pour produire une tonne de céréales », ce déficit de 160 milliards de tonnes d'eau correspond à 160 millions de tonnes de céréales, soit la moitié de la production américaine13.
+Étant donné l'énorme population chinoise de plus de 1,4 milliard d'habitants, la chute du niveau des nappes phréatiques en Chine pourrait perturber les marchés mondiaux de céréales et entraîner une hausse des prix de la nourriture dans le monde entier14.
+Selon trois chercheurs de l'université d'Utrecht, auteurs d'une étude sur le sujet publiée le 25 janvier 2012, « la non-durabilité de l'usage des eaux souterraines pour l'irrigation est un problème important non seulement pour les pays qui font un usage intensif des eaux souterraines, mais aussi pour le monde dans son ensemble, étant donné que le commerce international introduit de fortes corrélations entre la production de nourriture dans un pays et la consommation dans un autre »15.
+Pollutions des nappes
+Les nappes peuvent être polluées par l'enfouissement de déchets, la pollution (accidentelle ou non) de puits, de gouffres (utilisés comme décharge), d'étangs (parfois situés dans le plafond de la nappe) ou de failles naturelles, ou encore des forages qui peuvent permettre le transit de pollutions superficielles vers les nappes souterraines (les forages perforent la couche superficielle imperméable et rendent, à moyen ou long terme, finalement cette surface perméable aux éventuels polluants qui peuvent ensuite se retrouver dans les eaux pompées et consommées)16.
+
+La plus grande partie des pollutions de nappe a pour origine les activités agricoles qui utilisent de nombreux produits (engrais, lisiers, purins épandus comme fertilisants, pesticides) sources de pollutions et en concentrations importantes. Mais localement, des pollutions industrielles graves existent. Dans certaines régions du monde en état de stress hydrique à cause du réchauffement climatique ou le plus souvent d'une imperméabilisation excessive des sols et d'une surexploitation chronique des nappes, on cherche à recharger les nappes par des eaux de récupération, qui peuvent aussi être une source de dégradation de la qualité des nappes17,18.
+
+Certaines pollutions sont dites naturelles, provenant du passage des eaux dans des zones minéralisées (particulièrement en domaine cristallin). Certaines concentrations anormales en éléments très nocifs comme l'arsenic, le mercure, le cadmium ou le plomb peuvent être détectées dans la nappe et mettre en danger les populations locales et les écosystèmes quand la nappe alimente des sources ou est en contact direct avec des eaux superficielles, courantes ou stagnantes.
+
+Diverses méthodes de dépollution de nappe ont été testées, mais elles sont toujours longues et parfois coûteuses, et des millions de sites (civils, industriels et militaires) sont encore à traiter19,20. Rien qu'aux États-Unis, on estimait en 2013, qu'il restait 126 000 sites à traiter pour leurs eaux souterraines contaminées (et que leur fermeture devrait coûter au moins 110 à 127 milliards de dollars), 10 % de ces sites étant en outre considérés comme « complexes » (c'est-à-dire qu'ils ne pourraient pas être correctement traités avant 50 à 100 ans, faute de technologies adéquates disponibles19. Sur certains sites traités, on n'a pas réussi à atteindre les taux de polluants correspondant aux objectifs de dépollution, malgré les efforts faits. Faute d'argent et parce qu'il s'agit parfois de sites orphelins (où le principe pollueur-payeur est impossible ou difficile à appliquer), certains de ces sites pourraient basculer vers une gestion fataliste à long terme, basée sur une surveillance et la limitation de l'accès à ces eaux19.
+
+Valeur et services
+La valeur attribuée à une nappe ou aux services écosystémiques (nécessaires à sa bonne conservation) change beaucoup selon la rareté de l'eau dans la région considérée et plus généralement selon les lieux et les époques, selon ses usages (eau potable, eau industrielle, irrigation, etc.) et selon que la personne interrogée est usager de cette nappe ou non21.
+
+Quelques nappes dans le monde
+En France
+En France, la plus vaste nappe est celle de Beauce dont la surface est de près de 9 000 km2 sur six départements. Ses réserves sont estimées à près de 20 milliards de mètres cubes.
+
+La plus grosse est la nappe phréatique rhénane en Alsace qui s'étend sur un petit territoire, mais dont les réserves sont estimées à 35 milliards de mètres cubes sur la partie alsacienne seulement22.
+
+Aux États-Unis
+La plus grande nappe aux États-Unis est la nappe d'Ogallala, d'une superficie comparable à celle de la France, qui s'étend du Dakota du Sud au Texas.
+
+Notes et références
+« Eau souterraine et sécheresse : FAQ - questions fréquentes [archive] », sur BRGM (consulté le 27 mai 2024).
+Yohann Cousquer. Modélisation des échanges nappe-rivière à l'échelle intermédiaire : conceptualisation, calibration, simulation. Hydrologie. Thèse en cours de validation, Université Bordeaux Montaigne Bordeaux Institut national Polytechnique, 2017. https://hal.archives-ouvertes.fr/tel-01567824 [archive]
+BRGM (1983) Remontée des nappes d'eau souterraines ; Causes et effets. [archive] ; Infoterre - brgm ; rapports/83-SGN-353-EAU, PDF, 56 p.
+Magazine de l'environnement (2017) Le BRGM développe de nouveaux outils de modélisation pour gagner en réactivité et prévoir l'évolution de l'état des nappes [archive], 20 avril 2017
+Le Borgne, F. (2001) Réponses hydrogéochimiques de la nappe phréatique du Val d'Orléans aux sollicitations de son environnement. Développement du site expérimental de la carrière Morillon-Corvol de Sandillon (Loiret) [archive] (Doctoral dissertation, Université Paris7-Denis Diderot).
+Dieng, Y., ABDOUL, A. T., Wane, A. T., Gaye, O., EL HADJI SALIF, D. I. O. P., & Diallo, S. (1999). Les parasitoses intestinales chez des habitants d'une zone péri-urbaine à nappe phréatique polluée par les nitrates d'origine fécale (Yeumbeul, Sénégal). Sante, 9(6), 351-356.
+Nola, M., Njiné, T., Sikati, V., & Djuikom, E. (2001). Distribution de Pseudomonas aeruginosa et Aeromonas hydrophila dans les eaux de la nappe phréatique superficielle en zone équatoriale au Cameroun et relations avec quelques paramètres chimiques du milieu [archive]. Revue des sciences de l'eau/Journal of Water Science, 14(1), 35-53.
+Nola, M., Njine, T., Kemka, N., Togouet, S. H., Servais, P., Messouli, M., ... & Menbohan, S. F. (2006). Transfert des bactéries fécales vers une nappe phréatique à travers une colonne de sol en région équatoriale: influence de la charge en eau appliquée en surface [archive]. Revue des sciences de l'eau/Journal of Water Science, 19(2), 101-112.
+Kouzana, L., Ben Mammou, A., & Gaaloul, N. (2007). Intrusion marine et salinisation des eaux d'une nappe phréatique côtière [archive] (Korba, Cap-Bon, Tunisie). Geo-Eco-Trop, 31, 57-70.
+Nezli I.E, Achour S & Djabri L (2013). Approche géochimique des processus d’acquisition de la salinité des eaux de la nappe phréatique de la basse vallée de l’oued M’ya (Ouargla) (résumé Inist-CNRS [archive]).
+Lester R. Brown, Éco-économie, une autre croissance est possible, écologique et durable, Seuil, 2001, p. 69 à 72
+Article de Maxisciences, 4 janvier 2012 [archive]
+Sandra Postel, Pillar of Sand, New York, W.W. Norton & Compant, 1999. Équivalence approximativeeau/céréales : FAO, Yield Response to Water, Rome 1979
+Lester R. Brown, Éco-économie, une autre croissance est possible, écologique et durable, Seuil, 2001, p. 76
+Yoshihide Wada, Ludovicus van Beek et Marc Bierkens, département de géographie physique de l'Université d'Utrecht (Pays-Bas), Nonsustainable groundwater sustaining irrigation: A global assessment [archive], résumé en français disponible sur le site de Libération [archive]
+(en) Groundwater Contamination, National Academies Press, 1er janvier 1984 (ISBN 978-0-309-07832-0, DOI 10.17226/1770, lire en ligne [archive])
+(en) Ground Water Recharge Using Waters of Impaired Quality, National Academies Press, 1er janvier 1994 (ISBN 978-0-309-05142-2, DOI 10.17226/4780, lire en ligne [archive])
+(en) National Research Council, Prospects for Managed Underground Storage of Recoverable Water, 29 octobre 2007 (ISBN 978-0-309-11438-7, DOI 10.17226/12057, lire en ligne [archive])
+(en) Alternatives for Managing the Nation's Complex Contaminated Groundwater Sites, National Academies Press, 27 février 2013 (ISBN 978-0-309-27810-2, DOI 10.17226/14668, lire en ligne [archive])
+(en) National Research Council, Prospects for Managed Underground Storage of Recoverable Water, 29 octobre 2007 (ISBN 978-0-309-11438-7, DOI 10.17226/12057, lire en ligne [archive])
+Rozan, A., Stenger, A., & Willinger, M. (1997). Valeur de préservation de la qualité de l'eau souterraine: une comparaison entre usagers et non-usagers. Cahiers d'économie et sociologie rurales, (45), 61-92. (résumé [archive])
+Source APRONA
+Voir aussi
+Sur les autres projets Wikimedia :
+
+nappe phréatique, sur le Wiktionnaire
+Articles connexes
+Aquifère
+Cycle de l'eau
+Nappe alluviale
+Nappe de la craie
+Nappe captive
+Nappe d'eau souterraine
+Hydrogéologie
+Rabattement de nappe
+Recharge des aquifères
+Observatoire de l'eau
+Bibliographie
+Albinet, M., & Margat, J. (1970), Cartographie de la vulnerabilite a la pollution des nappes d’eau souterraine [archive]. Bull. BRGM, 2ème série, 3(4), 13-22.
+Brouyère, S., Briers, P., Descy, J. P., Schmit, F., Degré, A., & Orban, P. (2017), Convention Région wallonne et HGE-ULg Caractérisation complémentaire des masses d’eau dont le bon état dépend d’interactions entre les eaux de surface et les eaux souterraines [archive] - Délivrable D1. 8 Rapport final (No. D1. 8).
+Datry T. (2003), Urbanisation et qualité des nappes phréatiques : réponses des écosystèmes aquatiques souterrains aux pratiques d’infiltration d’eau pluviale, Université Claude Bernard-Lyon, 1, 220 (résumé [archive])
+Farlin, J., Gallé, T., & Bayerle, M. (2017), Contamination des eaux souterraines par les produits phytosanitaires ou leurs produits de dégradation-PestRisk : un outil d’évaluation du potentiel de contamination et de quantification des concentrations à l’échelle du bassin versant de captage. Techniques Sciences Méthodes, (10), 59-67|résumé [archive].
+Lallemand-Barrès, A., & Roux, J. C. (1999), Périmètres de protection des captages d'eau souterraine destinée à la consommation humaine : guide méthodologique et réglementaire (Vol. 33). BRGM.
+Ollagnon H. (1979), Propositions pour une gestion patrimoniale des eaux souterraines: l’expérience de la nappe phréatique d’Alsace [archive]. Bulletin interministériel pour la rationalisation des choix budgétaires, 36, 33-73.
+Petit, O. (2004), La surexploitation des eaux souterraines: enjeux et gouvernance [archive], Natures sciences sociétés, 12(2), 146-156.
+Vandenberghe, C., & Colinet, G. (2017), La gestion de la matière organique du sol, un enjeu important pour limiter la lixiviation du nitrate vers les eaux souterraines [archive]. Biotechnologie, Agronomie, Société et Environnement, 21(3), 201.
+Liens externes
+Notices dans des dictionnaires ou encyclopédies généralistes : Britannica [archive]Store norske leksikon [archive]
+icône décorative Portail de la géologie icône décorative Portail de l’eau icône décorative Portail des lacs et cours d'eau
+Catégorie : Aquifère[+]
+La dernière modification de cette page a été faite le 27 juin 2024 à 23:40.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

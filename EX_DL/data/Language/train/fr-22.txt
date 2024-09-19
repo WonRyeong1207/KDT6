@@ -1,0 +1,102 @@
+Physique atomique
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Physique atomique
+
+Ce modèle de Bohr schématise la transition d'un électron de l'orbitale atomique n=3 vers l'orbitale interne n=2, d'où un photon est émis (ΔE = hν). Un électron de l'orbitale n=2 doit en avoir préalablement été retiré par ionisation.
+Pratiqué par	
+Physicien atomique (d)
+Objets	
+Atome
+couche électronique
+modifier - modifier le code - modifier WikidataDocumentation du modèle
+
+La physique atomique est le champ de la physique qui étudie les atomes en tant que systèmes isolés qui comprennent les électrons et le noyau atomique. Elle se concentre essentiellement sur l'arrangement des électrons autour du noyau et sur la façon dont celui-ci est modifié. Cette définition englobe tant les ions que les atomes électriquement neutres.
+
+Puisque « atomique » et « nucléaire » sont utilisés de façon synonyme dans le langage courant, la physique atomique est souvent confondue avec la physique nucléaire. Cependant, les physiciens considèrent que la physique nucléaire se concentre principalement sur le noyau atomique.
+
+Atomes isolés
+La physique atomique considère toujours les atomes de façon isolée, c'est-à-dire qu'un modèle est toujours composé d'un noyau et d'électrons qui orbitent autour. Elle n'est pas concernée par la formation des molécules (même si la théorie physique en jeu est transposable), ni par la physique du solide. Elle considère les processus d'ionisation, d'excitation par les photons et de collisions entre particules atomiques.
+
+Il peut sembler que la modélisation d'atomes en isolation ne reflète pas la réalité. Les atomes peuvent former un gaz ou un plasma, où l'échelle de temps pour les interactions entre atomes est énorme comparée aux processus atomiques dont la théorie se préoccupe. En conséquence, les atomes sont la plupart du temps isolés dans la réalité. C'est pour cette raison que cette théorie est utile à la modélisation des plasmas et à l'étude de l'atmosphère, même si les deux contiennent d'énormes quantités d'atomes.
+
+Un électron peut être suffisamment excité pour échapper à l'attraction du noyau. On dit alors que le reste de l'atome est un ion, c'est-à-dire un quasi atome électriquement chargé.
+
+Historique
+La plupart des domaines en physique sont soit théoriques, soit expérimentaux. Il en va de même de la physique atomique. Le progrès d'un domaine se fait la plupart du temps en s'appuyant sur deux piliers : (1) modélisation et (2) validation. Si la validation ne peut confirmer le modèle, ce dernier est à revoir. De même, si le modèle prédit un comportement qui ne peut être validé avec les outils disponibles, d'autres outils sont éventuellement développés pour confirmer ou infirmer le modèle. La technologie présente a une incidence majeure sur le développement d'un modèle, car les outils plus précis sont le plus souvent issus de nouvelles technologies.
+
+Article détaillé : Théorie atomique.
+À l'évidence, le premier pas essentiel à l'élaboration d'une théorie atomique est la reconnaissance que la matière est composée d'atomes, dans le sens moderne d'unité de base des éléments chimiques. Cette théorie a principalement été développé par le chimiste et physicien John Dalton au XVIIIe siècle. À cette époque, la notion d'atome était floue, même si les propriétés pouvaient être décrites et classées dans un tableau périodique.
+
+La naissance moderne de la théorie remonte à la découverte des raies spectrales et les tentatives pour décrire le phénomène, Fraunhofer se démarquant particulièrement. L'étude de ces raies a mené la construction du modèle de Bohr et à la naissance de la théorie des quanta. En tentant de décrire mathématiquement le spectre atomique, un tout nouveau modèle mathématique est apparu. En ce qui concerne les atomes et leur nuage d'électrons, ce modèle a non seulement fourni une meilleure description via le modèle atomique orbital, mais a aussi donné de nouvelles fondations théoriques à la chimie, la chimie quantique, et à la spectroscopie.
+
+Depuis la Seconde Guerre mondiale, tant la partie théorique qu'expérimentale ont progressé à grands pas. C'est principalement dû à l'émergence de l'informatique qui a permis de développer des modèles plus sophistiqués, mathématiquement parlant, de la structure atomique et des processus de collisions. Les progrès notables enregistrés dans les accélérateurs de particules, les détecteurs de particules, les générateurs de champs magnétiques et les laser ont grandement appuyé les efforts de recherche.
+
+Voir aussi
+Sur les autres projets Wikimedia :
+
+Physique atomique, sur Wikimedia Commons
+Physique atomique et subatomique, sur Wikiversity
+Physique atomique, sur Wikibooks
+Articles connexes
+Absorption saturée
+Physique atomique fondamentale
+Niveau d'énergie
+Fonction d'onde
+Orbitale atomique
+Configuration électronique
+Couche électronique
+Applications
+Physique des plasmas
+Horloge atomique
+Domaines connexes
+Optique quantique
+Liens externes
+(en) Atomic Physics on the Internet [archive]
+(en) Catalogue de liens [archive]
+(en) JILA [archive]
+ [masquer]
+v · m
+Branches de la physique
+Catégories	
+AppliquéeExpérimentaleThéorique
+Champs et ondes	
+Champ gravitationnelChamp électromagnétiqueChamp de Higgs électrofaibleThéorie quantique des champsRelativité GénéraleRestreinte
+Énergie et mouvement	
+Mécanique ClassiqueCélesteFluidesMilieux continusQuantiqueThermodynamique
+Spécialités	
+AcoustiqueAstrophysiqueAtomiqueIndustrielleMatière condenséeNucléaireOptiqueParticulesSolideStatistique
+Autres sciences	
+AtmosphériqueBiophysiqueBiomécaniqueMédicaleÉconophysiqueGéophysiquePhysico-chimieMathématiquePsychophysique
+icône décorative Portail de la physique
+Catégorie : Physique atomique[+]
+La dernière modification de cette page a été faite le 15 octobre 2023 à 11:46.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

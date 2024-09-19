@@ -1,0 +1,95 @@
+Alerte de franchissement involontaire de ligne
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+
+1. Trajectoire normale de la voiture
+2. Trajectoire prévue de la voiture
+3. Avertissement en cas de dépassement (vibration)
+4. Retour à la trajectoire prévue
+L’alerte de franchissement involontaire de ligne (ou AFIL) est un dispositif qui avertit le conducteur d'une automobile quand il franchit involontairement (sans actionner ses clignotants) une ligne continue ou discontinue. L'avertissement se manifeste par une vibration dans le siège du conducteur du côté où le franchissement a lieu. Cette alerte intuitive qui simule le roulement sur une bande rugueuse sonore a été préférée à une alerte sonore moins facilement interprétable.
+
+L’appellation système d’avertissement de franchissement de ligne est également utilisée dans le règlement 130 de la CEE-ONU1.
+
+Le principe de ce système AFIL réside dans l'utilisation de diodes infrarouges et de capteurs sensibles à ces rayonnements, placés sous le bouclier avant du véhicule. Les variations de réflexion des rayonnements infrarouges sur les bandes blanches engendrent le déclenchement du système via le calculateur du véhicule.
+
+Pour être conforme au règlement 130, l'alerte de franchissement involontaire de ligne doit fonctionner sur une ligne droite éventuellement incurvée jusqu'à un rayon de courbure de 250 mètres2.
+
+Ce dispositif utilisé pour la première fois en grande série par Citroën sur la première C4 a reçu le Prix de l'innovation 2004 du salon de Genève.
+
+Une évolution de ce système permise par l'apparition des directions assistée électriques consiste à le transformer en système actif, qui ramène automatiquement le véhicule dans sa file de circulation en cas de dérive de son cap : le Lane Keeping Assist ou aide au maintien dans la file de circulation.
+
+Reconnaissance
+Euro NCAP offre des points aux voitures équipées d'un système d'alerte de franchissement involontaire de ligne3.
+
+Évolutions
+Système d’urgence de maintien de la trajectoire
+Dans l'espace économique européen, pour les véhicules qui en sont équipés, le règlement d’exécution (UE) 2021/646 définit une autre fonction, le système d’urgence de maintien de la trajectoire (ELKS pour l'anglais emergency lane-keeping systems) qui combine à la fois fonction de système d’avertissement de dérive de la trajectoire (LDWS pour Lane Departure Warning System) et fonction correctrice de direction (CDCF pour Corrective Directional Control Function) à des vitesses comprises entre 70 et 130 km/h4.
+
+Notes et références
+[PDF] http://www.unece.org/fileadmin/DAM/trans/doc/2019/wp29/ECE-TRANS-WP.29-343-Rev.27.pdf [archive]
+règlement 130 de la CEE-ONU
+(en) « Lane Support [archive] », sur euroncap.com (consulté le 10 octobre 2023).
+Règlement d’exécution (UE) 2021/646 de la Commission du 19 avril 2021 établissant des règles relatives à l’application du règlement (UE) 2019/2144 du Parlement européen et du Conseil en ce qui concerne les procédures uniformes et les spécifications techniques pour la réception par type des véhicules à moteur eu égard à leur système d’urgence de maintien de la trajectoire (ELKS) [archive]
+Voir aussi
+Articles connexes
+Aide au maintien dans la file de circulation
+Aide à la conduite automobile
+Aide à la conduite de véhicules
+Liens externes
+Explications sur le site de Citroën [archive]
+ [masquer]
+v · m
+Équipements des véhicules motorisés
+Dynamique du véhicule	
+Freinage automobileLimiteur de vitesseRégulateur de vitesse
+Voir et être vu	
+Détecteur de pluieÉclairage automobileEssuie-glaceFeux de détresseRecul caméraradar
+Equipements de sécurité	
+eCallIsofixRehausseurSiège enfantSécurité active
+Chocs	
+AirbagCeinture de sécuritéPare-chocsSécurité passiveSystème anti-collision
+Aide à la conduite	
+Freinage/trajectoire	
+Système d'aide à la conduite (ADAS)AntipatinageABSAFUESPAEBALKAFIL
+Divers	
+ISAAide au stationnementOrdinateur de bordACC
+Conduite automatisée	
+Niveau d'autonomieStationnement automatiqueALKSSécurité informatique des véhicules
+Pneumatiques	
+PneumatiquesPression des pneus (TPMS)
+Antipollution	
+Réduction catalytique sélective
+Divers	
+Stop & Start
+icône décorative Portail de l’automobile icône décorative Portail de la robotique
+Catégories : Sécurité automobileSystème d'alerteCitroën[+]
+La dernière modification de cette page a été faite le 10 octobre 2023 à 20:37.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

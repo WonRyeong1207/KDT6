@@ -1,0 +1,125 @@
+Courbe de Lorenz
+
+Article
+Discussion
+Lire
+Modifier
+Modifier le code
+Voir l’historique
+
+Outils
+Apparence masquer
+Taille du texte
+
+Petite
+
+Standard
+
+Grande
+Largeur
+
+Standard
+
+Large
+Couleur (bêta)
+
+Automatique
+
+Clair
+
+Sombre
+Page d’aide sur l’homonymie	
+Pour l’article homonyme, voir Fonction lorentzienne.
+
+	
+Cet article est une ébauche concernant l’économie.
+
+Vous pouvez partager vos connaissances en l’améliorant (comment ?) selon les recommandations des projets correspondants.
+
+Courbe de Lorenz
+
+Type	
+Courbe économique (d)
+Nommé en référence à	
+Max O. Lorenz
+modifier - modifier le code - modifier WikidataDocumentation du modèle
+
+
+La courbe de Lorenz des revenus et du patrimoine en France en 2010.
+
+Courbe de Lorenz. La ligne pointillée représente la ligne d'égalité linéaire parfaite. Le coefficient de Gini est : A / (A+B).
+La courbe de Lorenz est la représentation graphique de la fonction qui, à la part x des détenteurs d'une part d'une grandeur, associe la part y de la grandeur détenue. Elle a été développée par Max O. Lorenz en vue d'une représentation graphique des inégalités de revenu.
+
+Description
+Elle peut être facilement transposée, notamment à la répartition d'une donnée statistique quelconque, comme :
+
+les inégalités de répartition d'un actif ou de toute autre distribution de richesse,
+l'état de la répartition des clients au sein d'une clientèle,
+l'état de concentration d'un marché avec la ventilation des parts de marché.
+Une interprétation de la courbe de Lorenz peut être faite au moyen du coefficient de Gini, égal au rapport de la surface A à l'aire totale du triangle. C'est une mesure d'inégalité de répartition.
+
+Dans d'autres domaines (apprentissage automatique, statistiques), la courbe de Lorenz est appelée courbe CAP (Cumulative Accuracy Profile). Elle diffère de la courbe courbe ROC (Receiver Operating Characteristic, utilisée en épidémiologie, traitement du signal, psychologie expérimentale) en le sens que cette dernière établit une corrélation entre le taux de vrais positifs en fonction du taux de faux positifs, alors que la courbe CAP donne le taux de vrais positifs en fonction du taux d'échantillons considérés.
+
+Exemple
+Dans le cas de l'analyse des revenus des ménages, soit le pourcentage ou le nombre x des ménages les moins riches qui détient telle part en valeur ou en pourcentage y du revenu de l'ensemble des ménages, la part des ménages, classée par ordre de revenu individuel croissant, est figurée en abscisse, et la part du revenu en ordonnée.
+
+Conclusions tirées de l'observation de la courbe :
+
+dans une société, on dira que la distribution des revenus est parfaitement égalitaire si tous les ménages reçoivent le même revenu ; alors la part x des ménages les moins riches reçoit une part y = x du revenu global ; une répartition égalitaire est donc représentée par la première bissectrice du repère (d'équation y = x) ; cette droite est appelée la ligne d'égalité parfaite ;
+à l'inverse, on parlera de distribution parfaitement inégalitaire si dans la société considérée, un ménage accapare le revenu total (global) ; dans ce cas, la fonction associée prend la valeur y = 0 pour tout x < 100%, et y = 100% quand x = 100% ; la courbe de Lorenz correspondant à cette situation est appelée la ligne de parfaite inégalité.
+Formalisation
+La définition mathématique de la courbe de Lorenz passe par l’introduction des quantiles de la fonction de répartition de la grandeur étudiée. En notant X la grandeur observée (revenu, patrimoine, etc.), et μ sa loi de probabilité (qui peut être discrète, par exemple dans le cas où X correspond à un échantillon réellement mesuré), l’on peut poser Qμ la fonction quantile associée (pseudo-inverse de la fonction de répartition de μ). La courbe de Lorenz est alors la courbe représentative de la fonction :
+
+L
+μ	
+:
+[
+0
+,
+1
+]
+⟶	
+[
+0
+,
+1
+]
+p
+⟼	
+∫
+0
+p
+Q
+μ
+(
+u
+)
+d
+(
+u
+)
+∫
+0
+1
+Q
+μ
+(
+u
+)
+d
+(
+u
+)
+{\displaystyle {\begin{array}{rc|rcl}L_{\mu }&:&[0,1]&\longrightarrow &[0,1]\\&&p&\longmapsto &{\frac {\int _{0}^{p}Q_{\mu }(u)\mathrm {d} (u)}{\int _{0}^{1}Q_{\mu }(u)\mathrm {d} (u)}}\end{array}}}
+les deux intégrales étant calculées contre la mesure de Lebesgue.
+
+L’intégrale du dénominateur est alors égale à l’espérance de X.
+
+Lien externe
+(en) Une fiche technique [archive] sur la courbe de Lorenz comprenant divers champs d'application, incluant un fichier Excel traçant la courbe de Lorenz et calculant coefficients de Gini et de variation.
+
+icône décorative Portail de l’économie icône décorative Portail des mathématiques icône décorative Portail des probabilités et de la statistique
+Catégories : ÉconométrieInégalités de revenu[+]
+La dernière modification de cette page a été faite le 5 octobre 2023 à 20:59.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons attribution, partage dans les mêmes conditions ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.
