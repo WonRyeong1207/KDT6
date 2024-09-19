@@ -300,14 +300,14 @@ def draw_two_plot(loss, r2, title):
     ax2 = ax1.twinx()
     
     ax1.plot(loss['train'], label=f"train loss mean: {sum(loss['train'])/len(loss['train']):.6f}", color='#5587ED')
-    ax1.plot(loss['val'], label=f"test loss mean: {sum(loss['val'])/len(loss['val']):.6f}", color='#F361A6')
+    ax1.plot(loss['val'], label=f"validation loss mean: {sum(loss['val'])/len(loss['val']):.6f}", color='#F361A6')
     ax2.plot(r2['train'], label=f"train score max: {max(r2['train'])*100:.2f} %", color='#00007F')
-    ax2.plot(r2['val'], label=f"test score max: {max(r2['val'])*100:.2f} %", color='#99004C')
+    ax2.plot(r2['val'], label=f"validation score max: {max(r2['val'])*100:.2f} %", color='#99004C')
     
     fig.suptitle(f'{title} iris ANN multi classification', fontsize=15)
     ax1.set_ylabel('loss', fontsize=10, color='#5587ED')
     ax2.set_ylabel('score', fontsize=10, color='#00007F')
     
     fig.legend(fontsize='small', loc='lower left')
-    plt.xticks(np.arange(0, len(loss['train']), 2), labels=[x for x in range(1, len(loss['val'])+1, 2)])
+    # plt.xticks(np.arange(0, len(loss['train']), 2), labels=[x for x in range(1, len(loss['val'])+1, 2)])
     plt.show()
