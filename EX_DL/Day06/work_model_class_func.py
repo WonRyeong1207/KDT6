@@ -271,12 +271,14 @@ def training(dataset, model, epochs, lr, batch_size, threshold):
         
         # 학습 파라미터 저장
         if len(train_val_score['val']) == 1:
+            print("saved first")
             torch.save(model.state_dict(), save_param)
-            # torch.save(model, save_model)
+            torch.save(model, save_model)
         elif len(train_val_score['val']) > 1:
             if train_val_score['val'][-1] > max(train_val_score['val']):
+                print("saved model")
                 torch.save(model.state_dict(), save_param)
-                # torch.save(model, save_model)
+                torch.save(model, save_model)
 
         # early stopping
         if len(train_val_loss['val']) > 1:
@@ -287,7 +289,7 @@ def training(dataset, model, epochs, lr, batch_size, threshold):
         if break_cnt >= threshold:
             print('성능 및 손실의 개선이 없어서 학습을 중단합니다.\n')
             print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_score:.6f}")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {train_score:.6f}")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {train_score:.6f}\n")
             break
         
     return train_val_loss, train_val_score, train_val_pred
