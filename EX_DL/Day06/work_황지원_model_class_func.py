@@ -223,6 +223,7 @@ def training(dataset, model, epochs, lr, batch_size, threshold):
     data_dl = DataLoader(dataset, batch_size=batch_size, drop_last=True)
     
     save_param = '../model/language/lang_multi_clf.pth'
+    save_model = '../model/language/lang_multi_clf_model.pth'
     break_cnt = 0
     
     for epoch in range(1, epochs+1):
@@ -271,9 +272,11 @@ def training(dataset, model, epochs, lr, batch_size, threshold):
         # 학습 파라미터 저장
         if len(train_val_score['val']) == 1:
             torch.save(model.state_dict(), save_param)
+            # torch.save(model, save_model)
         elif len(train_val_score['val']) > 1:
             if train_val_score['val'][-1] > max(train_val_score['val']):
                 torch.save(model.state_dict(), save_param)
+                # torch.save(model, save_model)
 
         # early stopping
         if len(train_val_loss['val']) > 1:
