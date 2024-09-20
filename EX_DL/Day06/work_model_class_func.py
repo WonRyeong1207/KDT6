@@ -209,9 +209,11 @@ def testing(model, X_ts, y_ts):
 def predict(model, X_ts):
     with torch.no_grad():
         
-        pred = model(X_ts)
+        pred = model(X_ts).argmax()
+        langDict = {0:'en', 1:'fr', 2: 'id', 3:'tl'}
+        result = langDict[pred]
     
-    return pred
+    return result
 
     
 # model learning
