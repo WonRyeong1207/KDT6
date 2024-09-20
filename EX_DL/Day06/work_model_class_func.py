@@ -207,6 +207,9 @@ def testing(model, X_ts, y_ts):
     return loss, score, pred
 
 def predict(model, X_ts):
+    
+    # X_ts = torch.FloatTensor(X_ts)
+    
     with torch.no_grad():
         
         pred = model(X_ts).argmax()
