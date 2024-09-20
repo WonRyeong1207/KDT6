@@ -63,8 +63,11 @@ def detectLang(text):
     freq = list(map(lambda n: n/total, cnt))
     print(f'freq => {freq}')
     
+    # 내 predict 함수에는 scaling이 없기때문에 여기서 처리하고 넘겨야 할 수 있음.
+    # 모델내에 없을 수 있기때문에 이 또한 수정이 필요함.
+    
     # 판별요청 & 결과 반환
-    result = 'en' # langModel.predict([freq])
+    result = langModel.predict([freq])
     langDict = {'en':'영어', 'fr':'프랑스어', 'id': '인도네시아어', 'tl':'타갈로그어'}
     
     return langDict[result]
