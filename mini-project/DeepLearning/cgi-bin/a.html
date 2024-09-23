@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>이미지 분류기</title>
+    <title>Image Classification</title>
 </head>
 
 <body>
-    <h1>이미지 분류기</h1>
-    <input type="file" id="imageInput" accept="image/*">
-    <button onclick="classifyImage()">분류하기</button>
-    <div id="result"></div>
-    <img id="uploadedImage" style="max-width: 300px; margin-top: 20px;">
+    <h1>Image Classifier</h1>
+    <form enctype="multipart/form-data" action="/cgi-bin/your_script.py" method="POST">
+        <input type="file" name="imageInput" accept="image/*">
+        <input type="submit" value="Classify">
+    </form>
+    <div id="result">{msg}</div>
 </body>
 
 </html>
