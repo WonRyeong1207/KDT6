@@ -413,6 +413,35 @@ def predict(model, data_loader):
     
     return result, actual_labels
 
+def predict_web(model, image_tensor):
+    """
+    classification animal for a single image
+
+    Args:
+        model (model_instance):  testing model
+        image_tensor (tensor): transformed single image tensor
+
+    Returns:
+        str: predicted animal species
+    """
+    
+    model.eval()  # Set the model to evaluation mode
+    with torch.inference_mode():  # Ensure no gradients are computed
+        image_tensor = image_tensor.to(DEVICE, dtype=torch.float32)  # 단일 이미지 텐서로 처리
+        outputs = model(image_tensor)  # 모델에 이미지 입력
+        _, predicted = torch.max(outputs, 1)  # 최대 값의 인덱스를 예측값으로
+        
+        labelDict = {0: 'cane', 1: 'cavallo', 2: 'elefante', 3: 'farfalla', 4: 'gallina',
+                     5: 'gatto', 6: 'mucca', 7: 'pecora', 8: 'ragno', 9: 'scoiattolo'}
+        translate = {'cane': 'dog', 'cavallo': 'horse', 'elefante': 'elephant', 'farfalla': 'butterfly', 'gallina': 'chicken',
+                     'gatto': 'cat', 'mucca': 'cow', 'pecora': 'sheep', 'ragno': 'spider', 'scoiattolo': 'squirrel'}
+        
+        predicted_label = predicted.cpu().numpy()[0]  # 예측된 라벨 인덱스 추출
+        predicted_animal = translate[labelDict[predicted_label]]  # 인덱스를 통해 동물 이름 변환
+    
+    return predicted_animal
+
+
     
 # model learning
 # --------------------------------------
