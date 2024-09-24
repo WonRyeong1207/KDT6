@@ -426,14 +426,14 @@ def training(dataset, model, epochs, lr=0.001, batch_size=32, patience=10):
 
         if epoch%5 == 0:
             print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc:.6f}")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {val_acc.item():.6f}")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {val_acc.item():.6f}\n")
         
         if len(acc_dict['val']) == 1:
             print("saved first")
             torch.save(model.state_dict(), save_param)
             torch.save(model, save_model)
         else:
-            if acc_dict['val'][-1] > max(acc_dict['val']):
+            if acc_dict['val'][-1] >= max(acc_dict['val']):
                 print("saved model")
                 torch.save(model.state_dict(), save_param)
                 torch.save(model, save_model)
@@ -446,7 +446,7 @@ def training(dataset, model, epochs, lr=0.001, batch_size=32, patience=10):
             print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {val_acc.item():.6f}\n")
             break
         
-        return loss_dict, acc_dict, f1_dict
+    return loss_dict, acc_dict, f1_dict
     
 
 # 그림 그리는 함수
@@ -476,4 +476,29 @@ def draw_two_plot(loss, score, title):
     
     fig.legend(fontsize='small', loc='lower left')
     # plt.xticks(np.arange(0, len(loss['train']), 2), labels=[x for x in range(1, len(loss['val'])+1, 2)])
+    plt.show()
+    
+    
+# predict figure draw
+def draw_predict_figure(model, X_data, y_data, num):
+    """
+    Draw predict figure in data set
+
+    Args:
+        model (model instane): predicting model
+        X_data (tensor): feature tensor
+        y_data (tensor): label tensor
+        num (int): data number
+    """
+    pred = predict(model, X_data[num])
+
+    print(f"predict number: {pred}")
+    print(f"real number: {int(y_data[num].item())}\n")
+
+    image_data = X_data[num].reshape(-1, 28)
+    print(f"image data: {image_data.shape}, {image_data.ndim}D")
+
+    plt.imshow(image_data, cmap='BuPu')
+    plt.title(f"[image - {y_data[num]}]")
+    plt.axis('off')
     plt.show()
