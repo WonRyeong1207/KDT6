@@ -6,4 +6,4 @@ Animal image classification
 - learning method: supervised learning, binary classification, transfer learning(?)
 - learning algorithm: CNN
 """
-
+# ..
