@@ -1,0 +1,48 @@
+# torchtext version 0.18.0
+# --------------------------------
+# 설치순서 중요함!!!
+# --------------------------------
+
+# 순서와 버전을 맞춰야하는 영역 ------------------
+
+conda create -n NLP_38_018 python=3.8
+    conda activate NLP_38_018
+
+conda install pytorch==2.3.0, torchvision, torchaudio cpuonly -c pytorch
+    # cuda를 사용할 예정이라면 본인의 cuda 버전에 맞춰서 설치
+
+    python
+    import torch
+    torch.__version__
+    `2.3.0`
+    exit()
+
+conda install -c conda-forge portalocker>=2.0.0
+
+    python
+    import portalocker
+    portalocker.__version__
+    `2.10.1`
+    exit()
+
+conda install -c pytorch torchtext torchdata
+
+    python
+    import torchtext
+    torchtext.__version__
+    `0.18.0`
+
+    import torchdata
+    torchdata.__version__
+    `0.8.0`
+    exit()
+
+# 여기서부터는 본인이 쓰는거 install ------------------
+
+conda install -c conda-forge pandas, matplotlib, seaborn, scikit-learn, torchinfo
+
+pip install torchmetrics
+
+# version 확인과 import는 꼭 해야함
+
+VS Code에서 임의의 .ipynb 파일 만들어서 아무거나 import 하고 jupyter 설치 ㄱㄱ
