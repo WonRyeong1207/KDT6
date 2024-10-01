@@ -46,3 +46,21 @@ pip install torchmetrics
 # version 확인과 import는 꼭 해야함
 
 VS Code에서 임의의 .ipynb 파일 만들어서 아무거나 import 하고 jupyter 설치 ㄱㄱ
+
+
+# Corpus(말뭉치) download ----------------
+
+conda install -c anaconda nltk
+
+    python
+    import nltk
+    nltk.__version__
+    nltk.download()
+        - 새로운 창이 열림. download 버튼 누르면 됨.
+        - 왼쪽 아래에 finish가 나오고 창을 닫으면 됨.
+    `Ture`
+    exit()
+
+# 한국어 말뭉치는 그때 가서 다시 알려주신다고 하심
+# knolpy 외에 다른 것들 중에서 version 차이 안나고 좋은 걸로 찾아서 사용해야한다고 함.
+# 종류는 다양하다고 함
