@@ -62,5 +62,20 @@ conda install -c anaconda nltk
     exit()
 
 # 한국어 말뭉치는 그때 가서 다시 알려주신다고 하심
-# knolpy 외에 다른 것들 중에서 version 차이 안나고 좋은 걸로 찾아서 사용해야한다고 함.
+# konlpy 외에 다른 것들 중에서 version 차이 안나고 좋은 걸로 찾아서 사용해야한다고 함.
 # 종류는 다양하다고 함
+
+
+# KoNLPY 라이브러리 설치 ----------
+
+conda install -c conda-forge jpype1
+
+pip install konlpy
+
+    python
+    import konlpy
+    konlpy.__version__
+    `0.6.0`
+    exit()
+
+# 순서를 2개 반대로 설치 했는데 일단은 komoran이 작동을 안해서 알아 봐야 할듯?
