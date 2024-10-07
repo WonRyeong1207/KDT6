@@ -105,3 +105,12 @@ pip install soynlp
     `0.0.493`
     exit()
 
+# 또 다른 한국어 말뭉치
+pip install Korpora
+
+    python
+    import Korpora
+    Korpora.__version__
+    `0.2.0`
+    exit()
+
