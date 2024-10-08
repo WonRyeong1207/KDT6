@@ -114,3 +114,12 @@ pip install Korpora
     `0.2.0`
     exit()
 
+# embedding 관련
+pip install gensim
+
+    python
+    import gensim
+    gensim.__version__
+    `4.3.3`
+    exit()
+
