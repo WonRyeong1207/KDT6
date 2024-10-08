@@ -14,3 +14,8 @@ num_comments: 28.0
 gilded_count: 14.0
 data: 1433925338.0
 
+[index] - 39
+Her glimmer of hope began to fade as her knight in shining armour arrived through the castle gates...
+
+...bloodied, chained and attached to a stake.
+
