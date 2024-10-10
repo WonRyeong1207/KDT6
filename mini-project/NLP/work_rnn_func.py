@@ -332,7 +332,7 @@ def create_vocab(token_freq):
     vocab_df = pd.DataFrame(columns=['key', 'value'])
     vocab_df['key'] = data_vocab.keys()
     vocab_df['value'] = data_vocab.values()
-    vocab_df.to_csv('./psychiatry_vocab.csv', encoding='utf-8')
+    vocab_df.to_csv('./psychiatry_vocab.csv', encoding='utf-8', index=False)
     return data_vocab
 
 
@@ -568,7 +568,7 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
     save_model = './model/bc_lstm_clf_model.pth'
     
     train_batch_cnt = len(train_dataset) / batch_size
-    val_batch_cnt = len(val_dataset) / 10
+    val_batch_cnt = len(val_dataset) / 100
 
     model.train()
     for epoch in range(1, epochs+1):
