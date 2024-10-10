@@ -41,7 +41,7 @@ DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu' # 항상 설정하지만
 RANDOM_STATE = 10
 torch.manual_seed(RANDOM_STATE)
 LABEL_TRANSLATE = {0:'others', 1:'psychiatry'}
-DATA_ROOT = '../data/news/'
+DATA_ROOT = './data/'
 ko_model = 'ko_core_news_sm'
 ko_spacy = spacy.load(ko_model)
 ko_okt = Okt()
@@ -108,7 +108,7 @@ def load_file_list(data_root='', num_range=2):
 # function parameters: data_root, file_dict
 # function return: sentence (just one sentence)
 
-def read_file(file_dict):
+def read_file(file_list, i, type_='train/'):
     """
     read data in file list
 
@@ -118,21 +118,21 @@ def read_file(file_dict):
     Yields:
         list: lines data
     """
-    for i in range(len(file_dict)):
-        for file_name in file_dict[i]:
-            with open(DATA_ROOT+file_name, mode='rt', encoding='utf-8') as f:
-                all_text = []
-                while True:
-                    text = f.read()
-                    text = text.replace('\n', '')
-                    text = text.replace('\t', '')
-                    text = re.sub('[^ㄱ-ㅎ가-힣]+', ' ', text)
-                    
-                    if not text:
-                        break
-                    else:
-                        all_text.append(text)
-            yield all_text
+    
+    for file_name in file_list:
+        with open(DATA_ROOT+type_+f'{i}/'+file_name, mode='rt', encoding='utf-8') as f:
+            all_text = []
+            while True:
+                text = f.readline()
+                text = text.replace('\n', '')
+                text = text.replace('\t', '')
+                text = re.sub('[^ㄱ-ㅎ가-힣]+', ' ', text)
+                
+                if not text:
+                    break
+                else:
+                    all_text.append(text)
+        yield all_text
 
 
 
@@ -142,7 +142,7 @@ def read_file(file_dict):
 # function parameters: file_dict
 # function return: data_df
 
-def create_df(file_dict):
+def create_df(file_dict, type_='train/'):
     """
     create dataframe
 
@@ -156,7 +156,7 @@ def create_df(file_dict):
     
     for i in range(len(file_dict)):
         carry = []
-        for text_list in read_file(file_dict):
+        for text_list in read_file(file_dict[i], i, type_):
             for text in text_list:
                 carry.append(text)
                 
@@ -319,15 +319,19 @@ def create_vocab(token_freq):
     Returns:
         dict: data vocab dict
     """
-    sorted_list = sorted(token_freq.itmes(), key=lambda x: x[1], reverse=True)
+    sorted_list = sorted(token_freq.items(), key=lambda x: x[1], reverse=True)
     
     PAD_TOKEN, OOV_TOKEN = 'PAD', 'OOV'
     data_vocab = {PAD_TOKEN:0, OOV_TOKEN:1}
     
     for idx, tk in enumerate(sorted_list, 2):
+        # if idx > 5000:
+        #     break
         data_vocab[tk[0]] = idx
         
-    vocab_df = pd.DataFrame(data_vocab)
+    vocab_df = pd.DataFrame(columns=['key', 'value'])
+    vocab_df['key'] = data_vocab.keys()
+    vocab_df['value'] = data_vocab.values()
     vocab_df.to_csv('./psychiatry_vocab.csv', encoding='utf-8')
     return data_vocab
 
@@ -353,7 +357,10 @@ def encoding(data_df, data_vocab):
     for token_list in data_df['del_stop']:
         sent = []
         for token in token_list:
-            sent.append(data_vocab[token])
+            try:
+                sent.append(data_vocab[token])
+            except:
+                sent.append(data_vocab['OOV'])
         encoding_data.append(sent)
     yield encoding_data
     
@@ -406,7 +413,8 @@ def padding(data_df, len_data=10):
             sent.extend([0]*(len_data-current_len))
             padding_data[idx] = sent
         else:
-            sent = sent[current_len-len_data:]
+            # sent = sent[current_len-len_data:]
+            sent = sent[:len_data]
             padding_data[idx] = sent
     return padding_data
 
@@ -476,8 +484,20 @@ class BCRNNModels(nn.Module):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def testing(model, X_data, y_data):
+def validation(model, X_data, y_data):
+    
+    with torch.no_grad():
+        pred = model(X_data)
+        
+        loss = nn.BCELoss()(pred, y_data)
+        acc_score = BinaryAccuracy()(pred, y_data)
+        f1_score = BinaryF1Score()(pred, y_data)
+        mat = BinaryConfusionMatrix()(pred, y_data)
+        
+    return loss, acc_score, f1_score
 
+def testing(model, X_data, y_data):
+    y_data = y_data.unsqueeze(1).float()
     with torch.no_grad():
         pred = model(X_data)
         
@@ -498,22 +518,30 @@ def testing(model, X_data, y_data):
 # must not update weight & bais
 
 def predict_web(model, X_data):
-    
+    X_data = X_data.unsqueeze(1)
     with torch.no_grad():
         pred = model(X_data)
-        pred_label = (pred > 0.5).int()
+        pred_label = torch.argmax((pred > 0.5).int())
         pred_label = LABEL_TRANSLATE[int(pred_label.flatten())]
         
     return pred_label
 
-def predict(model, images, labels):
+def predict(model, x_data, y_data):
+    # 텐서 하나
+    # y_data의 차원을 확인하고 unsqueeze가 필요한지 확인
+    if len(y_data.shape) == 1:  # 1D 텐서인 경우
+        y_data = y_data.unsqueeze(1)  # (N,) -> (N, 1)
     
+    y_data = y_data.float()  # float형으로 변환
+    x_data = x_data.unsqueeze(1)
     with torch.no_grad():
-        pred = model(images)
-        pred_labels = (pred > 0.5).int()
+        # 예측 수행
+        pred = model(x_data)
+        # 0.5 이상이면 1, 미만이면 0으로 변환
+        pred_labels = torch.argmax((pred > 0.5).int())
         pred_labels = [LABEL_TRANSLATE[int(label)] for label in pred_labels.flatten()]
-        real_labels = [LABEL_TRANSLATE[int(label)] for label in labels.flatten()]
-    
+        real_labels = [LABEL_TRANSLATE[int(label)] for label in y_data.flatten()]
+
     return pred_labels, real_labels
 
 
@@ -568,7 +596,7 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
         model.eval()
         for step, (input_ids, labels) in enumerate(val_data_dl):
             labels = labels.unsqueeze(1)
-            val_loss, val_acc, val_score, _ = testing(model, input_ids, labels)
+            val_loss, val_acc, val_score = validation(model, input_ids, labels)
             
             total_v_loss += val_loss
             total_v_acc += val_acc
@@ -588,8 +616,8 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
         f1_dict['train'].append(train_score)
         f1_dict['val'].append(val_score)
         if epoch%5 == 0:
-            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc:.6f}")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {val_acc.item():.6f}\n")
+            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc*100:.6f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_acc*100:.6f} %\n")
         
         if len(acc_dict['val']) == 1:
             print("saved first")
@@ -605,8 +633,8 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
         
         if scheduler.num_bad_epochs >= scheduler.patience:
             print('성능 및 손실의 개선이 없어서 학습을 중단합니다.\n')
-            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc:.6f}")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss.item():.6f}, score: {val_acc.item():.6f}\n")
+            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc*100:.6f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_acc*100:.6f} %\n")
             break
         
     return loss_dict, acc_dict, f1_dict
