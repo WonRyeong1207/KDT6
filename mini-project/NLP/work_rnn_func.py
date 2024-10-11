@@ -433,7 +433,7 @@ def padding(data_df, len_data=10):
 # - dropout
 
 class BCRNNModels(nn.Module):
-    def __init__(self, n_vocab, hidden_dim, embedding_dim, n_layers, dropout=0.25, bidirectional=True, model_type='lstm'):
+    def __init__(self, n_vocab, hidden_dim, embedding_dim, n_layers, dropout=0.5, bidirectional=True, model_type='lstm'):
         super().__init__()
         
         self.embedding = nn.Embedding(
@@ -461,9 +461,17 @@ class BCRNNModels(nn.Module):
                 proj_size=0
             )
         if bidirectional:
-            self.classifier = nn.Linear(hidden_dim*2, 1)
+            self.classifier = nn.Sequential(
+                nn.Linear(hidden_dim*2, 30),
+                nn.ReLU(),
+                nn.Linear(30, 1)
+                )
         else:
-            self.classifier = nn.Linear(hidden_dim, 1)
+            self.classifier = nn.Sequential(
+                nn.Linear(hidden_dim, 30),
+                nn.ReLU(),
+                nn.Linear(30, 1)
+                )
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, inputs):
@@ -564,8 +572,8 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
     val_data_dl = DataLoader(val_dataset, batch_size=100, shuffle=True)
     scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
     
-    save_param = './model/bc_lstm_clf_params.pth'
-    save_model = './model/bc_lstm_clf_model.pth'
+    save_param = './model/bc_lstm_clf_params_2.pth'
+    save_model = './model/bc_lstm_clf_model_2.pth'
     
     train_batch_cnt = len(train_dataset) / batch_size
     val_batch_cnt = len(val_dataset) / 100
