@@ -461,17 +461,9 @@ class BCRNNModels(nn.Module):
                 proj_size=0
             )
         if bidirectional:
-            self.classifier = nn.Sequential(
-                nn.Linear(hidden_dim*2, 30),
-                nn.ReLU(),
-                nn.Linear(30, 1)
-                )
+            self.classifier = nn.Linear(hidden_dim*2, 1)
         else:
-            self.classifier = nn.Sequential(
-                nn.Linear(hidden_dim, 30),
-                nn.ReLU(),
-                nn.Linear(30, 1)
-                )
+            self.classifier = nn.Linear(hidden_dim, 1)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, inputs):
@@ -481,6 +473,49 @@ class BCRNNModels(nn.Module):
         last_output = self.dropout(last_output)
         logits = self.classifier(last_output)
         logits = F.sigmoid(logits)
+        return logits
+
+
+# model class
+class SentenceClassifier(nn.Module):
+    def __init__(self, n_vocab, hidden_dim, embedding_dim, n_layers, dropout=0.5, bidirectional=True, model_type='lstm'):
+        super().__init__()
+        
+        self.embedding = nn.Embedding(
+            num_embeddings=n_vocab,
+            embedding_dim=embedding_dim,
+            padding_idx=0
+        )
+        if model_type == 'rnn':
+            self.model = nn.RNN(
+                input_size=embedding_dim,
+                hidden_size=hidden_dim,
+                num_layers=n_layers,
+                bidirectional=bidirectional,
+                dropout=dropout,
+                batch_first=True
+            )
+        elif model_type == 'lstm':
+            self.model = nn.LSTM(
+                input_size=embedding_dim,
+                hidden_size=hidden_dim,
+                num_layers=n_layers,
+                bidirectional=bidirectional,
+                dropout=dropout,
+                batch_first=True
+            )
+        if bidirectional:
+            self.classifier = nn.Linear(hidden_dim*2, 1)
+        else:
+            self.classifier = nn.Linear(hidden_dim, 1)
+        self.dropout = nn.Dropout(dropout)
+        
+    def forward(self, inputs):
+        embeddings = self.embedding(inputs)
+        output, _ = self.model(embeddings)
+        last_output = output[:, -1, :]
+        last_output = self.dropout(last_output)
+        logits = self.classifier(last_output)
         return logits
 
 
@@ -525,14 +560,23 @@ def testing(model, X_data, y_data):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def predict_web(model, X_data):
+def predict_web(model, X_data, type_='others'):
     X_data = X_data.unsqueeze(1)
     with torch.no_grad():
-        pred = model(X_data)
-        pred_label = torch.argmax((pred > 0.5).int())
-        pred_label = LABEL_TRANSLATE[int(pred_label.flatten())]
+        if type_=='me':
+            pred = model(X_data)
+            # pred = torch.argmax(pred)
+        elif type_=='others':
+            pred = model(X_data)
+            pred = torch.sigmoid(pred)
+            # pred = torch.argmax(pred)
+        # pred_label = torch.argmax((pred > 0.5).int())
+        # pred_label = int(pred_label.flatten())
+        # if pred_label > 1:
+        #     pred_label = 0
+        # pred_label = lable_translate[pred_label]
         
-    return pred_label
+    return pred[0].item()
 
 def predict(model, x_data, y_data):
     # 텐서 하나
