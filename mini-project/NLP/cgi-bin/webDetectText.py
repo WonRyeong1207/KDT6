@@ -61,20 +61,87 @@ def showHTML(text, msg):
     print("Cache-Control: no-cache, no-store, must-revalidate")  # 캐시 방지
     print("Pragma: no-cache")  # HTTP 1.0 캐시 방지
     print("Expires: 0")  # 구형 브라우저 캐시 방지
+    # print(f"""
+    
+    #     <!DOCTYPE html>
+    #     <html lang="ko">
+    #      <head>
+    #       <meta charset="UTF-8">
+    #       <title>Text classification</title>
+    #      </head>
+    #      <body>
+    #       <form method="post">
+    #         <textarea name="text" rows="10" cols="40">{text}</textarea>
+    #         <p><input type="submit" value="classification"></p>
+    #       </form>
+    #       <p>{msg}의 진료를 받으세요</p>
+    #      </body>
+    #     </html>""")
     print(f"""
     
         <!DOCTYPE html>
         <html lang="ko">
          <head>
           <meta charset="UTF-8">
-          <title>Text classification</title>
+          <title>Text Classification</title>
+          <style>
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f9f9f9;
+                margin: 0;
+                padding: 0;
+            }}
+            .container {{
+                max-width: 800px;
+                margin: 20px auto;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                border-radius: 8px;
+            }}
+            .question-input {{
+                width: 100%;
+                padding: 15px;
+                font-size: 16px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                margin-bottom: 20px;
+            }}
+            .submit-btn {{
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 4px;
+            }}
+            .submit-btn:hover {{
+                background-color: #45a049;
+            }}
+            .answer-section {{
+                margin-top: 20px;
+                padding: 20px;
+                background-color: #f1f1f1;
+                border-radius: 4px;
+            }}
+          </style>
          </head>
+        
          <body>
-          <form method="post">
-            <textarea name="text" rows="10" cols="40">{text}</textarea>
-            <p><input type="submit" value="classification"></p>
-          </form>
-          <p>{msg}의 진료를 받으세요</p>
+          <div class="container">
+            <h2>질문을 입력하세요:</h2>
+            <form method="post">
+              <textarea name="text" class="question-input" rows="10" cols="40">{text}</textarea>
+              <br>
+              <button type="submit" class="submit-btn">질문하기</button>
+            </form>
+            
+            <div class="answer-section">
+              <h3>답변:</h3>
+              <p>{msg}의 진료를 받으세요</p>
+            </div>
+          </div>
          </body>
         </html>""")
 

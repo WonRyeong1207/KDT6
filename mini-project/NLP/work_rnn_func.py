@@ -565,18 +565,21 @@ def predict_web(model, X_data, type_='others'):
     with torch.no_grad():
         if type_=='me':
             pred = model(X_data)
+            # pred = torch.max(pred)
             # pred = torch.argmax(pred)
         elif type_=='others':
             pred = model(X_data)
             pred = torch.sigmoid(pred)
+            # pred = torch.max(pred)
             # pred = torch.argmax(pred)
         # pred_label = torch.argmax((pred > 0.5).int())
         # pred_label = int(pred_label.flatten())
         # if pred_label > 1:
         #     pred_label = 0
         # pred_label = lable_translate[pred_label]
+        pred = torch.max(pred)
         
-    return pred[0].item()
+    return pred.item()
 
 def predict(model, x_data, y_data):
     # 텐서 하나
