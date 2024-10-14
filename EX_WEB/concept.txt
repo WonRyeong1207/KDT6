@@ -1,0 +1,33 @@
+함수
+ - 자주 사용되는 기능/코드
+ - 재사용 O, 중복 사용 X
+    (ex) error 발생됨
+    ```
+    print(sum([10, 9]))
+    sum = 'hello'
+    print(sum([40, 2]))
+    ```
+- 프로토콜 설계
+    - function name, parameters(type, name), function return
+    - 사용자 입장에서는 어떻게 설계하던지 관심은 없지만 위의 3개는 중요함.
+
+프로토콜(Protocol)
+ - 규칙/규약
+ - 서로 다른 기기 사이에서 정보를 주고 받아야하기 때문
+ - OSI 7 layer
+
+HTML 5
+ - 표준화된 계기, 코드가 간결해짐?
+ - 웹페이지를 만들때 웹 그거 뭐냐? 그 그 브라우저가 사용하는 HTML을 사용해서 개발할 것!!!
+ - 디자인적인 요소는 일일이 적지 말자 --> hard coding...
+     - 그래서 나오는 개념이 CSS와 JavaScript 그리고 DataBase
+ - poen tag와 close tag 사이에는 여러가지들이 있음. tag 안에 tag도 가능
+ - tag name에 따라 속성이 달라짐.
+
+CSS
+ - 디자인이 설정된 파일
+ - 이것만 수정하면 이 파일을 사용하는 .html을 한번에 여러개를 수정 가능
+
+JavaScript
+ - action과 관련된 코드가 저장된 파일 (ex) work_model_func.py 이런 느낌
+

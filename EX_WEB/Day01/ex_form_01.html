@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tag</title>
+</head>
+<body>
+    <h1>사용자 입력 Form Tag</h1>
+    <hr>
+    <!--get 방식으로 서버에 입력 데이터 전달, 주소 표시 줄에 보임-->
+    <!--value는 초기값-->
+    <form>
+        텍스트 <input type="text" name="msg" value="없음"><br>
+        비밀번호 <input type="password" name="pass" value="None"><br>
+        전화번호 <input type="tel" name="phone" value="000-0000-0000"><br>
+        숫자데이터 <input type="number" name="nums" value="0"><br>
+        웹 url <input type="url" name="url" value="0"><br>
+        이메일 <input type="email" name="email" value="xxxx@xxxxx.com"><br>
+        <input type="submit" value="전송">
+    </form>
+
+    <hr>
+
+    <form>
+        <strong>프로그래밍 가능한 언어 선택</strong><br>
+        Python <input type="checkbox" name="Python"><br>
+        C <input type="checkbox" name="C"><br>
+        C++ <input type="checkbox" name="C++"><br>
+        C# <input type="checkbox" name="C#"><br>
+        Html <input type="checkbox" name="Html"><br>
+        xml <input type="checkbox" name="xml"><br>
+        mySQL <input type="checkbox" name="mySQL"><br>
+        Java <input type="checkbox" name="Java"><br>
+        JavaScript <input type="checkbox" name="JavaScript"><br>
+        Kotlin <input type="checkbox" name="Kotlin"><br>
+        R <input type="checkbox" name="R"><br><br>
+
+        <strong>성별</strong><br>
+        남 <input type="radio" name="gender" value="M"><br>
+        여 <input type="radio" name="gender" value="F"><br><br>
+
+        <strong>연령대</strong><br>
+        10대 <input type="radio" name="age" value="10"><br>
+        20대 <input type="radio" name="age" value="20"><br>
+        30대 <input type="radio" name="age" value="30"><br>
+        40대 <input type="radio" name="age" value="40"><br><br>
+
+        <!--버튼 태그-->
+        저장하시겠습니까? <input type="button" name="okbtn" value="확인"><br><br>
+
+        <!--색상 입력 태그-->
+        배경색: <input type="color" name="bgcolor"><br><br>
+
+        <!--날짜 요일 입력 태그-->
+        생년월일: <input type="date" name="birthday"><br><br>
+
+        <input type="submit" value="전송">
+    </form>
+
+    <br>
+    
+    <form>
+        <label for="msg1">
+            메시지 : <input type="text" id="msg1">
+        </label>
+        <br>
+        <!--label tag 밖에 input tag가 있는 경우에는 명확하게 해줘야함-->
+        <label for="msg2">메시지 :</label> <input type="text" id="msg2"><br><br>
+
+        <input type="submit" value="전송">
+    </form>
+
+    <br>
+
+</body>
+</html>
