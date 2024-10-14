@@ -622,13 +622,13 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
     save_param = './model/bc_lstm_clf_params_2.pth'
     save_model = './model/bc_lstm_clf_model_2.pth'
     
-    train_batch_cnt = len(train_dataset) / batch_size
-    val_batch_cnt = len(val_dataset) / 100
+    train_batch_cnt = len(train_dataset) // batch_size
+    val_batch_cnt = len(val_dataset) // 100
 
     model.train()
     for epoch in range(1, epochs+1):
-        total_t_loss, total_t_acc, total_t_f1 = 0, 0, 0
-        total_v_loss, total_v_acc, total_v_f1 = 0, 0, 0
+        total_t_loss, total_t_acc, total_t_f1 = [], [], []
+        total_v_loss, total_v_acc, total_v_f1 = [], [], []
         
         for step, (input_ids, labels) in enumerate(train_data_dl):
             # batch_cnt = dataset.n_rows / batch_size
@@ -637,12 +637,12 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
             pred = model(input_ids)
             
             loss = nn.BCELoss()(pred, labels)
-            total_t_loss += loss
+            total_t_loss.append(loss)
             
             a_score = BinaryAccuracy()(pred, labels)
-            total_t_acc += a_score
+            total_t_acc.append(a_score)
             f_score = BinaryF1Score()(pred, labels)
-            total_t_f1 += f_score
+            total_t_f1.append(f_score)
             
             optimizer.zero_grad()
             loss.backward()
@@ -653,16 +653,24 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
             labels = labels.unsqueeze(1)
             val_loss, val_acc, val_score = validation(model, input_ids, labels)
             
-            total_v_loss += val_loss
-            total_v_acc += val_acc
-            total_v_f1 += val_score
+            total_v_loss.append(val_loss)
+            total_v_acc.append(val_acc)
+            total_v_f1.append(val_score)
         
-        train_loss = (total_t_loss/train_batch_cnt).item()
-        train_acc = (total_t_acc/train_batch_cnt)
-        train_score = (total_t_f1/train_batch_cnt).item()
-        val_loss = (total_v_loss/val_batch_cnt).item()
-        val_acc = (total_v_acc/val_batch_cnt)
-        val_score = (total_v_f1/val_batch_cnt).item()
+        if len(total_t_loss) == train_batch_cnt:
+            train_loss = (sum(total_t_loss)/train_batch_cnt).item()
+            train_acc = (sum(total_t_acc)/train_batch_cnt)
+            train_score = (sum(total_t_f1)/train_batch_cnt).item()
+            val_loss = (sum(total_v_loss)/val_batch_cnt).item()
+            val_acc = (sum(total_v_acc)/val_batch_cnt)
+            val_score = (sum(total_v_f1)/val_batch_cnt).item()
+        else:
+            train_loss = (sum(total_t_loss)/len(total_t_loss)).item()
+            train_acc = (sum(total_t_acc)/len(total_t_acc))
+            train_score = (sum(total_t_f1)/len(total_t_f1)).item()
+            val_loss = (sum(total_v_loss)/len(total_v_loss)).item()
+            val_acc = (sum(total_v_acc)/len(total_v_acc))
+            val_score = (sum(total_v_f1)/len(total_v_f1)).item()
         
         loss_dict['train'].append(train_loss)
         loss_dict['val'].append(val_loss)
@@ -670,9 +678,10 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
         acc_dict['val'].append(val_acc)
         f1_dict['train'].append(train_score)
         f1_dict['val'].append(val_score)
+        
         if epoch%5 == 0:
-            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc*100:.6f} %")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_acc*100:.6f} %\n")
+            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_score*100:.6f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_score*100:.6f} %\n")
         
         if len(acc_dict['val']) == 1:
             print("saved first")
@@ -688,8 +697,8 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
         
         if scheduler.num_bad_epochs >= scheduler.patience:
             print('성능 및 손실의 개선이 없어서 학습을 중단합니다.\n')
-            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_acc*100:.6f} %")
-            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_acc*100:.6f} %\n")
+            print(f"[{epoch:5}/{epochs:5}]  [Train]         loss: {train_loss:.6f}, score: {train_score*100:.6f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]    loss: {val_loss:.6f}, score: {val_score*100:.6f} %\n")
             break
         
     return loss_dict, acc_dict, f1_dict
