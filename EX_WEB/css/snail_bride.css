@@ -1,0 +1,26 @@
+body {
+    color: white;
+    background-color: rgb(4, 24, 42);
+    font-family: FiraCode;
+    font-weight: lighter;
+}
+
+.us {
+    color: skyblue;
+}
+
+.cm {
+    color: pink;
+}
+
+.link {
+    color: rgb(235, 224, 255);
+}
+
+.highlight {
+    color: rgb(255, 255, 255);
+}
+
+ul li {
+    list-style: none;
+}
