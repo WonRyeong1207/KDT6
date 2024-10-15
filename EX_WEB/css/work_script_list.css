@@ -1,0 +1,59 @@
+body {
+    font-family: FiraCode;
+    font-weight: lighter;
+}
+
+span {
+    font-size: small;
+    position: absolute;
+    right: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.mang:link {
+    color: pink;
+}
+
+a.mang:visited {
+    color: rgb(196, 22, 80);
+}
+
+a.mang:hover {
+    color: rgb(156, 0, 195);
+}
+
+a.snag:link {
+    color: rgb(90, 255, 125);
+}
+
+a.sang:visited {
+    color: rgb(53, 101, 56);
+}
+
+a.sang:hover {
+    color: rgb(0, 176, 192);
+}
+
+label {
+    font-weight: normal;
+    font-size: large;
+}
+
+#mang {
+    font-weight: normal;
+    font-size: large;
+    color: rgb(255, 172, 216);
+    position: relative;
+    left: 10;
+}
+
+#sang {
+    font-weight: normal;
+    font-size: large;
+    color: rgb(66, 225, 66);
+    position: relative;
+    left: 10;
+}
