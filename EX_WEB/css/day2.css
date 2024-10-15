@@ -1,0 +1,23 @@
+body {
+    font-family: Fira Code;
+    background-image: url("../../../../지원이꼬/덕질/각별/스크린샷\(8\).png");
+    background-size: cover;
+    color: white;
+    font-weight: lighter;
+}
+
+p {
+    background-color: rgb(6, 149, 164);
+}
+
+#second_p {
+    background-color: rgb(0, 9, 55);
+    color: rgb(171, 171, 171);
+    font-weight: bolder;
+}
+
+.mon {
+    background-color: hotpink;
+    color: ivory;
+    font-size: large;
+}

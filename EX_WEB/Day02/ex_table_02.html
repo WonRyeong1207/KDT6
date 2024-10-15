@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Tag</title>
+</head>
+<body>
+    <h3>Table 태그</h3>
+    <!--상품목록 페이지-->
+    <table border="1">
+        <col style="width: 80px;">
+        <colgroup span="2" style="width: 180px;"></colgroup>
+        <col style="width: 100px;">
+        
+        <tr>
+            <th>번호</th>
+            <th>제품명</th>
+            <th>수량</th>
+            <th>가격</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>콜라</td>
+            <td align="right">1 개</td>
+            <td align="right">2,000 원</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>나랑드 제로: 파인애플</td>
+            <td rowspan="2" align="right">10 개</td>
+            <td rowspan="2" align="right">2,000 원</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>콜라 1.25 L</td>
+            <!--td>2개</td>
+            <td>3,000원</td-->
+        </tr>
+        <tr>
+            <td>total</td>
+            <td colspan="3" align="right">402,000 원</td>
+        </tr>
+    </table>
+</body>
+</html>

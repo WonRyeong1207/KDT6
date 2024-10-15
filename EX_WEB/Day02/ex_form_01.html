@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tag</title>
+</head>
+<body>
+    <style>
+        body{font-family: FiraCode;}
+    </style>
+
+    <h3>From Tag와 다양한 입력 Input Tag</h3>
+    <!--Label Tag & Radio Tag-->
+    <hr>
+    <form>
+        <label>Gender: </label>
+        <label>
+            <input type="radio" name="gender" value="M"> Male
+        </label>
+        
+        <input if="f" type="radio" name="gender" value="F" checked> <label for="f">Female</label><br>
+
+        <!--서버전송기능 submit tag-->
+        <input type="submit" value="전송"><br>
+    </form>
+    <hr>
+    <br>
+    <h3>filedst & legend Tag group</h3>
+    <form>
+        <fieldset>
+            <legend>Gender</legend>
+            <label>
+                <input type="radio" name="gender" value="M"> Male
+            </label>
+            <label>
+                <input type="radio" name="gender" value="F" checked> Female
+            </label>
+        </fieldset>
+        <br>
+        <input type="submit" value="전송">
+    </form>
+
+</body>
+</html>

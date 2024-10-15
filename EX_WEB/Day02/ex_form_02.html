@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tag</title>
+</head>
+<body>
+    <style>
+        body {font-family: FiraCode;}
+
+        p {font-family: FiraCode;}
+
+    </style>
+
+    <h3>textarea tag</h3>
+    <hr>
+    <form>
+        <fieldset>
+        <legend>Blog Writting</legend>
+        <p>
+            <label for="title">title</label>
+            <input type="text" name="title" minlength="2" maxlength="20"
+                   placeholder="Coffee" autofocus="True">
+        </p>
+
+        <p>
+            <label for="content">content</label><br>
+            <textarea name="content" placeholder="I really loved Coffee!!!" rows="15" cols="80"></textarea>
+        </p>
+        </fieldset><br><br>
+
+        <input type="submit" name="save" value="save">
+    </form>
+    
+</body>
+</html>
