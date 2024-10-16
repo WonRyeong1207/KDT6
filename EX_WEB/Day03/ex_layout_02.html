@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS & TAG</title>
+    <style>
+        * {
+            text-align: center;
+            font-family: FiraCode;
+            font-weight: lighter;
+            color: white;
+            
+        }
+        
+        html {height: 100%;}
+        body {
+            height: 100vh; 
+            width: 100vw;
+            background-color: rgb(1, 1, 54);
+        }
+
+        #header, header {
+            background-color: rgb(25, 10, 71);
+            height: 10vh;
+        }
+
+        #menu, nav {
+            background-color:rgb(25, 10, 71);
+            width: 20%;
+            height: 70vh;
+            float: left;
+        }
+
+        #center, section {
+            background-color: rgb(25, 10, 71);
+            display: inline-block;
+            width: 60%;
+            height: 70vh;
+            
+        }
+
+        #sidem, aside {
+            background-color: rgb(25, 10, 71);
+            width: 20%;
+            height: 70vh;
+            float: right;
+        }
+
+        #footer, footer {
+            background-color: rgb(25, 10, 71);
+            clear: both;
+        }
+
+        ul li {
+            list-style: url('../image/free-icon-pumpkin-8599700.png');
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="header">HEADER</div>
+    <div id="menu">MENU</div>
+    <div id="center">CENTER</div>
+    <div id="side">SIDE</div>
+    <div id="footer">FOOTER</div> -->
+
+    <header>
+        <h1>My Project Demo</h1>
+    </header>
+    <nav>
+        <label>Mini Project</label>
+        <ul>
+            <li><a href="#ml">Machine Learning</a></li>
+            <li><a href="#dl">Deep Learning</a></li>
+            <li><a href="#cv">OpenCV: Vision Processing</a></li>
+            <li><a href="#nlp">Natural Language Processing</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div id="ml">
+            Machine Learning
+        </div>
+        <div id="dl">
+            Deep Learning
+        </div>
+        <div id="cv">
+            OpenCV: Vision Processing
+        </div>
+        <div id="nlp">
+            Natural Language Processing
+        </div>
+    </section>
+    <aside>SIDE</aside>
+    <footer>
+        <blockquote
+            cite="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700">
+            <p>
+                사용한 icon 출처입니다.
+            </p>
+            <a href="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700"
+                title="호박 아이콘" target="_blank">호박 아이콘 제작자: ppangman - Flaticon</a>
+        </blockquote>
+    </footer>
+</body>
+</html>
