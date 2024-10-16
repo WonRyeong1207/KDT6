@@ -22,7 +22,7 @@
 
         #header, header {
             background-color: rgb(25, 10, 71);
-            height: 10vh;
+            height: 20vh;
         }
 
         #menu, nav {
@@ -55,6 +55,13 @@
         ul li {
             list-style: url('../image/free-icon-pumpkin-8599700.png');
         }
+
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(172, 172, 255);
+        }
     </style>
 </head>
 <body>
@@ -66,6 +73,11 @@
 
     <header>
         <h1>My Project Demo</h1>
+        
+        <a href="https://github.com/WonRyeong1207/KDT6" title="git.link" target="_blank">
+            progect by Ji-Won Hwang @hadesdis1207
+        </a>
+        
     </header>
     <nav>
         <label>Mini Project</label>
@@ -78,16 +90,46 @@
     </nav>
     <section>
         <div id="ml">
-            Machine Learning
+            Machine Learning<br>
+            <pre>
+                 트위터 사용자들의 mbti를 E/I, N/S, T/F, J/P의 4가지의 큰 분류로 binary classification.
+                - frame work: skicit-learn, model: SVM
+                - model 선정 이유: 데이터의 feature가 많았는데 다차원에서도 성능을 잘 보여주는 모델이기 때문에 선정함.
+
+                 하지만 간과한 것이 하나가 있었음. 데이터의 불균형도 문제이긴 했지만 feature와 label/target의 상관관계가 매우 낮았음.
+                낮은 상관관계를 가지고 있었기 때문에 규칙을 찾아내기 어려웠고 성능이 좋지 못했음.
+            </pre>
         </div>
         <div id="dl">
-            Deep Learning
+            Deep Learning<br>
+            <pre>
+                 10 종류의 동물사진을 넣으면 사진에서 특징을 추출해서 multi classification.
+                - frame work: pytorch, model: custum VGG16
+                - model 선정 이유: CNN 모델 중에서 적은 수의 weight와 bais를 사용하기 때문에 다른 model 보다 결과를 빠르게 보여줄거라 판단함.
+
+                 Transfer Learning을 알았다면 빠르게 뭔가를 더 시도 해봤을 아쉬운 model. 이때부터 웹구현을 시작함.
+                발표때는 웹 시연을 못 했지만 추후에 시도를 하고 문제를 깨닳음. model을 저장함에 있어서 등호를 하나 빼먹어서 성능 좋은 모델을 저장하지 못했음.
+            </pre>
         </div>
         <div id="cv">
-            OpenCV: Vision Processing
+            OpenCV: Vision Processing<br>
+            <pre>
+                 호랑이, 사자, 치타, 표범을 binary classification하기. 호랑이와 다른 동물.
+                - frame work: pytorch, model: custum VGG16
+                - 지난번에 사용한 model을 transfer learning 할 수 있는 방법을 알았기 때문.
+
+                 데이터 전처리를 할 때, 호랑이는 아니지만 호랑이의 특징을 가지고 있는 데이터를 호랑이가 아니라고 학습을 시켜야했음.
+            </pre>
         </div>
         <div id="nlp">
-            Natural Language Processing
+            Natural Language Processing<br>
+            <pre>
+                 네이버 지식in 크롤링. 지식in의 본문 내용을 통해 정신과, 이비인후과, 안과, 내과 중 1곳을 조심스럽게 추천하기.
+                - frame work: pytorch, model: basic lstm
+
+                 개념도 어려웠던 project...  웹크롤링이 어려웠음... 인당 10000개의 데이터를 들고와서 팀원과 공유하고 시작.
+                stopwor의 문제도 있었음. 어쩐걸 제거 해야할지...
+            </pre>
         </div>
     </section>
     <aside>SIDE</aside>
