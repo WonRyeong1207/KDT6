@@ -3,6 +3,11 @@ body {
     background-color: rgb(4, 24, 42);
     font-family: FiraCode;
     font-weight: lighter;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
 }
 
 .us {
@@ -13,12 +18,36 @@ body {
     color: pink;
 }
 
+.su {
+    color: rgb(250, 190, 80);
+}
+
+.un {
+    color: rgb(255, 192, 224);
+}
+
 .link {
     color: rgb(235, 224, 255);
 }
 
 .highlight {
     color: rgb(255, 255, 255);
+}
+
+.high_r {
+    color: red;
+}
+
+.high_b {
+    color: blue;
+}
+
+.high_y {
+    color: yellow;
+}
+
+.high_g {
+    color: green;
 }
 
 ul li {
