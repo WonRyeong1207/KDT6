@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    a li{
+        float: left;
+        padding: 5px 20px;
+        background-color: lightskyblue;
+        font-weight: 600;
+    }
+    ul{
+        list-style: none;
+        min-width: 900px;
+    }
+
+    a:link{
+        text-decoration: none;
+        color: white;
+    }
+    a:visited{
+        text-decoration: none;
+        color: white;
+    }
+    a:active{
+        text-decoration: none;
+        color: darkgray;
+    }
+    li:hover{
+        background-color: orangered;
+    }
+
+    .bar{
+        height: 31px;
+        width: 100%;
+        background-color: lightskyblue;
+    }
+
+</style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="bar">
+    <ul>
+        <!-- _parent가 아니면 아이프레임 안에서 링크 이동이 일어난다. -->
+        <!-- main.html에서 실행을 하고 HTML을 클릭하면 -> subPage01.html로 이동 -->
+        <a href="subPage01.html" target="_parent"><li>HTML</li></a>
+        <a href="subPage02.html" target="_parent"><li>CSS</li></a>
+        <a href="subPage03.html" target="_parent"><li>JAVA-SCRIPT</li></a>
+        <a href="#"><li>J-QUERY</li></a>
+        <a href="#"><li>BOOT STRAP</li></a>
+    </ul>
+</div>, initial-scale=1.0">
+</body>
+</html>
