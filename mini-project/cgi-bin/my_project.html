@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+    <style>
+        * {
+            font-family: FiraCode;
+            font-weight: lighter;
+            color: white;
+            text-align: center;
+        }
+        
+        html {height: 100%;}
+        body {
+            height: 100vh; 
+            width: 100vw;
+            background-color: rgb(1, 1, 54);
+        }
+
+        #header, header {
+            background-color: rgb(25, 10, 71);
+            height: 20vh;
+        }
+
+        #menu, nav {
+            background-color:rgb(25, 10, 71);
+            width: 20%;
+            height: 90vh;
+            float: left;
+        }
+
+        #center, section {
+            background-color: rgb(25, 10, 71);
+            display: inline-block;
+            width: 80%;
+            height: 90vh;
+            
+        }
+
+        #sidem, aside {
+            background-color: rgb(25, 10, 71);
+            width: 20%;
+            height: 90vh;
+            float: right;
+        }
+
+        #footer, footer {
+            background-color: rgb(1, 1, 54);
+            clear: both;
+        }
+
+        ul li {
+            list-style: url('../../EX_WEB/image/free-icon-pumpkin-8599700.png');
+        }
+
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(172, 172, 255);
+        }
+
+        #ml, #dl, #cv, #nlp {
+            display: none;
+        }
+
+        pre {
+            text-align: left;
+        }
+
+        iframe{
+            width: 900px;
+            height: 130%;
+        }
+
+        span, label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="header">HEADER</div>
+    <div id="menu">MENU</div>
+    <div id="center">CENTER</div>
+    <div id="side">SIDE</div>
+    <div id="footer">FOOTER</div> -->
+
+    <header>
+        <h1>My Project Demo</h1>
+        
+        <a href="https://github.com/WonRyeong1207/KDT6" title="git.link" target="_blank">
+            progect by Ji-Won Hwang @hadesdis1207
+        </a>
+        
+    </header>
+    <nav>
+        <label>Mini Project</label>
+        <ul>
+            <li onclick="changedisplay('ml')"><a href="http://localhost:8080/cgi-bin/webDetectMBTI.py" target="subFrame" title="Machine Learning">Machine Learning</a></li>
+            <li onclick="changedisplay('dl')"><a href="http://localhost:8080/cgi-bin/webDetectImage_cnn.py" target="subFrame" title="Deep Learning">Deep Learning</a></li>
+            <li onclick="changedisplay('cv')"><a href="http://localhost:8080/cgi-bin/webImage_cnn.py" target="subFrame" title="OpenCV: Vision Processing"">OpenCV: Vision Processing</a></li>
+            <li onclick="changedisplay('nlp')"><a href="http://localhost:8080/cgi-bin/webDetectText.py" target="subFrame" title="Natural Language Processing">Natural Language Processing</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div id="title">
+            <span>보고 싶은 프로젝트를 선택하세요</span>
+        </div>
+        <div id="ml">
+            <span>Machine Learning</span><br>
+            <pre>
+             트위터 사용자들의 mbti를 E/I, N/S, T/F, J/P의 4가지의 큰 분류로 binary classification.
+            - frame work: skicit-learn, model: SVM
+            - model 선정 이유: 데이터의 feature가 많았는데 다차원에서도 성능을 잘 보여주는 모델이기 때문에 선정함.
+
+             하지만 간과한 것이 하나가 있었음. 데이터의 불균형도 문제이긴 했지만 feature와 label/target의 상관관계가 매우 낮았음.
+            낮은 상관관계를 가지고 있었기 때문에 규칙을 찾아내기 어려웠고 성능이 좋지 못했음.
+            </pre>
+        </div>
+        <div id="dl">
+            <span>Deep Learning</span><br>
+            <pre>
+            10 종류의 동물사진을 넣으면 사진에서 특징을 추출해서 multi classification.
+            - frame work: pytorch, model: custum VGG16
+            - model 선정 이유: CNN 모델 중에서 적은 수의 weight를 사용하기 때문에 다른 model 보다 결과를 빠르게 보여줄거라 판단.
+
+            Transfer Learning을 알았다면 빠르게 뭔가를 더 시도 해봤을 아쉬운 model. 이때부터 웹구현을 시작함.
+            발표때는 웹 시연을 못 했지만 추후에 시도를 하고 문제를 깨닳음. model을 저장함에 있어서 등호를 빼먹어서 성능 좋은 모델을 저장 못함.
+            현재의 모델은 이러한 문제점을 해결한 모델.
+            </pre>
+        </div>
+        <div id="cv">
+            <span>OpenCV: Vision Processing</span><br>
+            <pre>
+             호랑이, 사자, 치타, 표범을 binary classification하기. 호랑이와 다른 동물.
+            - frame work: pytorch, model: custum VGG16
+            - 지난번에 사용한 model을 transfer learning 할 수 있는 방법을 알았기 때문.
+
+             데이터 전처리를 할 때, 호랑이는 아니지만 호랑이의 특징을 가지고 있는 데이터를 호랑이가 아니라고 학습을 시켜야했음.
+            </pre>
+        </div>
+        <div id="nlp">
+            <span>Natural Language Processing</span><br>
+            <pre>
+             네이버 지식in 크롤링. 지식in의 본문 내용을 통해 정신과, 이비인후과, 안과, 내과 중 1곳을 조심스럽게 추천하기.
+            - frame work: pytorch, model: basic lstm
+
+             개념도 어려웠던 project...  웹크롤링이 어려웠음... 인당 10000개의 데이터를 들고와서 팀원과 공유하고 시작.
+            stopword의 문제도 있었음. 어쩐걸 제거 해야할지...
+             지난번 웹시연시 있엇던 약간의 문제를 해결함. 그럼에도 '정신과'의 확률이 높은것은 이유를 알 수 없음.
+            </pre>
+        </div>
+        <iframe name="subFrame" frameborder="0" , scrolling="no"></iframe>
+    </section>
+    <!-- <aside>SIDE</aside> -->
+    <footer>
+        <blockquote
+            cite="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700">
+            <p>
+                사용한 icon 출처입니다.
+            </p>
+            <a href="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700"
+                title="호박 아이콘" target="_blank">호박 아이콘 제작자: ppangman - Flaticon</a>
+        </blockquote>
+    </footer>
+    <script>
+        function changedisplay(disid) {
+            document.getElementById("title").style.display = "none";
+            document.getElementById("ml").style.display = "none";
+            document.getElementById("dl").style.display = "none";
+            document.getElementById("cv").style.display = "none";
+            document.getElementById("nlp").style.display = "none";
+            document.getElementById(disid).style.display = "block";
+        }
+    </script>
+</body>
+</html>
