@@ -215,10 +215,10 @@ if inputs != "":
     data_tf = tf_scaler.transform(data_df)
     data_pj = pj_scaler.transform(data_df)
     
-    pre_ei = ei_model.predict(data_ei)[0]
-    pre_ns = ns_model.predict(data_ns)[0]
-    pre_tf = tf_model.predict(data_tf)[0]
-    pre_pj = pj_model.predict(data_pj)[0]
+    pre_ei = ei_model.predict(data_ei)[0].upper()
+    pre_ns = ns_model.predict(data_ns)[0].upper()
+    pre_tf = tf_model.predict(data_tf)[0].upper()
+    pre_pj = pj_model.predict(data_pj)[0].upper()
     
     msg = f'{pre_ei}{pre_ns}{pre_tf}{pre_pj}'
 
