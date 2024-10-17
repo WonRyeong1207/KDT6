@@ -25,6 +25,9 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import os
+import PIL
+from PIL import Image
 
 import torch
 import torch.nn as nn
@@ -35,14 +38,13 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import Dataset, DataLoader, random_split
 
 import torchmetrics
-from torchmetrics.classification import F1Score, Accuracy
+from torchmetrics.classification import F1Score, Accuracy, ConfusionMatrix, MulticlassAccuracy, MulticlassF1Score, MulticlassConfusionMatrix
 
 import sklearn
-# from sklearn.model_selection import train_test_split
-# from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score
 
 import torchvision
+import torchvision.models as models
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
@@ -166,16 +168,16 @@ def make_dataset_cpu():
     img_datasets = ImageFolder(root='./data/', transform=img_transforms)
     
     # train & test split
-    # train : test : 8 : 2
-    train_size = int(0.8 * len(img_datasets))
+    # train : test = 9 : 1
+    train_size = int(0.9 * len(img_datasets))
     test_size = len(img_datasets) - train_size
     train_datasets, test_datasets = random_split(img_datasets, [train_size, test_size])
     
     # train & validation split
-    # train : validation = 8 : 2
-    train_size = int(0.8 * len(train_datasets))
-    val_size = len(train_datasets) - train_size
-    train_datasets, val_datasets = random_split(train_datasets, [train_size, val_size])
+    # train : validation = 9 : 1
+    train_size_2 = int(0.9 * len(train_datasets))
+    val_size = len(train_datasets) - train_size_2
+    train_datasets, val_datasets = random_split(train_datasets, [train_size_2, val_size])
     
     return train_datasets, test_datasets, val_datasets
 
@@ -230,8 +232,6 @@ class DctDataset(Dataset):
         return image, label
 
 
-
-
     
 # model class
 # ----------------------------------------------------------------
@@ -241,31 +241,6 @@ class DctDataset(Dataset):
 # parameters: None or transfer learning?
 # attribute field: input_layer, hidden_layer, output_layer
 # class function: create structure, forward leanring model
-# class structure
-#   - input layer: input node 26, output node 20, activation function: ReLU
-#   - hidden layer: input node 20, output node 15, activation function: ReLU
-#   - hidden layer: input node 15, output node 10, activation function: ReLU
-#   - output layer: input node 10, output node 4, activation function: None
-
-# class LangMCModel(nn.Module):
-#     def __init__(self):
-#         super().__init__()
-        
-#         self.input_layer = nn.Linear(26, 20)
-#         # self.hidden_layer_1 = nn.Linear(20, 15)
-#         # self.hidden_layer_2 = nn.Linear(15, 10)
-#         self.hidden_layer = nn.Linear(20, 10)
-#         self.output_layer = nn.Linear(10, 4)
-        
-        
-#     def forward(self, x):
-#         y = F.relu(self.input_layer(x))
-#         # y = F.relu(self.hidden_layer_1(y))
-#         # y = F.relu(self.hidden_layer_2(y))
-#         y = F.relu(self.hidden_layer(y))
-#         y = self.output_layer(y)
-        
-#         return y
     
 # create vgg16 model
 class VGG16Model(nn.Module):
@@ -344,7 +319,33 @@ class VGG16Model(nn.Module):
 
   def forward(self, x):
     return self.model(x)
+
+
+# transfer vgg16 model
+class CustomVgg16MCModel(nn.Module):
+    def __init__(self):
+        super(CustomVgg16MCModel, self).__init__()
+        self.vgg16 = models.vgg16(weights=models.VGG16_Weights.IMAGENET1K_V1)
+        self.features = self.vgg16.features
+        self.avgpool = self.vgg16.avgpool
+        self.classifier = self.vgg16.classifier
+        self.custom_layer = nn.Sequential(
+            nn.ReLU(),
+            nn.Linear(1000, 500),
+            nn.ReLU(),
+            nn.Linear(500, 50),
+            nn.ReLU(),
+            nn.Linear(50, 10)
+        )
     
+    def forward(self, x):
+        y = self.features(x)
+        y = self.avgpool(y)
+        y = torch.flatten(y, 1)
+        y = self.classifier(y)
+        y = self.custom_layer(y)
+        return y
+
     
 # vlidation & test function
 # ----------------------------------------
@@ -354,7 +355,7 @@ class VGG16Model(nn.Module):
 # ----------------------------------------
 # must not update weight & bais
     
-def testing(model, X_ts, y_ts):
+def testing_cuda(model, X_ts, y_ts):
     """
     validation & test function
     - must not update weight & bais
@@ -450,7 +451,7 @@ def predict_web(model, image_tensor):
 # - function return: loss, score, pred
 # - optimizer: optima.Adam
 
-def training(model, train_loader, val_loader, epochs, lr, batch_size=32, threshold=0.0001):
+def training_cuda(model, train_loader, val_loader, epochs, lr, batch_size=32, threshold=0.0001):
     """
     model training function
     ---
@@ -607,7 +608,7 @@ def training(model, train_loader, val_loader, epochs, lr, batch_size=32, thresho
             torch.save(model.state_dict(), save_param)
             torch.save(model, save_model)
         elif len(train_val_score['val']) > 1:
-            if train_val_score['val'][-1] > max(train_val_score['val']):
+            if train_val_score['val'][-1] >= max(train_val_score['val']):
                 print("saved model")
                 torch.save(model.state_dict(), save_param)
                 torch.save(model, save_model)
@@ -638,6 +639,118 @@ def training(model, train_loader, val_loader, epochs, lr, batch_size=32, thresho
             break
         
     return train_val_loss, train_val_score #, train_val_pred
+
+
+def testing(model, test_images, test_labels):
+    # test_labels = test_labels.unsqueeze(1).float()  # 차원이 맞지 않기 때문에 차원 추가
+    # test_labels = torch.nn.functional.one_hot(test_labels, num_classes=10).float()
+
+    
+    with torch.no_grad():
+        pred = model(test_images)
+        loss = nn.CrossEntropyLoss()(pred, test_labels)
+        acc = MulticlassAccuracy(num_classes=10)(pred, test_labels)
+        f1 = MulticlassF1Score(num_classes=10)(pred, test_labels)
+        mat = MulticlassConfusionMatrix(num_classes=10)(pred, test_labels)
+        
+    return loss, acc, f1, mat
+
+
+def training(model, train_datasets, val_datasets, epochs=100, lr=0.001, batch_size=64, patience=5):
+    loss_dict = {'train':[], 'val':[]}
+    acc_dict = {'train':[], 'val':[]}
+    f1_dict = {'train':[], 'val':[]}
+    
+    optimizer = optima.Adam(model.parameters(), lr=lr)
+    train_data_dl = DataLoader(train_datasets, batch_size=batch_size, shuffle=True)
+    val_data_dl = DataLoader(val_datasets, batch_size=100, shuffle=True)
+    scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='min')
+    
+    save_param = './model/CNN_mc_custom_clf_params.pth'
+    save_model = './model/CNN_mc_custom_clf_model.pth'
+    
+    train_batch_cnt = len(train_datasets) / batch_size
+    val_batch_cnt = len(val_datasets) / 100
+    
+    for epoch in range(1, epochs+1):
+        total_t_loss, total_t_acc, total_t_f1 = 0, 0, 0
+        total_v_loss, total_v_acc, total_v_f1 = 0, 0, 0
+        
+        model.train()
+        for images, labels in train_data_dl:
+            # batch_cnt = len(train_datasets) / batch_size
+            # labels = labels.unsqueeze(1).float()
+            # labels = torch.nn.functional.one_hot(labels, num_classes=10).float()
+
+            pred = model(images)
+            
+            loss = nn.CrossEntropyLoss()(pred, labels)
+            total_t_loss += loss
+            
+            acc = MulticlassAccuracy(num_classes=10)(pred, labels)
+            total_t_acc += acc
+            
+            score = MulticlassConfusionMatrix(num_classes=10)(pred, labels)
+            total_t_f1 += score
+            
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+        
+        model.eval()
+        with torch.no_grad():
+            for images, labels in val_data_dl:
+                # batch_cnt = len(val_datasets) / batch_size
+                v_loss, v_acc, v_score, _ = testing(model, images, labels)
+
+                total_v_loss += v_loss
+                total_v_acc += v_acc
+                total_v_f1 += v_score
+        
+        train_loss = (total_t_loss/train_batch_cnt).item()
+        train_acc = (total_t_acc/train_batch_cnt)
+        train_score = (total_t_f1/train_batch_cnt).item()
+        val_loss = (total_v_loss/val_batch_cnt).item()
+        val_acc = (total_v_acc/val_batch_cnt)
+        val_score = (total_v_f1/val_batch_cnt).item()
+        
+        loss_dict['train'].append(train_loss)
+        loss_dict['val'].append(val_loss)
+        acc_dict['train'].append(train_acc)
+        acc_dict['val'].append(val_acc)
+        f1_dict['train'].append(train_score)
+        f1_dict['val'].append(val_score)
+
+        if epoch%5 == 0:
+            print('---check point---')
+            print(f"[{epoch:5}/{epochs:5}]  [Train]       loss: {train_loss:.6f}, score: {train_score*100:.4f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]  loss: {val_loss:.6f}, score: {val_score*100:.4f} %\n")
+            
+        if len(acc_dict['val']) == 1:
+            print("saved first")
+            print(f"[{epoch:5}/{epochs:5}]  [Train]       loss: {train_loss:.6f}, score: {train_score*100:.4f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]  loss: {val_loss:.6f}, score: {val_score*100:.4f} %\n")
+            torch.save(model.state_dict(), save_param)
+            torch.save(model, save_model)
+        else:
+            if acc_dict['val'][-1] >= max(acc_dict['val']):
+                print(f"[{epoch:5}/{epochs:5}]  saved model")
+                print(f"[{epoch:5}/{epochs:5}]  [Train]       loss: {train_loss:.6f}, score: {train_score*100:.4f} %")
+                print(f"[{epoch:5}/{epochs:5}]  [Validation]  loss: {val_loss:.6f}, score: {val_score*100:.4f} %\n")
+                torch.save(model.state_dict(), save_param)
+                torch.save(model, save_model)
+                
+        scheduler.step(val_loss)
+        
+        if scheduler.num_bad_epochs >= scheduler.patience:
+            print('성능 및 손실의 개선이 없어서 학습을 중단합니다.\n')
+            print(f"[{epoch:5}/{epochs:5}]  [Train]       loss: {train_loss:.6f}, score: {train_score*100:.4f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Validation]  loss: {val_loss:.6f}, score: {val_score*100:.4f} %")
+            print(f"[{epoch:5}/{epochs:5}]  [Train] accuracy: {train_acc*100:.4f} %, [Validation] accuracy:{val_acc*100:.4f} %")
+            break
+        
+    return loss_dict, acc_dict, f1_dict
+
 
 
 # 그림 그리는 함수
