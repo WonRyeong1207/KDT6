@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCV: vision</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="./static/css/project.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Tiger Binary classification</h1>
+        <div>
+            호랑이 이진 분류입니다.<br>
+            호랑이 특징은 잘 분류하는 모델입니다.
+        </div><br>
+        <!-- form action 경로를 'webImage_cnn.py'로 변경 -->
+        <form enctype="multipart/form-data" action="/cgi-bin/webImage_cnn.py" method="POST">
+            <input type="file" name="imageInput" accept="image/*" class="question-input">
+            <input type="submit" value="Classify" class="submit-btn">
+        </form>
+        <div class="answer-section">
+            {{msg}}
+            <img src='data:image/jpeg;base64,{img_data}' alt='Uploaded Image' class="image-display"><br>
+        </div>
+    </div>
+</body>
+</html>
