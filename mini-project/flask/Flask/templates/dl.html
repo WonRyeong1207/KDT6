@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="./static/css/project.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Animal Image Classifier</h1>
+        <div>
+            소, 개, 거미, 나비, 말, 양, 고양이, 코끼리, 닭, 다람쥐 등의 10가지 동물을 분류합니다.
+        </div><br>
+        <form enctype="multipart/form-data" action="/cgi-bin/webDetectImage_cnn.py" method="POST">
+            <input type="file" name="imageInput" accept="image/*" class="question-input">
+            <input type="submit" value="Classify" class="submit-btn">
+        </form>
+        <div class="answer-section">
+            {{msg}}
+            <img src='data:image/jpeg;base64,{img_data}' alt='Uploaded Image' class="image-display"><br>
+        </div>
+    </div>
+</body>
+</html>

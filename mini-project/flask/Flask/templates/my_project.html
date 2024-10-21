@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="./static/css/main.css"> -->
+</head>
+<body>
+    <!-- <div id="header">HEADER</div>
+    <div id="menu">MENU</div>
+    <div id="center">CENTER</div>
+    <div id="side">SIDE</div>
+    <div id="footer">FOOTER</div> -->
+
+    <header>
+        <h1>My Project Demo</h1>
+        <a href="{{url_for("main")}}" title="Home">progect by Ji-Won Hwang </a>
+        
+        <a href="https://github.com/WonRyeong1207/KDT6" title="git.link" target="_blank">
+            git_@hadesdis1207 
+        </a>
+        <a href="https://www.notion.so/KDT-Mini-Project-1267e1b47c9e80079a37d56a879c62c8?pvs=4" title="notion.link" target="_blank">
+            notion_@hadesdis1207
+        </a>
+        
+    </header>
+    <nav>
+        <label>Mini Project</label>
+        <ul>
+            <li onclick="changedisplay('ml')"><a href="{{url_for('ml')}}" target="subFrame" title="Machine Learning">Machine Learning</a></li>
+            <li onclick="changedisplay('dl')"><a href="{{url_for('dl')}}" target="subFrame" title="Deep Learning">Deep Learning</a></li>
+            <li onclick="changedisplay('cv')"><a href="{{url_for('vision')}}" target="subFrame" title="OpenCV: Vision Processing">OpenCV: Vision Processing</a></li>
+            <li onclick="changedisplay('nlp')"><a href="{{url_for('nlp')}}" target="subFrame" title="Natural Language Processing">Natural Language Processing</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div id="title">
+            <span>메인 화면 입니다.</span><br>
+            보고 싶은 프로젝트를 선택하세요<br>
+
+            <!-- <pre>
+            - 왼쪽의 리스트를 선택하면 해당 프로젝트를 볼 수 있습니다.
+            </pre> -->
+        </div>
+        <div id="ml">
+            <span>Machine Learning</span><br>
+            <pre>
+             트위터 사용자들의 mbti를 E/I, N/S, T/F, J/P의 4가지의 큰 분류로 binary classification.
+            - frame work: skicit-learn, model: SVM
+            - model 선정 이유: 데이터의 feature가 많았는데 다차원에서도 성능을 잘 보여주는 모델이기 때문에 선정함.
+
+             하지만 간과한 것이 하나가 있었음. 데이터의 불균형도 문제이긴 했지만 feature와 label/target의 상관관계가 매우 낮았음.
+            낮은 상관관계를 가지고 있었기 때문에 규칙을 찾아내기 어려웠고 성능이 좋지 못했음.
+             모델의 성능은 약 55 % 의 정확도를 가짐. 이를 개선하려면 데이터를 처음부터 다시 만져야하는 문제점이 있음.
+            </pre>
+        </div>
+        <div id="dl">
+            <span>Deep Learning</span><br>
+            <pre>
+            10 종류의 동물사진을 넣으면 사진에서 특징을 추출해서 multi classification.
+            - frame work: pytorch, model: custum VGG16
+            - model 선정 이유: CNN 모델 중에서 적은 수의 weight를 사용하기 때문에 다른 model 보다 결과를 빠르게 보여줄거라 판단.
+
+            Transfer Learning을 알았다면 빠르게 뭔가를 더 시도 해봤을 아쉬운 model. 이때부터 웹구현을 시작함.
+            발표때는 웹 시연을 못 했지만 추후에 시도를 하고 문제를 깨닳음. model을 저장함에 있어서 등호를 빼먹어서 성능 좋은 모델을 저장 못함.
+            현재의 모델은 이러한 문제점을 해결한 모델로 성은 약 90 % 의 정확도를 보여줌
+            </pre>
+        </div>
+        <div id="cv">
+            <span>OpenCV: Vision Processing</span><br>
+            <pre>
+             호랑이, 사자, 치타, 표범을 binary classification하기. 호랑이와 다른 동물.
+            - frame work: pytorch, model: custum VGG16
+            - 지난번에 사용한 model을 transfer learning 할 수 있는 방법을 알았기 때문.
+
+             데이터 전처리를 할 때, 호랑이는 아니지만 호랑이의 특징을 가지고 있는 데이터를 호랑이가 아니라고 학습을 시켜야했음.
+             성능은 99 % 의 정확도를 가지고 있음. 처음 프로젝트 목표가 무늬를 구별하는 거였기 때문에 그것을 생각하면 잘 나온
+            모델이지만 호랑이 탈을 뒤집어 쓴 동물의 분류나 캐릭터는 분류를 못함. 이는 train을 다시 해야하는 부분임.
+            </pre>
+        </div>
+        <div id="nlp">
+            <span>Natural Language Processing</span><br>
+            <pre>
+             네이버 지식in 크롤링. 지식in의 본문 내용을 통해 정신과, 이비인후과, 안과, 내과 중 1곳을 조심스럽게 추천하기.
+            - frame work: pytorch, model: basic lstm
+
+             개념도 어려웠던 project...  웹크롤링이 어려웠음... 인당 10000개의 데이터를 들고와서 팀원과 공유하고 시작.
+            stopword의 문제도 있었음. 어쩐걸 제거 해야할지...
+             지난번 웹 시연시 있었던 약간의 문제를 해결함. 첫번째 텐서의 확률 값이 아닌 문장 전체의 텐서 중에서 확률값이
+            가장 높은 것을 채택하는 방식으로 함수를 수정함.
+
+             모델의 성능은 약 97% 의 정확도를 보임. '아프다', '아픈데..' 등등을 넣으면 무조건 적으로 '정신과' 라고
+            하는데 이는 stopwords의 제거가 거의 없었던 점도 있지만 '아프다'='정신의 문제가 있다'라고 해석되는 인터넷
+            상에서의 은어의 가능성을 미쳐 발견하지 못한 것도 요인임.
+            </pre>
+        </div>
+        <iframe name="subFrame" frameborder="0" , scrolling="no"></iframe>
+    </section>
+    <!-- <aside>SIDE</aside> -->
+    <footer>
+        <blockquote
+            cite="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700">
+            <p>
+                사용한 icon 출처입니다.
+            </p>
+            <a href="https://www.flaticon.com/kr/free-icon/pumpkin_8599700?term=halloween&page=1&position=54&origin=search&related_id=8599700"
+                title="호박 아이콘" target="_blank">호박 아이콘 제작자: ppangman - Flaticon</a>
+        </blockquote>
+    </footer>
+    <script>
+        function changedisplay(disid) {
+            document.getElementById("title").style.display = "none";
+            document.getElementById("ml").style.display = "none";
+            document.getElementById("dl").style.display = "none";
+            document.getElementById("cv").style.display = "none";
+            document.getElementById("nlp").style.display = "none";
+            document.getElementById(disid).style.display = "block";
+        }
+    </script>
+</body>
+</html>

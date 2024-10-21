@@ -1,0 +1,86 @@
+* {
+    font-family: FiraCode;
+    font-weight: lighter;
+    color: white;
+    text-align: center;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(1, 1, 54);
+}
+
+#header,
+header {
+    background-color: rgb(25, 10, 71);
+    height: 20vh;
+}
+
+#menu,
+nav {
+    background-color: rgb(25, 10, 71);
+    width: 20%;
+    height: 90vh;
+    float: left;
+}
+
+#center,
+section {
+    background-color: rgb(25, 10, 71);
+    display: inline-block;
+    width: 80%;
+    height: 90vh;
+
+}
+
+#sidem,
+aside {
+    background-color: rgb(25, 10, 71);
+    width: 20%;
+    height: 90vh;
+    float: right;
+}
+
+#footer,
+footer {
+    background-color: rgb(1, 1, 54);
+    clear: both;
+}
+
+ul li {
+    list-style: url('../static/image/free-icon-pumpkin-8599700.png');
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(172, 172, 255);
+}
+
+#ml,
+#dl,
+#cv,
+#nlp {
+    display: none;
+}
+
+pre {
+    text-align: left;
+}
+
+iframe {
+    width: 900px;
+    height: 110%;
+}
+
+span,
+label {
+    font-weight: bold;
+}
