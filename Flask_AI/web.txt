@@ -1,0 +1,9 @@
+이 친구는 폴더나 파일 명이 정해져 있어..
+
+파일명을 바꿔서 쓰고 싶다면 환경변수를 바꿔주면 되다는데... 넘 귀찮은 것 아닌가...
+
+
+conda install -c conda-forge flask
+conda install python-dotenv
+
+.env 파일을 만들어서 설정을 미리 해둠으로 skip 가능!!

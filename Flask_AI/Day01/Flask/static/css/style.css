@@ -1,0 +1,10 @@
+body {
+    background-color: skyblue;
+    font-family: FiraCode;
+    font-weight: lighter;
+    text-align: center;
+}
+
+ul, li {
+    text-align: left;
+}
