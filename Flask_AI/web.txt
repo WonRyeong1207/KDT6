@@ -7,3 +7,10 @@ conda install -c conda-forge flask
 conda install python-dotenv
 
 .env 파일을 만들어서 설정을 미리 해둠으로 skip 가능!!
+
+conda install -c conda-forge flask-migrate
+conda install -c conda-forge flask-sqlalchemy <- 의존성때문에 설치됨.
+
+conda install conda-forge::flask-migrate
+conda install conda-forge::flask-sqlalchemy
+
