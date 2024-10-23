@@ -1,0 +1,46 @@
+body {
+    background-color: skyblue;
+    font-family: FiraCode;
+    font-weight: lighter;
+    text-align: center;
+}
+
+ul, li {
+    text-align: left;
+}
+
+#mse, .mse {
+    color: red;
+}
+
+table, #content {
+    text-align: left;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: rgb(156, 0, 195);
+}
+
+.header {
+    background-color: ivory;
+}
+
+.title {
+    font-weight: normal;
+    font-size: x-large;
+    color: darkblue;
+    text-align: left;
+}
