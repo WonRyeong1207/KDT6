@@ -112,7 +112,13 @@ def ko_food():
             text_me_str = str(text)
             
             # 'feature' 칼럼에서 text_me_str를 포함하는 레코드 가져오기
-            food_list = korean_food.query.filter(korean_food.feature.contains(text_me_str)).all()
+            # food_list = korean_food.query.filter(korean_food.feature.contains(text_me_str)).all()
+            
+            # 'feature' 칼럼에서 text_me_str를 포함하고, level이 pred_me와 같은 레코드 가져오기
+            food_list = korean_food.query.filter(
+                korean_food.feature.contains(text_me_str),
+                korean_food.level_code == pred_me  # 레벨 체크
+            ).all()
 
             # 결과 출력
             pred = LABEL_TRANSLATE[pred_me]
