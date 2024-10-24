@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Language Processing</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h2>질문을 입력하세요:</h2>
+        <div>
+            키워드로 음식 난이도별로 음식 추천합니다.<br> 
+        </div><br>
+        <form method="post">
+            <textarea name="text" class="question-input" rows="10" cols="40">{{text}}</textarea>
+            <br>
+            <button type="submit" class="submit-btn">질문하기</button>
+        </form>
+    
+        <div class="answer-section">
+            <h3>답변:</h3>
+            <p>{{msg}}의 요리를 추천합니다.</p>
+        </div><br>
+        <div class="answer-section">
+            <h3>{{msg}} 난이도의 레시피입니다.</h3>
+            {% if food_list %}
+            <ul>
+                {% for ko_food  in food_list%}
+                    <a href="{{ko_food.link}}" title="{{ko_food.title}}" target="_blank"><li>{{ko_food.subtitle}} {{ko_food.title}}</li></a>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <!-- <p>{{msg}} 난이도의 레시피가 없습니다.</p> -->
+                {% if msg != "난이도" %}
+                    <p>{{ msg }} 난이도의 레시피가 없습니다.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>
