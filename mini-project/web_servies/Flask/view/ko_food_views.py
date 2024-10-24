@@ -42,11 +42,11 @@ def transform(text_data, vocab, type_='me'):
                     sent.append(vocab['OOV'])
         
         current_len = len(sent)
-        if current_len < 50:
-            sent.extend([0]*(50-current_len))
+        if current_len < 120:
+            sent.extend([0]*(120-current_len))
         else:
             # sent = sent[current_len-len_data:]
-            sent = sent[:50]
+            sent = sent[:120]
             
     elif type_ == 'others':
         token_list = []
@@ -74,7 +74,7 @@ def transform(text_data, vocab, type_='me'):
     
     return sent
 
-pklfile_me = r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\web_servies\model\bc_lstm_clf_model.pth'
+pklfile_me = r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\web_servies\model\bc_lstm_clf_model_2.pth'
 
 n_vocab_me = len(vocab_me)  # 어휘 사전의 크기s
 
