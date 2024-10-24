@@ -1,0 +1,23 @@
+오늘은 본격적으로 데이터 베이스와 연결하는 것을 진행할 것임
+
+데이터를 파일로 저장하면 저장소 문제도 있고 조회가 ㅇ어렵기 때문에 데이터 베이스를 사요.
+또한 데이터베이스의 종류는 다양하니 그걸 두루두둘 쓸수 있는 라이브러리를 ㅅㅓㄹ치함.
+대신 가저온 행은 class 형식이니까 models 폴더에서 해당 클래스를 선언해줬음.
+
+세션이란? 서버단위에서 정보를 가지고 있는것. http가 정보를 가지고 있지 않기 때문에(다 지워버림) 로그인을 했다면 그 정보를 가지고 있음.
+  시간이 오래 지나면 '세션이 만료되었습니다'라며 재로그인을 시킴. 로그아웃 전까지 또는 일정 시간동안만 사용자의 정보를 가지고 있음.
+
+DB 연결 방법은 config.py 파일생성 후 `flask --help`했을때 db 명령어가 생겼다면... `flask db init`하고
+models 폴더에 models.py에서 필요한 테이블의 class를 만든 후 `flask db migrate`, `flask db upgrade`로 테이블 생성된 것을 확인!!
+
+
+SQLAlchemy의 ORM 기능을 사용
+```
+    question1 = Question(subject='질문있습니다.', content='파이썬이 뭔가요?')
+    db.session.add(question1)
+    # 실제로 반영을 하려면 commit을 해줘야함. DataBase마다 다름
+    db.session.commit()
+    # DataBase에 들어온 것을 보려면
+    flask db upgrade
+```
+이렇게 간단하게 입력가능

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>question list</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <style>
+        body {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    {% block content%}
+    {% endblock %}
+    
+    <h3>질문 게시판</h3>
+    <!--table-->
+    <span class="title">테이블 형식</span><br>
+    <table border="1">
+        <col style="width: 80px;">
+        <colgroup span="2" style="width: 300px;"></colgroup>
+        <col style="width: 100px">
+        <tr class="header">
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>날짜</th>
+        </tr>
+        {% if question_list %}
+            {% for question in question_list %}
+                <tr>
+                    <td><a href="{{url_for('quest.detail', q_id=question.id)}}" title="{{question.id}}번째 질문" target="_blank">{{question.id}}</a></td>
+                    <td><a href="{{url_for('quest.detail', q_id=question.id)}}" title="{{question.id}}번째 질문" target="_blank">{{question.subject}}</a></td>
+                    <td><a href="{{url_for('quest.detail', q_id=question.id)}}" title="{{question.id}}번째 질문" target="_blank">{{question.content}}</a></td>
+                    <td><a href="{{url_for('quest.detail', q_id=question.id)}}" title="{{question.id}}번째 질문" target="_blank">{{question.create_date}}</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td class='mse' colspan="3">등록된 질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    <br><br>
+
+    <!--list-->
+    <span class="title">리스트 형식</span><br>
+    {% if question_list %}
+        <ol>
+            {% for question in question_list %}
+                <a href="{{url_for('quest.detail', q_id=question.id)}}" title="{{question.id}}번째 질문" target="_blank"><li>{{question.subject}}: {{question.content}}</li></a>
+            {% endfor %}
+        </ol>
+        {% else %}
+            <p class='mse'>등록된 질문이 없습니다.</p>
+    {% endif %}
+</body>
+
+</html>
