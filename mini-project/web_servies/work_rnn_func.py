@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import os
 import re
 import ast
+import pickle
 
 import torch
 import torch.nn as nn
@@ -333,7 +334,11 @@ def create_vocab(token_freq):
     vocab_df = pd.DataFrame(columns=['key', 'value'])
     vocab_df['key'] = data_vocab.keys()
     vocab_df['value'] = data_vocab.values()
-    vocab_df.to_csv('./psychiatry_vocab.csv', encoding='utf-8', index=False)
+    # vocab_df.to_csv('./psychiatry_vocab.csv', encoding='utf-8', index=False)
+    
+    with open('koran_vocab.pkl', 'wb') as f:
+        pickle.dump(data_vocab, f)
+    
     return data_vocab
 
 
@@ -620,8 +625,8 @@ def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32,
     val_data_dl = DataLoader(val_dataset, batch_size=100, shuffle=True)
     scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
     
-    save_param = './model/bc_lstm_clf_params.pth'
-    save_model = './model/bc_lstm_clf_model.pth'
+    save_param = './model/bc_lstm_clf_params_2.pth'
+    save_model = './model/bc_lstm_clf_model_2.pth'
     
     train_batch_cnt = len(train_dataset) // batch_size
     val_batch_cnt = len(val_dataset) // 100
