@@ -20,11 +20,11 @@ def create_app():
     
     from .models import models
     
-    from .view import main_views, ko_food_views
+    from .view import main_views, ko_food_views, it_food_views
     
     app.register_blueprint(main_views.main_bp)
     app.register_blueprint(ko_food_views.ko_food_bp)
-    
+    app.register_blueprint(it_food_views.it_food_bp)
     
     
     return app
