@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sentens horror</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h2>레딧 두 문장 괴담 생성기</h2>
+        <div>
+            문장을 입력하면 다음 문장을 생성합니다.<br>
+        </div><br>
+        <form method="post">
+            <textarea name="text" class="question-input" rows="10" cols="40">{{text}}</textarea>
+            <br>
+            <button type="submit" class="submit-btn">생성하기</button>
+        </form>
+    
+        <div class="answer-section">
+            <h3>생성된 문장:</h3>
+            <p>{{msg}}</p>
+        </div>
+</body>
+</html>
