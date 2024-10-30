@@ -54,6 +54,7 @@ def sent_prepro(sent):
     
     # 한국어만 남길 수는 없으니...
     # 음.. 어카지?
+    sent = re.sub(r"'", r'"', sent) # 다음 모델은 이렇게 전처리 해보자
     sent = re.sub(r'[^0-9ㄱ-ㅎ가-힣!.?,]+', r" ", sent)
     
     # 공백 문제를 해결해보려는 시도
@@ -184,16 +185,14 @@ def load_data(data_path, nlp_type=None):
     
 
 # 단어 사전 저장
-def bulid_vocab(data, file_name='vocab.pkl', nlp_type='None', reverse_index=True):
+def bulid_vocab(data, file_name='vocab.pkl', reverse_index=True):
     # 토큰을 담을 그릇
     word_list = []
-    
     
     for sent in data:
         for word in sent:
             word_list.append(word)
    
-    
     # print(word_list, '\n')         
     word_counts = Counter(word_list)
     sorted_word = sorted(word_counts, key=word_counts.get, reverse=True)
@@ -265,6 +264,7 @@ class Decoder(nn.Module):
     def __init__(self, ss_vocab_size, embedding_dim, hidden_units):
         super(Decoder, self).__init__()
         self.embedding = nn.Embedding(ss_vocab_size, embedding_dim, padding_idx=0)
+        # 여기 lstm 파트를 custom 하면 성능이 좋아질까?
         self.lstm = nn.LSTM(embedding_dim, hidden_units, batch_first=True)
         # 여기는 출력층
         self.fc = nn.Linear(hidden_units, ss_vocab_size)
