@@ -79,7 +79,7 @@ def nlp_tokenize(data, nlp_type='None'):
                 token_list.extend(token)
         # yield token_list
     
-    elif nlp_type == ko_okt:
+    elif nlp_type == 'okt':
         for sent in data:
             morphs = ko_okt.morphs(sent)
             # carry = []
@@ -89,7 +89,7 @@ def nlp_tokenize(data, nlp_type='None'):
             word_list.extend(morphs)
         # yield word_list
             
-    elif nlp_type == ko_soynlp:
+    elif nlp_type == 'soynlp':
         for sent in data:
             ko_soynlp.train(sent)
             for sent in sent:
@@ -149,15 +149,15 @@ def load_data(data_path, nlp_type=None):
                 # print(f"second sent: {second}")
 
                 # NLP 토큰화 적용 (한 문장이 하나의 리스트로 유지되도록 설정)
-                if nlp_type == ko_spacy:
+                if nlp_type == 'spacy':
                     first = [token for token in nlp_tokenize([first], nlp_type=ko_spacy)]
                     second = [token for token in nlp_tokenize([second], nlp_type=ko_spacy)]
                     
-                elif nlp_type == ko_okt:
+                elif nlp_type == 'okt':
                     first = [ko_okt.morphs(first)]
                     second = [ko_okt.morphs(second)]
                 
-                elif nlp_type == ko_soynlp:
+                elif nlp_type == 'soynlp':
                     first = [token for token in nlp_tokenize([first], nlp_type=ko_soynlp)]
                     second = [token for token in nlp_tokenize([second], nlp_type=ko_soynlp)]
                 
