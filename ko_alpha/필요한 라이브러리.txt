@@ -4,8 +4,10 @@ Label, Verify, Correct: A Simple Few Shot Object Detection Method
 https://github.com/prannaykaul/lvc
 논문 작성자의 git
 
-torch version을 2.3.0을 기준으로 작성함.
- - python : 3.8
+
+"conda create -n alpha_38 python=3.8"
+
+torch version을 2.3.0을 기준으로 작성함. <- 현재 사용중인 version이기 때문
  - torch : 2.3.0
  - torchvision : 0.18.0
  - torchaudio : 2.3.0
@@ -21,4 +23,228 @@ torch version을 2.3.0을 기준으로 작성함.
  - cv2 : 4.10.0
  - flask : 3.0.3
  - tqdm : 4.67.0
+ - tabulate : 0.9.0
+ 
+
+(alpha_38) C:\Users\PC\Desktop\AI_KDT6\KDT6\ko_alpha>pip list
+    Package             Version
+    ------------------- ---------
+    alembic             1.14.0
+    blinker             1.8.2
+    Brotli              1.0.9
+    certifi             2024.8.30
+    charset-normalizer  3.3.2
+    click               8.1.7
+    colorama            0.4.6
+    contourpy           1.1.1
+    cycler              0.12.1
+    filelock            3.13.1
+    Flask               3.0.3
+    Flask-Migrate       4.0.7
+    Flask-SQLAlchemy    3.1.1
+    fonttools           4.53.1
+    gmpy2               2.1.2
+    greenlet            3.1.1
+    idna                3.7
+    importlib_metadata  8.5.0
+    importlib_resources 6.4.5
+    itsdangerous        2.2.0
+    Jinja2              3.1.4
+    joblib              1.4.2
+    kiwisolver          1.4.5
+    lightning-utilities 0.11.8
+    Mako                1.3.6
+    MarkupSafe          2.1.3
+    matplotlib          3.7.3
+    mkl-fft             1.3.1
+    mkl-random          1.2.2
+    mkl-service         2.4.0
+    mpmath              1.3.0
+    munkres             1.1.4
+    networkx            3.1
+    numpy               1.24.3
+    opencv-python       4.10.0.84
+    packaging           24.2
+    pandas              2.0.3
+    patsy               0.5.6
+    pillow              10.4.0
+    pip                 24.2
+    platformdirs        4.3.6
+    pooch               1.8.2
+    pyparsing           3.1.4
+    PyQt5               5.15.4
+    PyQt5-sip           12.9.0
+    PySocks             1.7.1
+    python-dateutil     2.9.0
+    pytz                2024.2
+    PyYAML              6.0.2
+    requests            2.32.3
+    scikit-learn        1.3.2
+    scipy               1.10.1
+    seaborn             0.13.2
+    setuptools          75.1.0
+    sip                 6.5.1
+    six                 1.16.0
+    SQLAlchemy          2.0.36
+    statsmodels         0.14.1
+    sympy               1.13.2
+    tabulate            0.9.0
+    threadpoolctl       3.5.0
+    toml                0.10.2
+    torch               2.3.0
+    torchaudio          2.3.0
+    torchinfo           1.8.0
+    torchmetrics        1.5.2
+    torchvision         0.18.0
+    tornado             6.4.1
+    tqdm                4.67.0
+    typing_extensions   4.11.0
+    tzdata              2024.2
+    unicodedata2        15.1.0
+    urllib3             2.2.3
+    Werkzeug            3.0.6
+    wheel               0.44.0
+    win-inet-pton       1.1.0
+    zipp                3.21.0
+
+
+(alpha_38) C:\Users\PC\Desktop\AI_KDT6\KDT6\ko_alpha>conda list
+    # packages in environment at C:\Users\PC\anaconda3\envs\alpha_38:
+    #
+    # Name                    Version                   Build  Channel
+    alembic                   1.14.0                   pypi_0    pypi
+    blas                      1.0                         mkl
+    blinker                   1.8.2              pyhd8ed1ab_0    conda-forge
+    brotli                    1.1.0                h2466b09_2    conda-forge
+    brotli-bin                1.1.0                h2466b09_2    conda-forge
+    brotli-python             1.0.9            py38hd77b12b_8
+    ca-certificates           2024.9.24            haa95532_0
+    certifi                   2024.8.30          pyhd8ed1ab_0    conda-forge
+    charset-normalizer        3.3.2              pyhd3eb1b0_0
+    click                     8.1.7           win_pyh7428d3b_0    conda-forge
+    colorama                  0.4.6              pyhd8ed1ab_0    conda-forge
+    contourpy                 1.1.1            py38hb1fd069_1    conda-forge
+    cpuonly                   2.0                           0    pytorch
+    cycler                    0.12.1             pyhd8ed1ab_0    conda-forge
+    filelock                  3.13.1           py38haa95532_0
+    flask                     3.0.3              pyhd8ed1ab_0    conda-forge
+    flask-migrate             4.0.7                    pypi_0    pypi
+    flask-sqlalchemy          3.1.1                    pypi_0    pypi
+    fonttools                 4.53.1           py38h4cb3324_0    conda-forge
+    freetype                  2.12.1               ha860e81_0
+    gmpy2                     2.1.2            py38h7f96b67_0
+    greenlet                  3.1.1                    pypi_0    pypi
+    icu                       73.2                 h63175ca_0    conda-forge
+    idna                      3.7              py38haa95532_0
+    importlib-metadata        8.5.0              pyha770c72_0    conda-forge
+    importlib-resources       6.4.5              pyhd8ed1ab_0    conda-forge
+    importlib_resources       6.4.5              pyhd8ed1ab_0    conda-forge
+    intel-openmp              2021.4.0          haa95532_3556
+    itsdangerous              2.2.0              pyhd8ed1ab_0    conda-forge
+    jinja2                    3.1.4            py38haa95532_0
+    joblib                    1.4.2              pyhd8ed1ab_0    conda-forge
+    jpeg                      9e                   h827c3e9_3
+    kiwisolver                1.4.5            py38hb1fd069_1    conda-forge
+    krb5                      1.20.1               heb0366b_0    conda-forge
+    lcms2                     2.12                 h83e58a3_0
+    lerc                      3.0                  hd77b12b_0
+    libblas                   3.9.0           1_h8933c1f_netlib    conda-forge
+    libbrotlicommon           1.1.0                h2466b09_2    conda-forge
+    libbrotlidec              1.1.0                h2466b09_2    conda-forge
+    libbrotlienc              1.1.0                h2466b09_2    conda-forge
+    libcblas                  3.9.0           8_h719fc58_netlib    conda-forge
+    libclang                  14.0.6          default_hb5a9fac_1
+    libclang13                14.0.6          default_h8e68704_1
+    libdeflate                1.17                 h2bbff1b_1
+    libffi                    3.4.4                hd77b12b_1
+    libjpeg-turbo             2.0.0                h196d8e1_0
+    liblapack                 3.9.0           8_h719fc58_netlib    conda-forge
+    libpng                    1.6.39               h8cc25b3_0
+    libpq                     12.20                h70ee33d_0
+    libtiff                   4.5.1                hd77b12b_0
+    libuv                     1.48.0               h827c3e9_0
+    libwebp-base              1.3.2                h3d04722_1
+    lightning-utilities       0.11.8             pyhd8ed1ab_0    conda-forge
+    lz4-c                     1.9.4                h2bbff1b_1
+    m2w64-gcc-libgfortran     5.3.0                         6    conda-forge
+    m2w64-gcc-libs            5.3.0                         7    conda-forge
+    m2w64-gcc-libs-core       5.3.0                         7    conda-forge
+    m2w64-gmp                 6.1.0                         2    conda-forge
+    m2w64-libwinpthread-git   5.0.0.4634.697f757               2    conda-forge
+    mako                      1.3.6                    pypi_0    pypi
+    markupsafe                2.1.3            py38h2bbff1b_0
+    matplotlib                3.7.3            py38haa244fe_0    conda-forge
+    matplotlib-base           3.7.3            py38h2724991_0    conda-forge
+    mkl                       2021.4.0           haa95532_640
+    mkl-service               2.4.0            py38h2bbff1b_0
+    mkl_fft                   1.3.1            py38h277e83a_0
+    mkl_random                1.2.2            py38hf11a4ad_0
+    mpc                       1.1.0                h7edee0f_1
+    mpfr                      4.0.2                h62dcd97_1
+    mpir                      3.0.0                hec2e145_1
+    mpmath                    1.3.0            py38haa95532_0
+    msys2-conda-epoch         20160418                      1    conda-forge
+    munkres                   1.1.4              pyh9f0ad1d_0    conda-forge
+    networkx                  3.1              py38haa95532_0
+    numpy                     1.24.3           py38hf95b240_0
+    numpy-base                1.24.3           py38h005ec55_0
+    opencv-python             4.10.0.84                pypi_0    pypi
+    openjpeg                  2.5.2                hae555c5_0
+    openssl                   3.4.0                h2466b09_0    conda-forge
+    packaging                 24.2               pyhd8ed1ab_0    conda-forge
+    pandas                    2.0.3            py38hf08cf0d_1    conda-forge
+    patsy                     0.5.6              pyhd8ed1ab_0    conda-forge
+    pillow                    10.4.0           py38h827c3e9_0
+    pip                       24.2             py38haa95532_0
+    platformdirs              4.3.6              pyhd8ed1ab_0    conda-forge
+    pooch                     1.8.2              pyhd8ed1ab_0    conda-forge
+    pyparsing                 3.1.4              pyhd8ed1ab_0    conda-forge
+    pyqt                      5.15.4           py38h885f38d_0    conda-forge
+    pyqt5-sip                 12.9.0           py38h885f38d_0    conda-forge
+    pysocks                   1.7.1            py38haa95532_0
+    python                    3.8.20               h8205438_0
+    python-dateutil           2.9.0              pyhd8ed1ab_0    conda-forge
+    python-tzdata             2024.2             pyhd8ed1ab_0    conda-forge
+    python_abi                3.8                      2_cp38    conda-forge
+    pytorch                   2.3.0               py3.8_cpu_0    pytorch
+    pytorch-mutex             1.0                         cpu    pytorch
+    pytz                      2024.2             pyhd8ed1ab_0    conda-forge
+    pyyaml                    6.0.2            py38h827c3e9_0
+    qt-main                   5.15.2              h19c9488_10
+    requests                  2.32.3           py38haa95532_0
+    scikit-learn              1.3.2            py38h4f736e5_2    conda-forge
+    scipy                     1.10.1           py38h1aea9ed_3    conda-forge
+    seaborn                   0.13.2               hd8ed1ab_2    conda-forge
+    seaborn-base              0.13.2             pyhd8ed1ab_2    conda-forge
+    setuptools                75.1.0           py38haa95532_0
+    sip                       6.5.1            py38h885f38d_2    conda-forge
+    six                       1.16.0             pyhd3eb1b0_1
+    sqlalchemy                2.0.36                   pypi_0    pypi
+    sqlite                    3.45.3               h2bbff1b_0
+    statsmodels               0.14.1           py38he7056a7_0    conda-forge
+    sympy                     1.13.2           py38haa95532_0
+    tabulate                  0.9.0                    pypi_0    pypi
+    threadpoolctl             3.5.0              pyhc1e730c_0    conda-forge
+    toml                      0.10.2             pyhd8ed1ab_0    conda-forge
+    torchaudio                2.3.0                  py38_cpu    pytorch
+    torchinfo                 1.8.0              pyhd8ed1ab_0    conda-forge
+    torchmetrics              1.5.2              pyhe5570ce_0    conda-forge
+    torchvision               0.18.0                 py38_cpu    pytorch
+    tornado                   6.4.1            py38h4cb3324_0    conda-forge
+    tqdm                      4.67.0                   pypi_0    pypi
+    typing_extensions         4.11.0           py38haa95532_0
+    ucrt                      10.0.22621.0         h57928b3_1    conda-forge
+    unicodedata2              15.1.0           py38h91455d4_0    conda-forge
+    urllib3                   2.2.3            py38haa95532_0
+    vc                        14.40                h2eaa2aa_1
+    vc14_runtime              14.40.33810         hcc2c482_22    conda-forge
+    vs2015_runtime            14.40.33810         h3bf8584_22    conda-forge
+    werkzeug                  3.0.6              pyhd8ed1ab_0    conda-forge
+    wheel                     0.44.0           py38haa95532_0
+    win_inet_pton             1.1.0            py38haa95532_0
+    xz                        5.4.6                h8cc25b3_1
+    yaml                      0.2.5                he774522_0
+    zipp                      3.21.0             pyhd8ed1ab_0    conda-forge
+    zlib                      1.2.13               h8cc25b3_1
+    zstd                      1.5.6                h8880b57_0
 
