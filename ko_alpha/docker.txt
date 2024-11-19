@@ -1,0 +1,59 @@
+# cpu 환경에서 실행을 하려고 하니 실행이 안되는 관계로
+# docker 컨테이너를 설치해서 사용하려고 함
+
+
+다운받은 docker image
+pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+
+
+# docker linux 명령어
+# docker 실행한 상태로 확인해야함.
+
+wsl -l -v       # 상태확인
+wsl -d [ ]      # 실행
+wsl -t [ ]      # 종료
+wsl --shutdown  # 일괄종료
+
+
+docker version              # docker info
+docker ps                   # 실행중인 container
+docker rm -f [container id] # container 종료
+docker images               # image 확인
+docker save -o [path] [tag] # 경로지정 설치
+# in window c:\Users\[user_name]\AppData\Local\Doker
+
+docker pull pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+# image 설치
+
+
+docker run --gpus all -it pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel /bin/bash
+# docker container 실행
+
+# cuda version
+nvcc --version
+    ```
+    11.0
+    ```
+
+# cuDNN
+cat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+    ```
+    CUDNN_MAJOR 8
+    CUDNN_MINOR 0
+    CUDNN_PATCHLEVEL 4
+    ```
+
+# pytorch version
+python -c "import torch; print(torch.__version)"
+# 만약에 설치경로가 보고 싶다면... print(torch.__file__)
+
+# python version
+python --version
+    ```
+    3.8.5
+    ```
+
+
+# anaconda가 존재함.
+# 가상환경은 base 하나뿐임.
+# 단일 프로젝트라면 가상환경을 안만들어도 ok이지만...
