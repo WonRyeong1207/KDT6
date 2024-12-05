@@ -18,20 +18,31 @@ import re
 import torch
 import torch.nn as nn
 
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\fs_vocab_okt.pkl', mode='rb') as f:
+# with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\fs_vocab_okt.pkl', mode='rb') as f:
+#     fs_vocab = pickle.load(f)
+# with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\ss_vocab_okt.pkl', mode='rb') as f:
+#     ss_vocab = pickle.load(f)
+# with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_fs_vocab.pkl', mode='rb') as f:
+#     re_fs_vocab = pickle.load(f)
+# with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_ss_vocab.pkl', mode='rb') as f:
+#     re_ss_vocab = pickle.load(f)
+    
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\fs_vocab_none.pkl', mode='rb') as f:
     fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\ss_vocab_okt.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\ss_vocab_none.pkl', mode='rb') as f:
     ss_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_fs_vocab.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_fs_vocab.pkl', mode='rb') as f:
     re_fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_ss_vocab.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_ss_vocab.pkl', mode='rb') as f:
     re_ss_vocab = pickle.load(f)
     
 # model_file = r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_model.pth'
-model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_param.pth"
+# model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_param.pth"
+model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_test_param.pth"
 # model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_model.pth"
 
-hidden_dim, embedding_dim = 128, 64
+# hidden_dim, embedding_dim = 128, 64
+hidden_dim, embedding_dim = 64, 64
 encoder = Encoder(len(fs_vocab), embedding_dim, hidden_dim)
 decoder = Decoder(len(ss_vocab), embedding_dim, hidden_dim)
 seq2seq_model = Seq2Seq(encoder, decoder)
@@ -40,7 +51,7 @@ seq2seq_model = Seq2Seq(encoder, decoder)
 state_dict = torch.load(model_file)
 # 상태 딕셔너리 로드
 if isinstance(state_dict, dict):
-    seq2seq_model.load_state_dict(state_dict)
+    seq2seq_model.load_state_dict(state_dict, strict=False)
 else:
     print("state_dict is not a dictionary.")
 
