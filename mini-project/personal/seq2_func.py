@@ -55,7 +55,7 @@ def sent_prepro(sent):
     # 한국어만 남길 수는 없으니...
     # 음.. 어카지?
     sent = re.sub(r"'", r'"', sent) # 다음 모델은 이렇게 전처리 해보자
-    sent = re.sub(r'[^0-9ㄱ-ㅎ가-힣!.?,"]+', r" ", sent)
+    sent = re.sub(r'[^a-zA-Z0-9ㄱ-ㅎ가-힣!.?,"]+', r" ", sent) # 영어를 일부 포함해야한다...
     
     # 공백 문제를 해결해보려는 시도
     sent = re.sub(r"\s+", " ", sent)
