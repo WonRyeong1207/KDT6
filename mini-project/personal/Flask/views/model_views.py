@@ -27,22 +27,23 @@ import torch.nn as nn
 # with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_ss_vocab.pkl', mode='rb') as f:
 #     re_ss_vocab = pickle.load(f)
     
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\fs_vocab_none.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\fs_vocab_model_2.pkl', mode='rb') as f:
     fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\ss_vocab_none.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\ss_vocab_model_2.pkl', mode='rb') as f:
     ss_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_fs_vocab.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_fs_vocab_model_2.pkl', mode='rb') as f:
     re_fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_ss_vocab.pkl', mode='rb') as f:
+with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_ss_vocab_model_2.pkl', mode='rb') as f:
     re_ss_vocab = pickle.load(f)
     
 # model_file = r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_model.pth'
 # model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_param.pth"
-model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_test_param.pth"
+model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_test_2_param.pth"
 # model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_model.pth"
 
 # hidden_dim, embedding_dim = 128, 64
-hidden_dim, embedding_dim = 64, 64
+# hidden_dim, embedding_dim = 128, 128
+hidden_dim, embedding_dim = 256, 256
 encoder = Encoder(len(fs_vocab), embedding_dim, hidden_dim)
 decoder = Decoder(len(ss_vocab), embedding_dim, hidden_dim)
 seq2seq_model = Seq2Seq(encoder, decoder)
@@ -82,7 +83,7 @@ def model_run():
             print(enco_in_ts[0])
             input_seq = enco_in_ts[0]
 
-            translated_text = seq.decode_sequence_web(seq2seq_model, input_seq, len(fs_vocab), len(ss_vocab), 50, re_fs_vocab, re_ss_vocab)
+            translated_text = seq.decode_sequence_web(seq2seq_model, input_seq, len(fs_vocab), len(ss_vocab), 70, re_fs_vocab, re_ss_vocab)
             
             msg = f"{translated_text}"
     
