@@ -173,12 +173,15 @@ def show_image_dataset(datasets):
 # - roi_heads
 
 class CustomFasterRCNNModel(nn.Module):
-    def __init__(self, num_classes):
+    # 기본 초기화 모델
+    def __init__(self, num_classes, min_k=1, max_k=10):
         super(CustomFasterRCNNModel,self).__init__()
         # 기존의 model 정보를 그대로 저장
         self.faster_rcnn = models.detection.fasterrcnn_resnet50_fpn(weights=models.detection.FasterRCNN_ResNet50_FPN_Weights.DEFAULT)
         # 모델 선언 이후 새로 입력할 수고를 덜기 위함.
-        self.num_classes = 91 + num_classes # 기본이 91
+        self.num_classes = num_classes # 기본이 91 + novel class
+        self.min_k, self.max_k = min_k, max_k
+
         
         # self.transform = self.faster_rcnn.transform
         # self.backbone = self.faster_rcnn.backbone
@@ -188,16 +191,132 @@ class CustomFasterRCNNModel(nn.Module):
         in_features = self.faster_rcnn.roi_heads.box_predictor.cls_score.in_features
         self.faster_rcnn.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(in_features, self.num_classes)
         
-            
-    def forward(self, images, targets=None):
-        # output = self.transform(inputs)
-        # output = self.backbone(output)
-        # output = self.rpn(output)
-        # y = self.roi_heads(output)
+    # knn 유사도 계산하는 함수
+    # query_image: 내가 인식하고 싶은 이미지
+    # support_image: query_image를 보조하는 이미지
+    def compute_knn_similarity(self, query_features, support_features, k):
+        # # 특징 벡터들의 유사도 계산 (유클리드 거리)
+        # distances = torch.cdist(query_features.flatten(1), support_features.flatten(1))  # (N_query, N_support)
         
-        output = self.faster_rcnn(images, targets)
+        # # K개의 최근접 이웃을 찾음
+        # _, knn_indices = torch.topk(distances, k, dim=1, largest=False, sorted=False)
+        
+        # # K개의 이웃의 유사도(거리) 평균을 계산하여 반환
+        # knn_similarities = torch.mean(distances.gather(1, knn_indices), dim=1)
+        
+        # return knn_similarities
+        
+        # OrderedDict에서 특정 특징 맵 선택
+        query_features = query_features['0']  # 예: '0' 키를 선택 (다른 키 필요시 변경)
+        support_features = support_features['0']
+
+        # 특징 벡터들의 유사도 계산 (유클리드 거리)
+        distances = torch.cdist(query_features.flatten(1), support_features.flatten(1))  # (N_query, N_support)
+
+        # K개의 최근접 이웃을 찾음
+        _, knn_indices = torch.topk(distances, k, dim=1, largest=False, sorted=False)
+
+        return knn_indices
+        
+    # function of finding optima k
+    def optimize_k(self, query_features, support_features):
+        # # 다양한 k 값에 대해 성능을 평가할 수 있는 메커니즘 필요
+        # best_k = self.min_k
+        # best_similarity = None
+        # best_loss = float('inf')
+
+        # # 후보 k값들에 대해 성능을 평가 (예: loss 값)
+        # for k in range(self.min_k, self.max_k + 1):
+        #     knn_similarities = self.compute_knn_similarity(query_features, support_features, k)
+        #     # 여기서는 임시로 유사도의 평균을 사용하여 loss를 계산 (더 정교한 평가 필요)
+        #     loss = knn_similarities.mean().item()
+            
+        #     if loss < best_loss:
+        #         best_loss = loss
+        #         best_k = k
+
+        # return best_k
+        
+        best_k = None
+        min_loss = float('inf')
+
+        # 후보 k값들에 대해 성능을 평가 (예: loss 값)
+        for k in range(self.min_k, self.max_k + 1):
+            knn_similarities = self.compute_knn_similarity(query_features, support_features, k)
+            # 여기서는 임시로 유사도의 평균을 사용하여 loss를 계산 (더 정교한 평가 필요)
+            loss = knn_similarities.float().mean().item()
+
+            if loss < min_loss:
+                min_loss = loss
+                best_k = k
+
+        return best_k
+    
+    # knn 유사도를 기반으로 RoI를 필터링하거나 추가적인 FSOD 논리를 수행하는 함수
+    def custom_roi_heads(self, query_features, support_features, targets=None):
+         # '0' 키로 Tensor 추출
+        query_tensor = query_features.get('0')
+        support_tensor = support_features.get('0')
+        
+        if query_tensor is None or support_tensor is None:
+            raise ValueError("Expected key '0' not found in OrderedDict.")
+        
+        print(f"query_tensor shape: {query_tensor.shape}")
+        print(f"support_tensor shape: {support_tensor.shape}\n")
+        
+        # Tensor가 있을 경우 flatten 처리
+        query_tensor = query_tensor.flatten(1) if isinstance(query_tensor, torch.Tensor) else query_tensor
+        support_tensor = support_tensor.flatten(1) if isinstance(support_tensor, torch.Tensor) else support_tensor
+
+        # 최적의 K값을 자동으로 계산
+        best_k = self.optimize_k(query_features, support_features)
+        
+        # 최적의 K값으로 유사도 계산
+        knn_similarities = self.compute_knn_similarity(query_features, support_features, best_k)
+        
+        # 유사도가 높은 RoI만 필터링
+        threshold = knn_similarities.float().mean()  # 평균 유사도를 임계값으로 사용
+        high_similarity_indices = knn_similarities < threshold
+
+        print(f"knn_similarities shape: {knn_similarities.shape}")  # 유사도의 크기
+        print(f"high_similarity_indices shape: {high_similarity_indices.shape}\n")  # 필터링된 인덱스 크기
+        
+        # high_similarity_indices의 크기를 query_tensor와 맞추기 위해 확장
+        high_similarity_indices_expanded = high_similarity_indices.expand(-1, query_tensor.size(1))  # (16, 256)
+
+        # 유사도가 높은 부분만 필터링하여 RoI 처리
+        refined_features = query_tensor[high_similarity_indices_expanded]
+        
+        # 이미지 크기 계산 (배치 크기와 이미지 크기)
+        image_shapes = query_tensor.shape[-2:]  # (height, width)
+
+        # 일반적인 RoI 헤드를 통해 결과 얻기
+        output = self.faster_rcnn.roi_heads(refined_features, targets, image_shapes)
         
         return output
+
+    # 초기 학습 함수
+    # def forward(self, images, targets=None):
+    #     # output = self.transform(inputs)
+    #     # output = self.backbone(output)
+    #     # output = self.rpn(output)
+    #     # y = self.roi_heads(output)
+        
+    #     output = self.faster_rcnn(images, targets)
+        
+    #     return output
+    
+    # model learning function
+    def forward(self, query_images, support_images, targets=None):
+        # Backbone에서 Query와 Support 특징 추출
+        query_features = self.faster_rcnn.backbone(query_images)
+        support_features = self.faster_rcnn.backbone(support_images)
+        # image를 잘못 나누면 필요없..
+        
+        # KNN 유사도를 기반으로 RoI를 필터링하거나 추가적인 FSOD 논리 수행
+        refined_results = self.custom_roi_heads(query_features, support_features, targets)
+        
+        return refined_results
     
 
 # custom datasets class
@@ -283,7 +402,7 @@ class COCODataset(Dataset):
         image_path = os.path.join(self.image_dir, self.coco.imgs[img_id]['file_name'])
         image = Image.open(image_path).convert("RGB")
 
-        # 어노테이션 처리
+        # annotation 처리
         boxes = [ann['bbox'] for ann in annotations]
         labels = [ann['category_id'] for ann in annotations]
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
@@ -314,27 +433,40 @@ class COCODataset(Dataset):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def validation(model, X_data, y_data):
+def validation(model, query_data, support_data, y_data, num_classes):
+    # query_data는 (N, 4) 형태의 바운딩 박스를 포함한다고 가정
+    # y_data는 (N,) 형태의 레이블 정보
+    targets = [{
+        "boxes": query_data,  # 바운딩 박스 정보
+        "labels": y_data      # 객체의 레이블 정보
+    }]
     
     with torch.no_grad():
-        pred = model(X_data)
+        pred = model(query_data, support_data, targets)  # targets도 전달
         
+        # 손실 함수 및 정확도 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
-        acc_score = MulticlassAccuracy()(pred, y_data)
-        f1_score = MulticlassF1Score()(pred, y_data)
-        mat = MulticlassConfusionMatrix()(pred, y_data)
+        acc_score = MulticlassAccuracy(num_classes=num_classes)(pred, y_data)
+        f1_score = MulticlassF1Score(num_classes=num_classes)(pred, y_data)
+        mat = MulticlassConfusionMatrix(num_classes=num_classes)(pred, y_data)
         
-    return loss, acc_score, f1_score
+    return loss, acc_score, f1_score, mat
 
-def testing(model, X_data, y_data):
-    y_data = y_data.unsqueeze(1).float()
+def testing(model, query_data, support_data, y_data, num_classes):
+     # y_data는 이미 long 타입이어야 하므로 unsqueeze를 제거하고 원래 형태로 사용
+    targets = [{
+        "boxes": query_data,  # 바운딩 박스 정보
+        "labels": y_data      # 객체의 레이블 정보
+    }]
+    
     with torch.no_grad():
-        pred = model(X_data)
+        pred = model(query_data, support_data, targets)  # targets도 전달
         
+        # 손실 함수 및 정확도 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
-        acc_score = MulticlassAccuracy()(pred, y_data)
-        f1_score = MulticlassF1Score()(pred, y_data)
-        mat = MulticlassConfusionMatrix()(pred, y_data)
+        acc_score = MulticlassAccuracy(num_classes=num_classes)(pred, y_data)
+        f1_score = MulticlassF1Score(num_classes=num_classes)(pred, y_data)
+        mat = MulticlassConfusionMatrix(num_classes=num_classes)(pred, y_data)
         
     return loss, acc_score, f1_score, mat
 
