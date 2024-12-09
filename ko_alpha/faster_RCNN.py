@@ -16,6 +16,8 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import seaborn as sns
 import os
 import cv2
 import json
@@ -27,6 +29,7 @@ from pycocotools.coco import COCO
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.nn.utils.rnn import pad_sequence
 import torch.optim as optima
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import DataLoader, Dataset
@@ -41,6 +44,9 @@ from torchinfo import summary
 import torchmetrics
 from torchmetrics.classification import MulticlassAccuracy, MulticlassConfusionMatrix, MulticlassF1Score
 
+import sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 # utils
 # -----------------------------------------------------------------------
@@ -50,8 +56,8 @@ from torchmetrics.classification import MulticlassAccuracy, MulticlassConfusionM
 # function return: none
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-RANDOM_RATE = 37
-torch.manual_seed(RANDOM_RATE)
+RANDOM_STATE = 37
+torch.manual_seed(RANDOM_STATE)
 
 def utils():
     """
@@ -63,11 +69,12 @@ def utils():
         print(f"cuda num: {torch.cuda.device_count()}")
         print(f"cude device name: {torch.cuda.get_device_name(0)}")
         print(f"cudnn version: {torch.backends.cudnn.version()}")
-    print(f"random rate: {RANDOM_RATE}\n")
+    print(f"random rate: {RANDOM_STATE}\n")
     
     print(f"numpy version: {np.__version__}")
     print(f"matplotlib version: {matplotlib.__version__}")
     print(f"opencv version: {cv2.__version__}")
+    print(f"scikit-learn version: {sklearn.__version__}")
     print(f"PIL version: {PIL.__version__}\n")
     
     print(f"torch version: {torch.__version__}")
@@ -128,35 +135,43 @@ def image_transformer(kind='train'):
 
 def show_image_dataset(datasets):
     """
-    show noralized image data in datasets
-    ---
-    ---
-    Args:
-        datasets (datssets): want to see image datasets
-    """
-    
-    name = datasets.classes
+    Show normalized image data in datasets.
 
+    Args:
+        datasets (Dataset): The image dataset to visualize.
+    """
     fig, axes = plt.subplots(2, 5, figsize=(24, 15))
 
-    for idx, (img_data, tagest) in enumerate(datasets):
+    for idx, data in enumerate(datasets):
+        if isinstance(data, tuple):
+            # 데이터셋 반환값이 튜플일 경우
+            img_data = data[0]  # 첫 번째 요소가 이미지 데이터라고 가정
+            target = data[1]  # 두 번째 요소가 라벨이라고 가정
+        elif isinstance(data, dict):
+            # 데이터셋 반환값이 딕셔너리일 경우
+            img_data = data['image']  # 키가 'image'일 경우
+            target = data.get('label', 'Unknown')  # 키가 'label'일 경우
+        else:
+            raise ValueError("Unexpected dataset structure.")
 
+        # Normalize image data
         rotated_images = torch.Tensor(img_data)
-        # normalization code
         image_min = rotated_images.min()
         image_max = rotated_images.max()
         rotated_images.clamp_(min=image_min, max=image_max)
         rotated_images.add_(-image_min).div_(image_max - image_min + 1e-5)
-        
-        # image data를 보고 결정
-        axes[idx//5][idx%5].imshow(img_data.permute(1, 2 ,0))
-        axes[idx//5][idx%5].set_title(name[tagest], fontsize=25)
-        axes[idx//5][idx%5].axis('off')
-        
-        if idx == 9: break
-        
+
+        # Visualize
+        axes[idx // 5][idx % 5].imshow(img_data.permute(1, 2, 0))
+        axes[idx // 5][idx % 5].set_title(f"Label: {target}", fontsize=25)
+        axes[idx // 5][idx % 5].axis('off')
+
+        if idx == 9:  # Show up to 10 images
+            break
+
     plt.tight_layout()
     plt.show()
+
     
     
 # custom faster rcnn model class
@@ -385,6 +400,68 @@ class CreateNovelClass:
             json.dump(self.coco, f)
 
 
+# custom datasets class
+# ---------------------------------------------------------------------------
+# class purpose: create datasets
+# class name: CustomDatasets
+# parameters: image_dir, annotation_file
+# attribute field: categry_names, output_file, coco, _create_categories
+# class function: init, len, getitem
+
+class CustomDataset(Dataset):
+    def __init__(self, image_dir, annotation_file, transform=None):
+        self.image_dir = image_dir
+        self.transform = transform
+
+        # 어노테이션 JSON 파일 로드
+        with open(annotation_file, 'r') as f:
+            self.coco_data = json.load(f)
+        
+        # 이미지 파일 경로와 해당 레이블 매핑
+        self.image_paths = [image['file_name'] for image in self.coco_data['images']]
+        self.image_ids = {image['file_name']: image['id'] for image in self.coco_data['images']}
+        self.categories = {category['id']: category['name'] for category in self.coco_data['categories']}
+        
+        # 어노테이션 (이미지에 대한 레이블 및 bbox 정보)
+        self.annotations = {image_id: [] for image_id in self.image_ids.values()}
+        for annotation in self.coco_data['annotations']:
+            image_id = annotation['image_id']
+            category_id = annotation['category_id']
+            bbox = annotation['bbox']
+            self.annotations[image_id].append((category_id, bbox))
+        
+        # 전체 이미지 경로와 어노테이션을 저장
+        self.images = self.image_paths
+        self.labels = [self.annotations[self.image_ids[img_path]] for img_path in self.image_paths]
+
+        # 데이터셋 크기
+        self.n_samples = len(self.images)
+
+    def __len__(self):
+        return self.n_samples
+
+    def __getitem__(self, idx):
+        image_path = os.path.join(self.image_dir, self.images[idx])  # 이미지 경로
+        image = Image.open(image_path).convert('RGB')  # 이미지를 RGB로 열기
+        
+        image_id = self.image_ids[self.images[idx]]
+        annotations = self.labels[idx]  # 해당 이미지의 어노테이션 (category_id, bbox)
+        
+        # 레이블: 다중 클래스이므로, one-hot encoding 방식으로 레이블 생성
+        labels = []
+        bboxes = []
+        for category_id, bbox in annotations:
+            labels.append(category_id - 1)  # 카테고리 ID는 1부터 시작하므로, 0-based로 변경
+            bboxes.append(bbox)
+        
+        # 이미지 전처리
+        if self.transform:
+            image = self.transform(image)
+        
+        # 텐서로 반환
+        return image, torch.tensor(labels), torch.tensor(bboxes)
+
+
 # 이거는 이미 존재하는 coco annotation의 format을 그대로 사용하는 코드
 class COCODataset(Dataset):
     def __init__(self, annotation_file, image_dir, transforms=None):
@@ -479,44 +556,65 @@ def testing(model, query_data, support_data, y_data, num_classes):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def predict_web(model, X_data, type_='others'):
-    X_data = X_data.unsqueeze(1)
-    with torch.no_grad():
-        if type_=='me':
-            pred = model(X_data)
-            # pred = torch.max(pred)
-            # pred = torch.argmax(pred)
-        elif type_=='others':
-            pred = model(X_data)
-            pred = torch.sigmoid(pred)
-            # pred = torch.max(pred)
-            # pred = torch.argmax(pred)
-        # pred_label = torch.argmax((pred > 0.5).int())
-        # pred_label = int(pred_label.flatten())
-        # if pred_label > 1:
-        #     pred_label = 0
-        # pred_label = lable_translate[pred_label]
-        pred = torch.max(pred)
-        
-    return pred.item()
-
-def predict(model, x_data, y_data):
-    # 텐서 하나
-    # y_data의 차원을 확인하고 unsqueeze가 필요한지 확인
+def predict(model, query_data, support_data, y_data, num_classes):
+    # y_data는 이미 long 타입이어야 하므로 unsqueeze를 제거하고 원래 형태로 사용
     if len(y_data.shape) == 1:  # 1D 텐서인 경우
         y_data = y_data.unsqueeze(1)  # (N,) -> (N, 1)
     
-    y_data = y_data.float()  # float형으로 변환
-    x_data = x_data.unsqueeze(1)
+    y_data = y_data.to(DEVICE)  # y_data를 모델의 device로 이동
+    query_data = query_data.to(DEVICE)  # 쿼리 데이터를 모델의 device로 이동
+    support_data = support_data.to(DEVICE)  # 지원 데이터를 모델의 device로 이동
+
     with torch.no_grad():
         # 예측 수행
-        pred = model(x_data)
-        # 0.5 이상이면 1, 미만이면 0으로 변환
-        pred_labels = torch.argmax(pred)
-        # pred_labels = [LABEL_TRANSLATE[int(label)] for label in pred_labels.flatten()]
-        # real_labels = [LABEL_TRANSLATE[int(label)] for label in y_data.flatten()]
-
+        pred = model(query_data, support_data)
+        
+        # softmax 적용 (다중 클래스 확률 분포)
+        pred_probs = F.softmax(pred, dim=1)
+        
+        # 가장 높은 확률을 가진 클래스 선택 (예측된 클래스)
+        pred_labels = torch.argmax(pred_probs, dim=1)
+    
     return pred_labels, y_data
+
+def predict_web(model, query_data, support_data):
+    query_data = query_data.unsqueeze(0).to(DEVICE)  # 배치 차원 추가
+    support_data = support_data.unsqueeze(0).to(DEVICE)  # 배치 차원 추가
+    
+    with torch.no_grad():
+        # 예측 수행
+        pred = model(query_data, support_data)
+        
+        # softmax 적용 (다중 클래스 확률 분포)
+        pred_probs = F.softmax(pred, dim=1)
+        
+        # 가장 높은 확률을 가진 클래스 선택 (예측된 클래스)
+        pred_label = torch.argmax(pred_probs, dim=1).item()
+    
+    return pred_label
+
+
+# 라벨? 크기가 지멋대로임
+def custom_collate_fn(batch):
+    query_data, support_data, targets = [], [], []
+    
+    for data in batch:
+        # 예시로 첫 번째 이미지를 query_data로, 나머지를 support_data로 분리
+        query_data.append(data[0][0])  # 첫 번째 이미지를 query_data
+        support_data.append(data[0][1:])  # 나머지 이미지를 support_data
+        targets.append(data[1])  # 라벨
+    
+    print(f"Targets in batch: {targets}\n")  # 확인용 출력
+    
+    # 쿼리 데이터와 지원 데이터를 텐서로 변환
+    query_data = torch.stack(query_data)
+    support_data = torch.stack(support_data)
+    
+    # 패딩 처리
+    padded_targets = pad_sequence([torch.tensor(target) for target in targets], batch_first=True, padding_value=-1)
+    
+    return query_data, support_data, padded_targets
+
 
 
 # model learning
@@ -527,69 +625,64 @@ def predict(model, x_data, y_data):
 # - optimizer: Adam
 # - scheduler: ReduceLROnPlatea, standard: val_loss
 
-def training(model, train_dataset, val_dataset, epochs, lr=0.001, batch_size=32, patience=10):
+def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, batch_size=8, patience=10):
     
     loss_dict = {'train':[], 'val':[]}
     acc_dict = {'train':[], 'val':[]}
     f1_dict = {'train':[], 'val':[]}
     
     optimizer = optima.Adam(model.parameters(), lr=lr)
-    train_data_dl = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    val_data_dl = DataLoader(val_dataset, batch_size=100, shuffle=True)
+    train_data_dl = DataLoader(train_dataset, batch_size=batch_size, collate_fn=custom_collate_fn, shuffle=True)
+    val_data_dl = DataLoader(val_dataset, batch_size=8, collate_fn=custom_collate_fn, shuffle=True)
     scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
     
     save_param = './model/custom_fsod_param.pth'
     save_model = './model/custom_fsod_model.pth'
-    
-    train_batch_cnt = len(train_dataset) // batch_size
-    val_batch_cnt = len(val_dataset) // 100
 
     model.train()
     for epoch in range(1, epochs+1):
         total_t_loss, total_t_acc, total_t_f1 = [], [], []
         total_v_loss, total_v_acc, total_v_f1 = [], [], []
         
-        for step, (input_ids, labels) in enumerate(train_data_dl):
-            # batch_cnt = dataset.n_rows / batch_size
-            labels = labels.unsqueeze(1)
+        for step, (query_data, support_data, labels) in enumerate(train_data_dl):
+            query_data = query_data.to(DEVICE)
+            support_data = support_data.to(DEVICE)
+            labels = labels.to(DEVICE)
             
-            pred = model(input_ids)
+            pred = model(query_data, support_data)
             
             loss = nn.CrossEntropyLoss()(pred, labels)
-            total_t_loss.append(loss)
+            total_t_loss.append(loss.item())
             
-            a_score = MulticlassAccuracy()(pred, labels)
-            total_t_acc.append(a_score)
-            f_score = MulticlassF1Score()(pred, labels)
-            total_t_f1.append(f_score)
+            acc_score = MulticlassAccuracy(num_classes=num_classes)(pred, labels)
+            total_t_acc.append(acc_score.item())
+            f_score = MulticlassF1Score(num_classes=num_classes)(pred, labels)
+            total_t_f1.append(f_score.item())
             
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
         
-        model.eval()
-        for step, (input_ids, labels) in enumerate(val_data_dl):
-            labels = labels.unsqueeze(1)
-            val_loss, val_acc, val_score = validation(model, input_ids, labels)
+        model.eval()  # 평가 모드
+        for step, (query_data, support_data, labels) in enumerate(val_data_dl):
+            query_data = query_data.to(DEVICE) 
+            support_data = support_data.to(DEVICE)
+            labels = labels.to(DEVICE)
+            
+            # Validation 데이터에 대한 손실 및 성능 계산
+            val_loss, val_acc, val_f1, _ = validation(model, query_data, support_data, labels, num_classes)
             
             total_v_loss.append(val_loss)
             total_v_acc.append(val_acc)
-            total_v_f1.append(val_score)
+            total_v_f1.append(val_f1)
         
-        if len(total_t_loss) == train_batch_cnt:
-            train_loss = (sum(total_t_loss)/train_batch_cnt).item()
-            train_acc = (sum(total_t_acc)/train_batch_cnt)
-            train_score = (sum(total_t_f1)/train_batch_cnt).item()
-            val_loss = (sum(total_v_loss)/val_batch_cnt).item()
-            val_acc = (sum(total_v_acc)/val_batch_cnt)
-            val_score = (sum(total_v_f1)/val_batch_cnt).item()
-        else:
-            train_loss = (sum(total_t_loss)/len(total_t_loss)).item()
-            train_acc = (sum(total_t_acc)/len(total_t_acc))
-            train_score = (sum(total_t_f1)/len(total_t_f1)).item()
-            val_loss = (sum(total_v_loss)/len(total_v_loss)).item()
-            val_acc = (sum(total_v_acc)/len(total_v_acc))
-            val_score = (sum(total_v_f1)/len(total_v_f1)).item()
+        train_loss = sum(total_t_loss) / len(total_t_loss)
+        train_acc = sum(total_t_acc) / len(total_t_acc)
+        train_score = sum(total_t_f1) / len(total_t_f1)
+        
+        val_loss = sum(total_v_loss) / len(total_v_loss)
+        val_acc = sum(total_v_acc) / len(total_v_acc)
+        val_score = sum(total_v_f1) / len(total_v_f1)
         
         loss_dict['train'].append(train_loss)
         loss_dict['val'].append(val_loss)
@@ -644,3 +737,67 @@ def draw_two_plot(loss, score, title, type_='FSOD'):
     plt.show()
     
     
+def show_mat(mat, title):
+    sns.heatmap(mat, annot=True, fmt='.2f', cbar=False, cmap='BuPu')
+    plt.title(title + 'confuse matrics')
+    plt.show()    
+
+
+def visualize_annotations(image_dir, annotation_file, image_id=None):
+    """
+    COCO 어노테이션 파일에 포함된 이미지를 시각화하는 함수.
+    
+    :param image_dir: 이미지가 저장된 디렉토리
+    :param annotation_file: COCO 형식의 어노테이션 파일 경로
+    :param image_id: 특정 이미지 ID를 시각화하려면 ID를 전달 (None이면 모든 이미지를 시각화)
+    """
+    # COCO 어노테이션 파일 로드
+    with open(annotation_file, 'r') as f:
+        coco_data = json.load(f)
+    
+    # 이미지와 어노테이션 매핑
+    images = {image['id']: image for image in coco_data['images']}
+    annotations = coco_data['annotations']
+    categories = {category['id']: category['name'] for category in coco_data['categories']}
+    
+    # 특정 이미지 ID가 있으면 해당 이미지만 필터링
+    if image_id is not None:
+        images = {image_id: images[image_id]}
+    
+    # 이미지별로 시각화
+    for img_id, img_info in images.items():
+        img_path = os.path.join(image_dir, img_info['file_name'])
+        if not os.path.exists(img_path):
+            print(f"이미지 파일 '{img_path}'을 찾을 수 없습니다.\n")
+            continue
+        
+        # 이미지 열기
+        image = Image.open(img_path).convert("RGB")
+        fig, ax = plt.subplots(1, figsize=(10, 8))
+        ax.imshow(image)
+        ax.axis('off')
+        
+        # 해당 이미지의 어노테이션 필터링
+        img_annotations = [ann for ann in annotations if ann['image_id'] == img_id]
+        
+        # 바운딩 박스 그리기
+        for ann in img_annotations:
+            bbox = ann['bbox']  # [x, y, width, height]
+            category_name = categories[ann['category_id']]
+            
+            # 바운딩 박스 추가
+            rect = patches.Rectangle(
+                (bbox[0], bbox[1]), bbox[2], bbox[3],
+                linewidth=2, edgecolor='red', facecolor='none'
+            )
+            ax.add_patch(rect)
+            
+            # 클래스 이름 추가
+            ax.text(
+                bbox[0], bbox[1] - 5, category_name,
+                color='red', fontsize=12, backgroundcolor='white'
+            )
+        
+        # 결과 표시
+        plt.title(f"Image ID: {img_id}")
+        plt.show()
