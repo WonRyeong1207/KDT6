@@ -21,6 +21,7 @@ import seaborn as sns
 import os
 import cv2
 import json
+import pickle
 import PIL
 from PIL import Image
 
@@ -59,6 +60,49 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 RANDOM_STATE = 37
 torch.manual_seed(RANDOM_STATE)
 
+# base coco category dict with padding
+BASE_CLASS_DICT = {0:'<PAD>',
+                   1: 'person', 2: 'bicycle', 3: 'car', 4: 'motorcycle', 5: 'airplane',
+                   6: 'bus', 7: 'train', 8: 'truck', 9: 'boat',10: 'traffic light',
+                   11: 'fire hydrant', 12: 'street sign', 13: 'stop sign', 14: 'parking meter',15: 'bench',
+                   16: 'bird', 17: 'cat', 18: 'dog', 19: 'horse', 20: 'sheep',
+                   21: 'cow', 22: 'elephant', 23: 'bear', 24: 'zebra', 25: 'giraffe',
+                   26: 'hat', 27: 'backpack', 28: 'umbrella', 29: 'shoe', 30: 'eye galsses',
+                   31: 'handbag',32: 'tie', 33: 'suitcase', 34: 'frisbee', 35: 'skis',
+                   36: 'snowboard', 37: 'sports ball', 38: 'kite', 39: 'baseball bat', 40: 'baseball glove',
+                   41: 'skateboard', 42: 'surfboard', 43: 'tennis racket', 44: 'bottle', 45: 'plate',
+                   46: 'wine glass', 47: 'cup', 48: 'fork', 49: 'knife', 50: 'spoon',
+                   51: 'bowl', 52: 'banana', 53: 'apple', 54: 'sandwich', 55: 'orange',
+                   56: 'broccoli', 57: 'carrot', 58: 'hot dog', 59: 'pizza', 60: 'donut',
+                   61: 'cake', 62: 'chair', 63: 'couch', 64: 'potted plant', 65: 'bed',
+                   66: 'mirror', 67: 'dining table', 68: 'window', 69:'desk', 70: 'toilet',
+                   71: 'door', 72: 'tv', 73: 'laptop', 74: 'mouse', 75: 'remote',
+                   76: 'keyboard', 77: 'cell phone', 78: 'microwave', 79: 'oven', 80: 'toaster',
+                   81: 'sink', 82: 'refrigerator', 83: 'blender', 84: 'book', 85: 'clock',
+                   86: 'vase', 87: 'scissors', 88: 'teddy bear',89: 'hair drier', 90: 'toothbrush',
+                   91: 'hair brush'}
+
+INV_BASE_CLASS_DICT = {'<PAD>': 0,
+                       'person': 1, 'bicycle': 2, 'car': 3, 'motorcycle': 4, 'airplane': 5,
+                       'bus': 6, 'train': 7, 'truck': 8, 'boat': 9, 'traffic light': 10,
+                       'fire hydrant': 11, 'street sign': 12, 'stop sign': 13, 'parking meter': 14, 'bench': 15,
+                       'bird': 16, 'cat': 17, 'dog': 18, 'horse': 19, 'sheep': 20,
+                       'cow': 21, 'elephant': 22, 'bear': 23, 'zebra': 24, 'giraffe': 25,
+                       'hat': 26, 'backpack': 27, 'umbrella': 28, 'shoe': 29, 'eye galsses': 30,
+                       'handbag': 31, 'tie': 32, 'suitcase': 33, 'frisbee': 34, 'skis': 35,
+                       'snowboard': 36, 'sports ball': 37, 'kite': 38, 'baseball bat': 39, 'baseball glove': 40,
+                       'skateboard': 41, 'surfboard': 42, 'tennis racket': 43, 'bottle': 44, 'plate': 45,
+                       'wine glass': 46, 'cup': 47, 'fork': 48, 'knife': 49, 'spoon': 50,
+                       'bowl': 51, 'banana': 52, 'apple': 53, 'sandwich': 54, 'orange': 55,
+                       'broccoli': 56, 'carrot': 57, 'hot dog': 58, 'pizza': 59, 'donut': 60,
+                       'cake': 61, 'chair': 62, 'couch': 63, 'potted plant': 64, 'bed': 65,
+                       'mirror': 66, 'dining table': 67, 'window': 68, 'desk': 69, 'toilet': 70,
+                       'door': 71, 'tv': 72, 'laptop': 73, 'mouse': 74, 'remote': 75,
+                       'keyboard': 76, 'cell phone': 77, 'microwave': 78, 'oven': 79, 'toaster': 80,
+                       'sink': 81, 'refrigerator': 82, 'blender': 83, 'book': 84, 'clock': 85,
+                       'vase': 86, 'scissors': 87, 'teddy bear': 88, 'hair drier': 89, 'toothbrush': 90,
+                       'hair brush': 91}
+
 def utils():
     """
     show & check utils
@@ -82,6 +126,21 @@ def utils():
     print(f"torchinfo version: {torchinfo.__version__}")
     print(f"torchmetrics version: {torchmetrics.__version__}")
     
+
+def save_dict(save_path, save_dict):
+    with open(save_path, mode='wb') as f:
+        pickle.dump(save_dict, f)
+
+def load_dict(save_path):
+    with open(save_path, mode='rb') as f:
+        read_dict = pickle.load(f)
+    return read_dict
+
+def inv_dict(want_inv_dict):
+    inv = {v:k for k, v in want_inv_dict.items()}
+    return inv
+
+
 
 # image transform function
 # -------------------------------------------------------------------
@@ -112,6 +171,8 @@ def image_transformer(kind='train'):
         transformer = v2.Compose([
             v2.Resize(size=256, interpolation=v2.InterpolationMode.BILINEAR),
             v2.RandomCrop(224),
+            v2.RandomHorizontalFlip(p=0.5),
+            v2.RandomRotation(degrees=15),
             v2.ToTensor(),  # 이미지를 텐서로 변환하고 [0, 1]로 스케일링
             v2.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
         ])
@@ -310,6 +371,33 @@ class CustomFasterRCNNModel(nn.Module):
         
         return output
 
+    def aggregate_support_features(self, support_features, support_labels):
+        """
+        Support 특징 요약 함수
+        Args:
+            support_features (Tensor): Support 이미지의 Backbone 출력 (num_support, C, H, W)
+            support_labels (Tensor): Support 이미지의 레이블 (num_support,)
+        Returns:
+            aggregated_features: 클래스별로 요약된 Support 특징 (Tensor)
+        """
+        # Flatten H, W 차원 (예: GAP 적용)
+        support_features = torch.mean(support_features, dim=[2, 3])  # (num_support, C)
+
+        if support_labels is not None:
+            unique_classes = torch.unique(support_labels)
+            aggregated_features = []
+            for cls in unique_classes:
+                cls_features = support_features[support_labels == cls]  # 해당 클래스의 특징
+                cls_summary = torch.mean(cls_features, dim=0, keepdim=True)  # 클래스 평균
+                aggregated_features.append(cls_summary)
+            aggregated_features = torch.cat(aggregated_features, dim=0)  # (num_classes, C)
+        else:
+            # Support 특징 전체 평균
+            aggregated_features = torch.mean(support_features, dim=0, keepdim=True)  # (1, C)
+
+        return aggregated_features
+
+    
     # 초기 학습 함수
     # def forward(self, images, targets=None):
     #     # output = self.transform(inputs)
@@ -322,16 +410,32 @@ class CustomFasterRCNNModel(nn.Module):
     #     return output
     
     # model learning function
-    def forward(self, query_images, support_images, targets=None):
-        # Backbone에서 Query와 Support 특징 추출
-        query_features = self.faster_rcnn.backbone(query_images)
-        support_features = self.faster_rcnn.backbone(support_images)
-        # image를 잘못 나누면 필요없..
-        
-        # KNN 유사도를 기반으로 RoI를 필터링하거나 추가적인 FSOD 논리 수행
-        refined_results = self.custom_roi_heads(query_features, support_features, targets)
-        
+    def forward(self, query_images, support_images, support_labels=None, targets=None):
+        """
+        모델의 Forward 함수
+
+        Args:
+            query_images (Tensor): Query 이미지 텐서 (batch_size, C, H, W)
+            support_images (Tensor): Support 이미지 텐서 (num_support, C, H, W)
+            support_labels (Tensor, optional): Support 이미지의 레이블 정보
+            targets (list of dict, optional): Query 이미지의 타겟 바운딩 박스 및 레이블 정보
+        Returns:
+            refined_results: FSOD 수행 후 결과 (예: 클래스 및 바운딩 박스 예측)
+        """
+
+        # Query와 Support의 특징 추출
+        query_features = self.faster_rcnn.backbone(query_images)  # (batch_size, C, H, W)
+        support_features = self.faster_rcnn.backbone(support_images)  # (num_support, C, H, W)
+
+        # Support 특징 요약
+        # Support 데이터는 보통 10~30장 사이로 작으므로, 평균 특징을 사용하거나 클래스별로 구분 가능
+        support_summary = self.aggregate_support_features(support_features, support_labels)
+
+        # FSOD 논리를 사용하여 Query 특징과 Support 특징 비교
+        refined_results = self.custom_roi_heads(query_features, support_summary, targets)
+
         return refined_results
+
     
 
 # custom datasets class
@@ -349,6 +453,13 @@ class CreateNovelClass:
         
         self.category_names = category_name_list
         self.output_file = output_file_path
+        
+        # dict관련
+        self.base_dict = BASE_CLASS_DICT
+        self.novel_dict_path = './dict/novel_dict.pkl'
+        self.merge_dict_path = './dict/add_novel_dict.pkl'
+        self.novel_dict = {}
+        self.add_dict = {}
 
         # COCO 기본 구조 초기화
         self.coco = {
@@ -362,10 +473,17 @@ class CreateNovelClass:
 
     def _create_categories(self):
         # 카테고리 정보를 COCO 형식에 맞게 추가
-        self.coco["categories"] = [{"id": i + 1, "name": name} for i, name in enumerate(self.category_names)]
+        # self.coco["categories"] = [{"id": i + 1, "name": name} for i, name in enumerate(self.category_names)]
+        base_max_id = max(self.base_dict.keys())
+        for i, name in enumerate(self.category_names, start=base_max_id+1):
+            category_info = {'id': i, "name": name}
+            self.coco['categories'].append(category_info)
+            self.add_dict[i] = name
+            self.novel_dict[i] = name
+        
 
     def add_image(self, img_id, img_path, bboxes, labels):
-        # 새로운 이미지와 어노테이션을 추가.
+        # 새로운 이미지와 annotation을 추가.
         # param img_id: 이미지의 고유 ID
         # param img_path: 이미지 파일 경로
         # param bboxes: 이미지에 대한 bounding box 정보 [[x, y, width, height], ...]
@@ -379,8 +497,11 @@ class CreateNovelClass:
             "height": 480  # 예시로 이미지의 크기를 지정 (실제 이미지 크기에 맞게 수정 가능)
         }
         self.coco["images"].append(image_info)
+        
+        # 추가되는 id에 맞춰서 mapping
+        labels = [list(self.add_dict.keys())[label - 1] for label in labels]
 
-        # 어노테이션 정보
+        # annotation info
         annotation_id = len(self.coco["annotations"]) + 1
         for bbox, label in zip(bboxes, labels):
             annotation_info = {
@@ -395,9 +516,22 @@ class CreateNovelClass:
             annotation_id += 1
 
     def save(self):
-        # COCO 형식의 어노테이션 파일 저장
-        with open(self.output_file, 'w') as f:
-            json.dump(self.coco, f)
+        try:
+            # save annotation file by coco-format
+            with open(self.output_file, 'w') as f:
+                json.dump(self.coco, f)
+            # save dict
+            with open(self.novel_dict_path, 'wb') as f:
+                pickle.dump(self.novel_dict, f)
+                
+            meger_dict = {**self.base_dict, **self.add_dict}
+            with open(self.merge_dict_path, 'wb') as f:
+                pickle.dump(meger_dict, f)
+            
+            print("saved all")
+            
+        except Exception as e:
+            print(e)
 
 
 # custom datasets class
@@ -409,57 +543,84 @@ class CreateNovelClass:
 # class function: init, len, getitem
 
 class CustomDataset(Dataset):
-    def __init__(self, image_dir, annotation_file, transform=None):
+    def __init__(self, image_dir, annotation_file=None, dict_file='./dict/add_novel_dict.pkl', transform='train'):
         self.image_dir = image_dir
-        self.transform = transform
+        self.transform = image_transformer(transform)
+        
+        self.image_paths = []
+        self.image_ids = {}
+        self.categories = {}
+        self.annotations = {}
 
-        # 어노테이션 JSON 파일 로드
-        with open(annotation_file, 'r') as f:
-            self.coco_data = json.load(f)
+        # load dict file
+        self.class_dict = load_dict(dict_file)
         
-        # 이미지 파일 경로와 해당 레이블 매핑
-        self.image_paths = [image['file_name'] for image in self.coco_data['images']]
-        self.image_ids = {image['file_name']: image['id'] for image in self.coco_data['images']}
-        self.categories = {category['id']: category['name'] for category in self.coco_data['categories']}
+        if annotation_file and os.path.exists(annotation_file):
+            # 어노테이션 JSON 파일 로드
+            with open(annotation_file, 'r') as f:
+                self.coco_data = json.load(f)
+            
+            # 이미지 파일 경로와 해당 레이블 매핑
+            self.image_paths = [image['file_name'] for image in self.coco_data['images']]
+            self.image_ids = {image['file_name']: image['id'] for image in self.coco_data['images']}
+            self.categories = {category['id']: category['name'] for category in self.coco_data['categories']}
+            
+            # Merge COCO categories with additional categories from class_dict
+            self.categories.update(self.class_dict)
+            
+            # 어노테이션 (이미지에 대한 레이블 및 bbox 정보)
+            self.annotations = {image_id: [] for image_id in self.image_ids.values()}
+            for annotation in self.coco_data['annotations']:
+                image_id = annotation['image_id']
+                category_id = annotation['category_id']
+                bbox = annotation['bbox']
+                self.annotations[image_id].append((category_id, bbox))
+            
+            # # 전체 이미지 경로와 어노테이션을 저장
+            # self.images = self.image_paths
+            # self.labels = [self.annotations[self.image_ids[img_path]] for img_path in self.image_paths]
         
-        # 어노테이션 (이미지에 대한 레이블 및 bbox 정보)
-        self.annotations = {image_id: [] for image_id in self.image_ids.values()}
-        for annotation in self.coco_data['annotations']:
-            image_id = annotation['image_id']
-            category_id = annotation['category_id']
-            bbox = annotation['bbox']
-            self.annotations[image_id].append((category_id, bbox))
-        
-        # 전체 이미지 경로와 어노테이션을 저장
-        self.images = self.image_paths
-        self.labels = [self.annotations[self.image_ids[img_path]] for img_path in self.image_paths]
+        else:
+            # If no annotation file, only use image files
+            self.coco_data = None
+            self.image_paths = os.listdir(image_dir)
+            self.image_ids = {img: idx + 1 for idx, img in enumerate(self.image_paths)}
+            self.categories = self.class_dict
+            self.annotations = {idx + 1: [] for idx in range(len(self.image_paths))}
 
         # 데이터셋 크기
-        self.n_samples = len(self.images)
+        self.n_samples = len(self.image_paths)
 
     def __len__(self):
         return self.n_samples
 
     def __getitem__(self, idx):
-        image_path = os.path.join(self.image_dir, self.images[idx])  # 이미지 경로
-        image = Image.open(image_path).convert('RGB')  # 이미지를 RGB로 열기
+        # Get image path and load the image
+        image_path = os.path.join(self.image_dir, self.image_paths[idx])
+        image = Image.open(image_path).convert('RGB')
         
-        image_id = self.image_ids[self.images[idx]]
-        annotations = self.labels[idx]  # 해당 이미지의 어노테이션 (category_id, bbox)
+        # Get image ID and corresponding annotations
+        image_id = self.image_ids[self.image_paths[idx]]
+        annotations = self.annotations[image_id]
         
         # 레이블: 다중 클래스이므로, one-hot encoding 방식으로 레이블 생성
         labels = []
         bboxes = []
         for category_id, bbox in annotations:
-            labels.append(category_id - 1)  # 카테고리 ID는 1부터 시작하므로, 0-based로 변경
+            # labels.append(category_id - 1)  # 카테고리 ID는 1부터 시작하므로, 0-based로 변경
+            labels.append(category_id )
             bboxes.append(bbox)
         
         # 이미지 전처리
         if self.transform:
             image = self.transform(image)
+            
+        # Convert labels and bounding boxes to tensors
+        labels_tensor = torch.tensor(labels, dtype=torch.long)
+        bboxes_tensor = torch.tensor(bboxes, dtype=torch.float32)
         
         # 텐서로 반환
-        return image, torch.tensor(labels), torch.tensor(bboxes)
+        return image, labels_tensor, bboxes_tensor
 
 
 # 이거는 이미 존재하는 coco annotation의 format을 그대로 사용하는 코드
@@ -510,16 +671,16 @@ class COCODataset(Dataset):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def validation(model, query_data, support_data, y_data, num_classes):
+def validation(model, images, y_data, num_classes):
     # query_data는 (N, 4) 형태의 바운딩 박스를 포함한다고 가정
     # y_data는 (N,) 형태의 레이블 정보
     targets = [{
-        "boxes": query_data,  # 바운딩 박스 정보
+        "boxes": images,  # 바운딩 박스 정보
         "labels": y_data      # 객체의 레이블 정보
     }]
     
     with torch.no_grad():
-        pred = model(query_data, support_data, targets)  # targets도 전달
+        pred = model(images, targets)  # targets도 전달
         
         # 손실 함수 및 정확도 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
@@ -529,15 +690,15 @@ def validation(model, query_data, support_data, y_data, num_classes):
         
     return loss, acc_score, f1_score, mat
 
-def testing(model, query_data, support_data, y_data, num_classes):
+def testing(model, images, y_data, num_classes):
      # y_data는 이미 long 타입이어야 하므로 unsqueeze를 제거하고 원래 형태로 사용
     targets = [{
-        "boxes": query_data,  # 바운딩 박스 정보
+        "boxes": images,  # 바운딩 박스 정보
         "labels": y_data      # 객체의 레이블 정보
     }]
     
     with torch.no_grad():
-        pred = model(query_data, support_data, targets)  # targets도 전달
+        pred = model(images, targets)  # targets도 전달
         
         # 손실 함수 및 정확도 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
@@ -596,24 +757,26 @@ def predict_web(model, query_data, support_data):
 
 # 라벨? 크기가 지멋대로임
 def custom_collate_fn(batch):
-    query_data, support_data, targets = [], [], []
+    images, targets = [], []
     
     for data in batch:
-        # 예시로 첫 번째 이미지를 query_data로, 나머지를 support_data로 분리
-        query_data.append(data[0][0])  # 첫 번째 이미지를 query_data
-        support_data.append(data[0][1:])  # 나머지 이미지를 support_data
+        images.append(data[0])
         targets.append(data[1])  # 라벨
     
-    print(f"Targets in batch: {targets}\n")  # 확인용 출력
+    # print(f"Targets in batch: {targets}")  # 확인용 출력
     
-    # 쿼리 데이터와 지원 데이터를 텐서로 변환
-    query_data = torch.stack(query_data)
-    support_data = torch.stack(support_data)
+    # targets의 최대 길이를 구함
+    max_len = max(len(t) for t in targets)  # targets의 최대 길이 계산
+
+    # 패딩을 추가하여 targets를 동일한 크기로 맞춤
+    padded_targets = [F.pad(torch.tensor(target), (0, max_len - len(target)), value=0) for target in targets]
     
-    # 패딩 처리
-    padded_targets = pad_sequence([torch.tensor(target) for target in targets], batch_first=True, padding_value=-1)
-    
-    return query_data, support_data, padded_targets
+    # 패딩 처리된 targets를 텐서로 변환
+    targets = torch.stack(padded_targets)
+
+    # print(f"Paded in batch: {targets}\n")
+
+    return images, targets
 
 
 
@@ -636,20 +799,19 @@ def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, b
     val_data_dl = DataLoader(val_dataset, batch_size=8, collate_fn=custom_collate_fn, shuffle=True)
     scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
     
-    save_param = './model/custom_fsod_param.pth'
-    save_model = './model/custom_fsod_model.pth'
+    save_param = './model/custom_FSOD_param.pth'
+    save_model = './model/custom_FSOD_model.pth'
 
     model.train()
     for epoch in range(1, epochs+1):
         total_t_loss, total_t_acc, total_t_f1 = [], [], []
         total_v_loss, total_v_acc, total_v_f1 = [], [], []
         
-        for step, (query_data, support_data, labels) in enumerate(train_data_dl):
-            query_data = query_data.to(DEVICE)
-            support_data = support_data.to(DEVICE)
-            labels = labels.to(DEVICE)
+        for step, (images, labels) in enumerate(train_data_dl):
+            images = images[step].to(DEVICE)
+            labels = labels[step].to(DEVICE)
             
-            pred = model(query_data, support_data)
+            pred = model(images)
             
             loss = nn.CrossEntropyLoss()(pred, labels)
             total_t_loss.append(loss.item())
@@ -664,13 +826,12 @@ def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, b
             optimizer.step()
         
         model.eval()  # 평가 모드
-        for step, (query_data, support_data, labels) in enumerate(val_data_dl):
-            query_data = query_data.to(DEVICE) 
-            support_data = support_data.to(DEVICE)
-            labels = labels.to(DEVICE)
+        for step, (images, labels) in enumerate(val_data_dl):
+            images = images[step].to(DEVICE)
+            labels = labels[step].to(DEVICE)
             
             # Validation 데이터에 대한 손실 및 성능 계산
-            val_loss, val_acc, val_f1, _ = validation(model, query_data, support_data, labels, num_classes)
+            val_loss, val_acc, val_f1, _ = validation(model, images, labels, num_classes)
             
             total_v_loss.append(val_loss)
             total_v_acc.append(val_acc)
