@@ -49,6 +49,22 @@ import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+# 나와야하는 결과
+'''
+# create instance
+novel_pixely = fsod.CreateNovelClass(category_names, output_annotation_path)
+
+novel_pixely.add_image(
+    img_id=1,
+    img_path=nt_image_path_list[0],
+    bboxes=[[428,593,284,403],[1498,592,162,418],[1273,594,200,336],
+            [1098,584,105,152],[742,602,169,120],[0,622,456,458]],
+    labels=[1,2,3,4,5,6]
+)
+
+novel_pixely.save()
+'''
+
 # utils
 # -----------------------------------------------------------------------
 # function name: utils
@@ -375,27 +391,41 @@ class CustomFasterRCNNModel(nn.Module):
         """
         Support 특징 요약 함수
         Args:
-            support_features (Tensor): Support 이미지의 Backbone 출력 (num_support, C, H, W)
-            support_labels (Tensor): Support 이미지의 레이블 (num_support,)
+            support_features: Backbone에서 추출된 Support 특징 (OrderedDict 또는 Tensor, [num_support, C, H, W])
+            support_labels: Support 데이터의 라벨 (Tensor, [num_support])
         Returns:
             aggregated_features: 클래스별로 요약된 Support 특징 (Tensor)
         """
+        # OrderedDict 처리: 첫 번째 레이어 출력 사용
+        if isinstance(support_features, dict):
+            support_features = support_features["0"]  # 필요한 레이어 선택
+
         # Flatten H, W 차원 (예: GAP 적용)
         support_features = torch.mean(support_features, dim=[2, 3])  # (num_support, C)
 
+        # support_labels 차원 축소
         if support_labels is not None:
+            if support_labels.dim() > 1:
+                support_labels = support_labels.squeeze()
+
+            # 고유 클래스별로 Support 특징 요약
             unique_classes = torch.unique(support_labels)
             aggregated_features = []
             for cls in unique_classes:
-                cls_features = support_features[support_labels == cls]  # 해당 클래스의 특징
-                cls_summary = torch.mean(cls_features, dim=0, keepdim=True)  # 클래스 평균
-                aggregated_features.append(cls_summary)
-            aggregated_features = torch.cat(aggregated_features, dim=0)  # (num_classes, C)
-        else:
-            # Support 특징 전체 평균
-            aggregated_features = torch.mean(support_features, dim=0, keepdim=True)  # (1, C)
+                # 클래스에 해당하는 특징 추출
+                cls_mask = (support_labels == cls)
+                if cls_mask.dim() > 1:
+                    cls_mask = cls_mask.squeeze()
 
-        return aggregated_features
+                cls_features = support_features[cls_mask]
+                aggregated_features.append(torch.mean(cls_features, dim=0))
+
+            aggregated_features = torch.stack(aggregated_features)
+            return aggregated_features
+
+        # 라벨이 없는 경우, 특징만 반환
+        return support_features
+
 
     
     # 초기 학습 함수
@@ -435,6 +465,7 @@ class CustomFasterRCNNModel(nn.Module):
         refined_results = self.custom_roi_heads(query_features, support_summary, targets)
 
         return refined_results
+
 
     
 
@@ -671,42 +702,71 @@ class COCODataset(Dataset):
 # -----------------------------------------------------
 # must not update weight & bais
 
-def validation(model, images, y_data, num_classes):
-    # query_data는 (N, 4) 형태의 바운딩 박스를 포함한다고 가정
-    # y_data는 (N,) 형태의 레이블 정보
-    targets = [{
-        "boxes": images,  # 바운딩 박스 정보
-        "labels": y_data      # 객체의 레이블 정보
-    }]
+def validation(model, query_images, support_images, support_labels, y_data, num_classes):
+    """
+    Validation 함수
+
+    Args:
+        model: FSOD 모델
+        query_images (Tensor): Query 이미지 텐서
+        support_images (Tensor): Support 이미지 텐서
+        support_labels (Tensor): Support 이미지 레이블
+        y_data (Tensor): Query 이미지의 타겟 레이블
+        num_classes (int): 총 클래스 수
+
+    Returns:
+        loss (float): Validation 손실
+        acc_score (float): Validation 정확도
+        f1_score (float): Validation F1 점수
+        mat (Tensor): Confusion Matrix
+    """
+    targets = [{"labels": y_data}]  # Query 이미지에 대한 타겟
     
     with torch.no_grad():
-        pred = model(images, targets)  # targets도 전달
-        
-        # 손실 함수 및 정확도 계산
+        # 모델에 Query, Support 및 Targets 전달
+        pred = model(query_images, support_images, support_labels, targets)
+
+        # 손실 및 메트릭 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
         acc_score = MulticlassAccuracy(num_classes=num_classes)(pred, y_data)
         f1_score = MulticlassF1Score(num_classes=num_classes)(pred, y_data)
         mat = MulticlassConfusionMatrix(num_classes=num_classes)(pred, y_data)
-        
+    
     return loss, acc_score, f1_score, mat
 
-def testing(model, images, y_data, num_classes):
-     # y_data는 이미 long 타입이어야 하므로 unsqueeze를 제거하고 원래 형태로 사용
-    targets = [{
-        "boxes": images,  # 바운딩 박스 정보
-        "labels": y_data      # 객체의 레이블 정보
-    }]
-    
+
+def testing(model, query_images, support_images, support_labels, y_data, num_classes):
+    """
+    Testing 함수
+
+    Args:
+        model: FSOD 모델
+        query_images (Tensor): Query 이미지 텐서
+        support_images (Tensor): Support 이미지 텐서
+        support_labels (Tensor): Support 이미지 레이블
+        y_data (Tensor): Query 이미지의 타겟 레이블
+        num_classes (int): 총 클래스 수
+
+    Returns:
+        loss (float): Testing 손실
+        acc_score (float): Testing 정확도
+        f1_score (float): Testing F1 점수
+        mat (Tensor): Confusion Matrix
+    """
+    targets = [{"labels": y_data}]  # Query 이미지에 대한 타겟
+
     with torch.no_grad():
-        pred = model(images, targets)  # targets도 전달
-        
-        # 손실 함수 및 정확도 계산
+        # 모델에 Query, Support 및 Targets 전달
+        pred = model(query_images, support_images, support_labels, targets)
+
+        # 손실 및 메트릭 계산
         loss = nn.CrossEntropyLoss()(pred, y_data)
         acc_score = MulticlassAccuracy(num_classes=num_classes)(pred, y_data)
         f1_score = MulticlassF1Score(num_classes=num_classes)(pred, y_data)
         mat = MulticlassConfusionMatrix(num_classes=num_classes)(pred, y_data)
-        
+
     return loss, acc_score, f1_score, mat
+
 
 
 # predict function
@@ -788,20 +848,30 @@ def custom_collate_fn(batch):
 # - optimizer: Adam
 # - scheduler: ReduceLROnPlatea, standard: val_loss
 
-def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, batch_size=8, patience=10):
+def training(model, train_dataset, val_dataset, support_dataset, epochs, num_classes, lr=0.001, batch_size=8, patience=10):
     
     loss_dict = {'train':[], 'val':[]}
     acc_dict = {'train':[], 'val':[]}
     f1_dict = {'train':[], 'val':[]}
     
     optimizer = optima.Adam(model.parameters(), lr=lr)
+    scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
+    
     train_data_dl = DataLoader(train_dataset, batch_size=batch_size, collate_fn=custom_collate_fn, shuffle=True)
     val_data_dl = DataLoader(val_dataset, batch_size=8, collate_fn=custom_collate_fn, shuffle=True)
-    scheduler = ReduceLROnPlateau(optimizer, patience=patience, mode='max')
+    support_loader = DataLoader(support_dataset, batch_size=len(support_dataset), collate_fn=custom_collate_fn, shuffle=False)  # Support 전체 로드
     
     save_param = './model/custom_FSOD_param.pth'
     save_model = './model/custom_FSOD_model.pth'
-
+    
+    # Support Set 불러오기 (전체를 메모리에 올려 학습 중 재사용)
+    support_images, support_labels = next(iter(support_loader))
+    
+    # 리스트 형태라면 텐서로 변환
+    if isinstance(support_images, list):
+        support_images = torch.stack(support_images).to(DEVICE)
+    support_labels = support_labels.to(DEVICE)
+    
     model.train()
     for epoch in range(1, epochs+1):
         total_t_loss, total_t_acc, total_t_f1 = [], [], []
@@ -811,7 +881,7 @@ def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, b
             images = images[step].to(DEVICE)
             labels = labels[step].to(DEVICE)
             
-            pred = model(images)
+            pred = model(images, support_images, support_labels)
             
             loss = nn.CrossEntropyLoss()(pred, labels)
             total_t_loss.append(loss.item())
@@ -831,7 +901,7 @@ def training(model, train_dataset, val_dataset, epochs, num_classes, lr=0.001, b
             labels = labels[step].to(DEVICE)
             
             # Validation 데이터에 대한 손실 및 성능 계산
-            val_loss, val_acc, val_f1, _ = validation(model, images, labels, num_classes)
+            val_loss, val_acc, val_f1, _ = val_loss, val_acc, val_f1, _ = validation(model, images, support_images, support_labels, labels, num_classes)
             
             total_v_loss.append(val_loss)
             total_v_acc.append(val_acc)
@@ -962,3 +1032,4 @@ def visualize_annotations(image_dir, annotation_file, image_id=None):
         # 결과 표시
         plt.title(f"Image ID: {img_id}")
         plt.show()
+        
