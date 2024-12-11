@@ -287,147 +287,130 @@ class CustomFasterRCNNModel(nn.Module):
     # query_image: 내가 인식하고 싶은 이미지
     # support_image: query_image를 보조하는 이미지
     def compute_knn_similarity(self, query_features, support_features, k):
-        # # 특징 벡터들의 유사도 계산 (유클리드 거리)
-        # distances = torch.cdist(query_features.flatten(1), support_features.flatten(1))  # (N_query, N_support)
-        
-        # # K개의 최근접 이웃을 찾음
-        # _, knn_indices = torch.topk(distances, k, dim=1, largest=False, sorted=False)
-        
-        # # K개의 이웃의 유사도(거리) 평균을 계산하여 반환
-        # knn_similarities = torch.mean(distances.gather(1, knn_indices), dim=1)
-        
-        # return knn_similarities
-        
-        # OrderedDict에서 특정 특징 맵 선택
-        query_features = query_features['0']  # 예: '0' 키를 선택 (다른 키 필요시 변경)
-        support_features = support_features['0']
+        """
+        Query와 Support 특징 간의 k-NN 유사도를 계산합니다.
+        """
+        # Query 특징 맵 축소
+        if query_features.dim() == 4:  # [N_query, C, H, W]
+            query_features = F.adaptive_avg_pool2d(query_features, (1, 1)).flatten(1)  # [N_query, C]
+        elif query_features.dim() != 2:  # 올바르지 않은 형식
+            raise ValueError(f"Invalid shape for query_features: {query_features.shape}")
 
-        # 특징 벡터들의 유사도 계산 (유클리드 거리)
-        distances = torch.cdist(query_features.flatten(1), support_features.flatten(1))  # (N_query, N_support)
+        # Support 특징 맵 축소
+        if support_features.dim() == 4:  # [N_support, C, H, W]
+            support_features = F.adaptive_avg_pool2d(support_features, (1, 1)).flatten(1)  # [N_support, C]
+        elif support_features.dim() != 2:  # 올바르지 않은 형식
+            raise ValueError(f"Invalid shape for support_features: {support_features.shape}")
 
-        # K개의 최근접 이웃을 찾음
-        _, knn_indices = torch.topk(distances, k, dim=1, largest=False, sorted=False)
+        # 유클리드 거리 계산
+        distances = torch.cdist(query_features, support_features, p=2)  # [N_query, N_support]
 
-        return knn_indices
+        # k-NN 계산
+        knn_distances, _ = torch.topk(distances, k, largest=False, dim=1)  # k개의 최근접 거리 추출
+        knn_similarities = 1 / (knn_distances + 1e-8)  # 거리 -> 유사도로 변환
+        
+        return knn_similarities
         
     # function of finding optima k
     def optimize_k(self, query_features, support_features):
-        # # 다양한 k 값에 대해 성능을 평가할 수 있는 메커니즘 필요
-        # best_k = self.min_k
-        # best_similarity = None
-        # best_loss = float('inf')
+        """
+        Query와 Support 특징 간의 최적의 k 값을 찾습니다.
+        Args:
+            query_features: Query 이미지 특징 (Tensor)
+            support_features: Support 이미지 특징 (Tensor)
+        Returns:
+            best_k: 최적의 k 값
+        """
+        best_k = self.min_k
+        best_loss = float('inf')
 
-        # # 후보 k값들에 대해 성능을 평가 (예: loss 값)
-        # for k in range(self.min_k, self.max_k + 1):
-        #     knn_similarities = self.compute_knn_similarity(query_features, support_features, k)
-        #     # 여기서는 임시로 유사도의 평균을 사용하여 loss를 계산 (더 정교한 평가 필요)
-        #     loss = knn_similarities.mean().item()
-            
-        #     if loss < best_loss:
-        #         best_loss = loss
-        #         best_k = k
-
-        # return best_k
-        
-        best_k = None
-        min_loss = float('inf')
-
-        # 후보 k값들에 대해 성능을 평가 (예: loss 값)
+        # 후보 k값들에 대해 성능을 평가
         for k in range(self.min_k, self.max_k + 1):
             knn_similarities = self.compute_knn_similarity(query_features, support_features, k)
-            # 여기서는 임시로 유사도의 평균을 사용하여 loss를 계산 (더 정교한 평가 필요)
-            loss = knn_similarities.float().mean().item()
-
-            if loss < min_loss:
-                min_loss = loss
+            loss = knn_similarities.float().mean().item()  # 임시로 평균 유사도를 평가로 사용
+            
+            if loss < best_loss:
+                best_loss = loss
                 best_k = k
 
         return best_k
     
     # knn 유사도를 기반으로 RoI를 필터링하거나 추가적인 FSOD 논리를 수행하는 함수
     def custom_roi_heads(self, query_features, support_features, targets=None):
-         # '0' 키로 Tensor 추출
-        query_tensor = query_features.get('0')
-        support_tensor = support_features.get('0')
-        
-        if query_tensor is None or support_tensor is None:
-            raise ValueError("Expected key '0' not found in OrderedDict.")
-        
-        print(f"query_tensor shape: {query_tensor.shape}")
-        print(f"support_tensor shape: {support_tensor.shape}\n")
-        
-        # Tensor가 있을 경우 flatten 처리
-        query_tensor = query_tensor.flatten(1) if isinstance(query_tensor, torch.Tensor) else query_tensor
-        support_tensor = support_tensor.flatten(1) if isinstance(support_tensor, torch.Tensor) else support_tensor
+        """
+        Query와 Support 특징을 사용하여 ROI를 결합하고 FSOD를 수행하는 함수
+        Args:
+            query_features: Query 이미지의 특징 (OrderedDict)
+            support_features: Support 이미지의 요약된 특징 (Tensor)
+            targets: Query의 타겟 정보 (optional)
+        Returns:
+            output: FSOD 논리에 따른 ROI 출력 결과
+        """
+        # Query와 Support 특징 텐서 처리
+        query_tensor = query_features.get('0')  # OrderedDict에서 Tensor 추출
+        if query_tensor is None:
+            raise ValueError("Expected key '0' not found in OrderedDict for query features.")
 
-        # 최적의 K값을 자동으로 계산
-        best_k = self.optimize_k(query_features, support_features)
+        # Query 텐서와 Support 텐서를 동일한 형식으로 변환
+        query_tensor = F.adaptive_avg_pool2d(query_tensor, (1, 1)).flatten(1)
+        support_tensor = F.adaptive_avg_pool2d(support_features, (1, 1)).flatten(1)
+
+        # 최적의 K값 계산
+        best_k = self.optimize_k(query_tensor, support_tensor)
         
         # 최적의 K값으로 유사도 계산
-        knn_similarities = self.compute_knn_similarity(query_features, support_features, best_k)
-        
-        # 유사도가 높은 RoI만 필터링
-        threshold = knn_similarities.float().mean()  # 평균 유사도를 임계값으로 사용
-        high_similarity_indices = knn_similarities < threshold
+        knn_similarities = self.compute_knn_similarity(query_tensor, support_tensor, best_k)
 
-        print(f"knn_similarities shape: {knn_similarities.shape}")  # 유사도의 크기
-        print(f"high_similarity_indices shape: {high_similarity_indices.shape}\n")  # 필터링된 인덱스 크기
-        
-        # high_similarity_indices의 크기를 query_tensor와 맞추기 위해 확장
-        high_similarity_indices_expanded = high_similarity_indices.expand(-1, query_tensor.size(1))  # (16, 256)
+        # 유사도가 높은 RoI만 필터링
+        threshold = knn_similarities.float().mean()
+        high_similarity_indices = knn_similarities > threshold
 
         # 유사도가 높은 부분만 필터링하여 RoI 처리
-        refined_features = query_tensor[high_similarity_indices_expanded]
+        refined_features = query_tensor[high_similarity_indices]
         
-        # 이미지 크기 계산 (배치 크기와 이미지 크기)
-        image_shapes = query_tensor.shape[-2:]  # (height, width)
+        return refined_features
 
-        # 일반적인 RoI 헤드를 통해 결과 얻기
-        output = self.faster_rcnn.roi_heads(refined_features, targets, image_shapes)
-        
-        return output
 
     def aggregate_support_features(self, support_features, support_labels):
         """
         Support 특징 요약 함수
         Args:
-            support_features: Backbone에서 추출된 Support 특징 (OrderedDict 또는 Tensor, [num_support, C, H, W])
+            support_features: Backbone에서 추출된 Support 특징 (Tensor or OrderedDict)
             support_labels: Support 데이터의 라벨 (Tensor, [num_support])
         Returns:
             aggregated_features: 클래스별로 요약된 Support 특징 (Tensor)
         """
-        # OrderedDict 처리: 첫 번째 레이어 출력 사용
+        # OrderedDict 처리: 필요한 레이어의 특징 선택
         if isinstance(support_features, dict):
-            support_features = support_features["0"]  # 필요한 레이어 선택
+            support_features = support_features["0"]  # 필요한 레이어 선택 (예: "0" 또는 "layer4")
 
         # Flatten H, W 차원 (예: GAP 적용)
         support_features = torch.mean(support_features, dim=[2, 3])  # (num_support, C)
 
         # support_labels 차원 축소
-        if support_labels is not None:
-            if support_labels.dim() > 1:
-                support_labels = support_labels.squeeze()
+        if support_labels.dim() > 1:  # 다차원일 경우 클래스 인덱스로 변환
+            support_labels = support_labels.argmax(dim=1)  # (num_support)
 
-            # 고유 클래스별로 Support 특징 요약
-            unique_classes = torch.unique(support_labels)
-            aggregated_features = []
-            for cls in unique_classes:
-                # 클래스에 해당하는 특징 추출
-                cls_mask = (support_labels == cls)
-                if cls_mask.dim() > 1:
-                    cls_mask = cls_mask.squeeze()
+        unique_classes = torch.unique(support_labels)
+        aggregated_features = []
 
-                cls_features = support_features[cls_mask]
+        for cls in unique_classes:
+            # 클래스별 마스크 생성
+            cls_mask = (support_labels == cls)
+            if cls_mask.dim() > 1:  # 마스크 차원 불일치 방지
+                cls_mask = cls_mask.squeeze()
+
+            # 마스크로 클래스별 특징 추출
+            cls_features = support_features[cls_mask]
+
+            if cls_features.size(0) > 0:  # 클래스에 해당하는 데이터가 있을 때만 처리
                 aggregated_features.append(torch.mean(cls_features, dim=0))
+            else:
+                print(f"Warning: No features found for class {cls}")
 
-            aggregated_features = torch.stack(aggregated_features)
-            return aggregated_features
+        aggregated_features = torch.stack(aggregated_features)
+        return aggregated_features
 
-        # 라벨이 없는 경우, 특징만 반환
-        return support_features
-
-
-    
     # 초기 학습 함수
     # def forward(self, images, targets=None):
     #     # output = self.transform(inputs)
