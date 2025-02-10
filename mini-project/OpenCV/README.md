@@ -7,13 +7,13 @@
 프로젝트 코드: cnn_bc_clf.ipynb, cnn_model_func.py (함수정리)
 
 
-프로젝트 데이터 폴더: 링크 첨부
+프로젝트 데이터: https://drive.google.com/file/d/1AbO_RjDlPz052_YajPynwKhSQLJzm4ce/view?usp=drive_link
 
 
 프로젝트 캡쳐한 이미지 폴더: image
 
 
-프로젝트 모델 폴더: 링크 첨부, 모델 파일 소실 -> 다시 추출 해야함
+프로젝트 모델: https://drive.google.com/drive/folders/12zfdElW6KrS-Oek890MU-mZZwd7ouNQ1?usp=drive_link
 
 
 프로젝트 웹 구현: cgi-bin
