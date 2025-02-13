@@ -6,8 +6,8 @@ from flask import Blueprint, render_template, request
 # 모델 관련
 import sys
 # model을 못들고 와서 경로추가
-sys.path.append(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal')
-sys.path.append(r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model")
+sys.path.append(r'C:\Users\MSI\Desktop\AI_KDT\KDT6\mini-project\personal')
+sys.path.append(r"C:\Users\MSI\Desktop\AI_KDT\KDT6\mini-project\personal\model")
 from seq2_func import Encoder
 from seq2_func import Decoder
 from seq2_func import Seq2Seq
@@ -27,18 +27,18 @@ import torch.nn as nn
 # with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\okt\index_ss_vocab.pkl', mode='rb') as f:
 #     re_ss_vocab = pickle.load(f)
     
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\fs_vocab_model_4.pkl', mode='rb') as f:
+with open(r'C:\Users\MSI\Desktop\AI_KDT6\KDT\mini-project\personal\dict\test\fs_vocab_model_4.pkl', mode='rb') as f:
     fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\ss_vocab_model_4.pkl', mode='rb') as f:
+with open(r'C:\Users\MSI\Desktop\AI_KDT6\KDT\mini-project\personal\dict\test\ss_vocab_model_4.pkl', mode='rb') as f:
     ss_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_fs_vocab_model_4.pkl', mode='rb') as f:
+with open(r'C:\Users\MSI\Desktop\AI_KDT6\KDT\mini-project\personal\dict\test\index_fs_vocab_model_4.pkl', mode='rb') as f:
     re_fs_vocab = pickle.load(f)
-with open(r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\dict\test\index_ss_vocab_model_4.pkl', mode='rb') as f:
+with open(r'C:\Users\MSI\Desktop\AI_KDT6\KDT\mini-project\personal\dict\test\index_ss_vocab_model_4.pkl', mode='rb') as f:
     re_ss_vocab = pickle.load(f)
     
 # model_file = r'C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_model.pth'
 # model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\third_seq2_param.pth"
-model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_test_4_param.pth"
+model_file = r"C:\Users\MSI\Desktop\AI_KDT6\KDT\mini-project\personal\model\seq2_test_4_param.pth"
 # model_file = r"C:\Users\PC\Desktop\AI_KDT6\KDT6\mini-project\personal\model\seq2_model.pth"
 
 # hidden_dim, embedding_dim = 128, 64
