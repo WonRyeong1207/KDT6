@@ -16,8 +16,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/PC/Desktop/AI_KDT6/KDT6/mini-project/personal",
-      "program": "c:/Users/PC/Desktop/AI_KDT6/KDT6/mini-project/personal/build/Debug/outDebug",
+      "cwd": "${fileDirname}",
+      "program": "${file}",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
